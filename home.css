@@ -541,3 +541,56 @@
     gap: 18px;
   }
 }
+
+
+/* 2026-06-01 request: slightly brighten the home page palette without changing layout or 3D behavior. */
+:root {
+  --text: #123047;
+  --muted: #315f7f;
+  --primary: #0086bd;
+  --soft: #e8f8ff;
+  --panel: rgba(255, 255, 255, .52);
+  --line: rgba(255, 255, 255, .66);
+  --shadow: 0 20px 56px rgba(0, 92, 132, .16);
+}
+
+.page-home {
+  background: radial-gradient(circle at 18% 12%, rgba(42, 204, 255, .26), transparent 32%),
+              radial-gradient(circle at 86% 18%, rgba(255, 202, 92, .20), transparent 30%),
+              linear-gradient(180deg, #e7fbff 0%, #fff7dc 100%);
+}
+
+.page-home .brand-kicker,
+.page-home .eyebrow,
+.page-home .status-kicker {
+  color: #007fb4;
+}
+
+.page-home .nav-links a,
+.page-home .glass-card,
+.page-home .hero-menu-item {
+  border-color: rgba(0, 151, 198, .18);
+  background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(231,249,255,.62));
+}
+
+.page-home .nav-links a.active,
+.page-home .hero-menu-item:hover,
+.page-home .hero-menu-item.active {
+  border-color: rgba(0, 152, 204, .34);
+  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(205,245,255,.78));
+  box-shadow: 0 16px 30px rgba(0, 105, 150, .20);
+}
+
+.page-home .hero-menu-title,
+.page-home .hero-status h2,
+.page-home .hero-copy h1 {
+  color: #006f9e;
+}
+
+.page-home .social-instagram {
+  filter: saturate(1.16) brightness(1.04);
+}
+
+.page-home .social-language {
+  background: linear-gradient(135deg, #00a6d6, #0b78b7);
+}

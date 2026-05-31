@@ -246,9 +246,15 @@
     if (!isHome || !brand) return;
 
     if (lang === 'en') {
-      brand.classList.add('poster-brand-title');
+      var isMobilePoster = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
       brand.setAttribute('aria-label', 'Sustainable Catch Map');
-      brand.innerHTML = '<span class="poster-word">Sus</span><span class="poster-word">-tain</span><span class="poster-word">-able</span><span class="poster-word">Catch</span><span class="poster-word">Map</span>';
+      if (isMobilePoster) {
+        brand.classList.add('poster-brand-title');
+        brand.innerHTML = '<span class="poster-word">Sus</span><span class="poster-word">-tain</span><span class="poster-word">-able</span><span class="poster-word">Catch</span><span class="poster-word">Map</span>';
+      } else {
+        brand.classList.remove('poster-brand-title');
+        brand.textContent = 'Sustainable Catch Map';
+      }
     } else {
       brand.classList.remove('poster-brand-title');
       brand.removeAttribute('aria-label');
@@ -314,5 +320,13 @@
     initLanguageToggle();
     applyLanguage(currentLang());
     initObserver();
+    var lastPosterMode = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+    window.addEventListener('resize', function () {
+      var nextPosterMode = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+      if (nextPosterMode !== lastPosterMode) {
+        lastPosterMode = nextPosterMode;
+        updateHomePosterBrand(currentLang());
+      }
+    });
   });
 })();
