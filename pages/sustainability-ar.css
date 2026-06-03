@@ -74,11 +74,20 @@
 }
 
 .ar-toolbar-left,
-.ar-toolbar-right {
+.ar-toolbar-right,
+.ar-fish-options {
   display: flex;
   align-items: center;
   gap: 10px;
   pointer-events: auto;
+}
+
+.ar-toolbar-left {
+  flex-wrap: wrap;
+}
+
+.ar-fish-options {
+  flex-wrap: wrap;
 }
 
 .ar-title-pill,
@@ -140,6 +149,37 @@
   background: linear-gradient(90deg, #0d7fb3, #45c5e8);
   color: #fff;
   border-color: rgba(255,255,255,.9);
+}
+
+.ar-fish-btn {
+  min-width: 76px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ar-fish-btn::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--fish-color, #ec3446);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.5);
+}
+
+.ar-fish-btn.is-red { --fish-color: #ec3446; }
+.ar-fish-btn.is-blue { --fish-color: #1789e8; }
+.ar-fish-btn.is-gold { --fish-color: #d6a326; }
+
+.ar-fish-btn.is-selected {
+  background: linear-gradient(90deg, var(--fish-color, #ec3446), rgba(255,255,255,.9));
+  color: #fff;
+  border-color: rgba(255,255,255,.94);
+  text-shadow: 0 1px 3px rgba(0,0,0,.28);
+}
+
+.ar-fish-btn.is-selected::before {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,255,255,.35);
 }
 
 .ar-photo-btn {
@@ -224,9 +264,20 @@
 
   .ar-toolbar-left {
     min-width: 0;
-    flex-direction: column;
+    max-width: calc(100% - 58px);
+    flex-direction: row;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .ar-fish-options {
+    gap: 7px;
+  }
+
+  .ar-fish-btn {
+    min-width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .ar-title-pill {
