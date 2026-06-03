@@ -138,7 +138,10 @@
     var toggle = state.stage.querySelector('[data-ar-toggle]');
     var photo = state.stage.querySelector('[data-ar-photo]');
 
-    title.textContent = text('虛擬實境 AR + 3D 模型', 'Virtual AR + 3D Model');
+    // 隱藏 AR 區塊上方標題文字，保留 AR 開關、拍照與互動功能不變。
+    title.textContent = '';
+    title.hidden = true;
+    title.setAttribute('aria-hidden', 'true');
     toggle.textContent = state.arOn ? text('AR：開啟', 'AR: On') : text('AR：關閉', 'AR: Off');
     toggle.classList.toggle('is-on', state.arOn);
     toggle.setAttribute('aria-pressed', state.arOn ? 'true' : 'false');
