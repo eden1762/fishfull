@@ -36,10 +36,10 @@ const MENU_ITEMS = [
     tabletScale: 0.76,
     mobileScale: 0.46,
     shortLabel: getStoredLanguage() === 'en' ? 'See the purpose of sustainability' : '看見永續初衷',
-    accent: '#3aa7ff',
-    halo: { core: '#3aa7ff', glow: '#76d6ff', rim: '#eaf8ff' },
-    // 眼睛導覽：藍色系色暈，和另外兩個入口明顯區分
-    mobileHalo: { core: '#3aa7ff', glow: '#76d6ff', rim: '#eaf8ff' },
+    accent: '#8eddf2',
+    // 網站導覽：粉藍色粉圈，降低亮度但清楚標示可點選範圍
+    halo: { core: '#9edff5', glow: '#c8f0fb', rim: '#effcff', pressed: '#4fb7d8' },
+    mobileHalo: { core: '#9edff5', glow: '#c8f0fb', rim: '#effcff', pressed: '#4fb7d8' },
     route: '/pages/about.html',
     hoverText: '了解我們的理念：以 AI、資料地圖與互動教育，讓每一次海鮮選擇更透明、更友善海洋。'
   },
@@ -54,10 +54,10 @@ const MENU_ITEMS = [
     tabletScale: 0.78,
     mobileScale: 0.47,
     shortLabel: getStoredLanguage() === 'en' ? 'Find nearby friendly seafood' : '找附近友善海鮮',
-    accent: '#20c997',
-    halo: { core: '#20c997', glow: '#7af0c8', rim: '#eafff7' },
-    // 友善小魚：綠色系色暈，凸顯地圖與友善海鮮意象
-    mobileHalo: { core: '#20c997', glow: '#7af0c8', rim: '#eafff7' },
+    accent: '#f2ad78',
+    // 友善小魚：粉橘色粉圈，和粉藍、粉紅入口明顯區分
+    halo: { core: '#ffc99f', glow: '#ffe0c2', rim: '#fff5ea', pressed: '#f28b45' },
+    mobileHalo: { core: '#ffc99f', glow: '#ffe0c2', rim: '#fff5ea', pressed: '#f28b45' },
     route: '/pages/map.html',
     hoverText: '跟著小魚游向附近友善海鮮據點，探索推薦路線與在地永續資訊。'
   },
@@ -72,10 +72,10 @@ const MENU_ITEMS = [
     tabletScale: 0.76,
     mobileScale: 0.46,
     shortLabel: getStoredLanguage() === 'en' ? 'Understand sustainability labels' : '理解永續標籤',
-    accent: '#a86cff',
-    halo: { core: '#a86cff', glow: '#d7a8ff', rim: '#f8edff' },
-    // AR 牛頓擺球組：紫色系色暈，降低亮度並和藍、綠兩入口拉開差異
-    mobileHalo: { core: '#a86cff', glow: '#d7a8ff', rim: '#f8edff' },
+    accent: '#f4a6bc',
+    // AR 牛頓擺球組：粉紅色粉圈，改掉原本偏亮紫色光暈
+    halo: { core: '#ffc0d4', glow: '#ffdce8', rim: '#fff3f7', pressed: '#ee6f99' },
+    mobileHalo: { core: '#ffc0d4', glow: '#ffdce8', rim: '#fff3f7', pressed: '#ee6f99' },
     route: '/pages/sustainability.html',
     hoverText: '透過像牛頓擺一樣有節奏的互動，理解海鮮來源、標籤與永續價值。'
   }
@@ -571,14 +571,14 @@ function SeashellDecor() {
    - 只在 item.haloVertical = true 時使用
    - 多層透明 ring 疊出柔和 halo，不影響桌機 / 平板原本水平光圈
 ============================================================ */
-function MobileObjectHalo({ colors, active }) {
+function MobileObjectHalo({ colors, active, pressed }) {
   const groupRef = useRef()
   const coreRef = useRef()
   const softRef = useRef()
   const outerRef = useRef()
   const rimRef = useRef()
 
-  const haloColors = colors || { core: '#8fd3ff', glow: '#4fc3ff', rim: '#ffffff' }
+  const haloColors = colors || { core: '#9edff5', glow: '#c8f0fb', rim: '#ffffff', pressed: '#4fb7d8' }
 
   useFrame((state) => {
     const t = state.clock.elapsedTime
@@ -590,10 +590,15 @@ function MobileObjectHalo({ colors, active }) {
       groupRef.current.scale.setScalar((active ? 1.045 : 1) * pulse)
     }
 
-    if (coreRef.current) coreRef.current.material.opacity = active ? 0.24 : 0.18
-    if (softRef.current) softRef.current.material.opacity = active ? 0.105 : 0.075
-    if (outerRef.current) outerRef.current.material.opacity = active ? 0.06 : 0.042
-    if (rimRef.current) rimRef.current.material.opacity = active ? 0.16 : 0.105
+    const targetCore = pressed ? 0.36 : (active ? 0.24 : 0.18)
+    const targetSoft = pressed ? 0.18 : (active ? 0.105 : 0.075)
+    const targetOuter = pressed ? 0.11 : (active ? 0.06 : 0.042)
+    const targetRim = pressed ? 0.24 : (active ? 0.16 : 0.105)
+
+    if (coreRef.current) coreRef.current.material.opacity = targetCore
+    if (softRef.current) softRef.current.material.opacity = targetSoft
+    if (outerRef.current) outerRef.current.material.opacity = targetOuter
+    if (rimRef.current) rimRef.current.material.opacity = targetRim
   })
 
   return (
@@ -608,7 +613,7 @@ function MobileObjectHalo({ colors, active }) {
       <mesh ref={outerRef} renderOrder={0}>
         <ringGeometry args={[0.76, 1.38, 96]} />
         <meshBasicMaterial
-          color={haloColors.glow}
+          color={pressed ? haloColors.pressed : haloColors.glow}
           transparent
           opacity={0.045}
           side={THREE.DoubleSide}
@@ -622,7 +627,7 @@ function MobileObjectHalo({ colors, active }) {
       <mesh ref={softRef} position={[0, 0, 0.01]} renderOrder={1}>
         <ringGeometry args={[0.6, 1.24, 96]} />
         <meshBasicMaterial
-          color={haloColors.core}
+          color={pressed ? haloColors.pressed : haloColors.core}
           transparent
           opacity={0.075}
           side={THREE.DoubleSide}
@@ -636,7 +641,7 @@ function MobileObjectHalo({ colors, active }) {
       <mesh ref={coreRef} position={[0, 0, 0.02]} renderOrder={2}>
         <ringGeometry args={[0.92, 1.04, 128]} />
         <meshBasicMaterial
-          color={haloColors.core}
+          color={pressed ? haloColors.pressed : haloColors.core}
           transparent
           opacity={0.18}
           side={THREE.DoubleSide}
@@ -650,7 +655,7 @@ function MobileObjectHalo({ colors, active }) {
       <mesh ref={rimRef} position={[0, 0, 0.03]} renderOrder={3}>
         <ringGeometry args={[1.04, 1.085, 128]} />
         <meshBasicMaterial
-          color={haloColors.rim}
+          color={pressed ? haloColors.pressed : haloColors.rim}
           transparent
           opacity={0.105}
           side={THREE.DoubleSide}
@@ -660,7 +665,7 @@ function MobileObjectHalo({ colors, active }) {
         />
       </mesh>
 
-      <pointLight color={haloColors.glow} intensity={active ? 0.24 : 0.13} distance={2.2} decay={2} />
+      <pointLight color={pressed ? haloColors.pressed : haloColors.glow} intensity={pressed ? 0.34 : (active ? 0.24 : 0.13)} distance={2.2} decay={2} />
     </group>
   )
 }
@@ -672,6 +677,7 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
   const ref = useRef()
   const haloRef = useRef()
   const [hovered, setHovered] = useState(false)
+  const [pressed, setPressed] = useState(false)
 
   useCursor(hovered)
 
@@ -681,9 +687,9 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
     // 增加一點整體的呼吸起伏
     ref.current.position.y = item.position[1] + Math.sin(t * 1.5 + item.position[0]) * 0.06
     if (haloRef.current) {
-      haloRef.current.material.opacity = active || hovered ? 0.34 : 0.16
+      haloRef.current.material.opacity = pressed ? 0.38 : (active || hovered ? 0.24 : 0.13)
       haloRef.current.rotation.z += 0.006
-      haloRef.current.scale.setScalar(active || hovered ? 1.14 : 1)
+      haloRef.current.scale.setScalar(pressed ? 1.18 : (active || hovered ? 1.08 : 1))
     }
   })
 
@@ -692,7 +698,13 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
       setHovered(true)
       setActiveKey(item.key)
     },
-    onPointerLeave: () => setHovered(false),
+    onPointerLeave: () => {
+      setHovered(false)
+      setPressed(false)
+    },
+    onPointerDown: () => setPressed(true),
+    onPointerUp: () => setPressed(false),
+    onPointerCancel: () => setPressed(false),
     onClick: () => { window.location.href = item.route }
   }
 
@@ -715,7 +727,7 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
           桌機、平板：完全維持原本水平光圈。
           手機版：改成直立 O 型柔光光暈，第一次進入畫面就像 3D 模型外圍被光暈包住。 */}
       {item.haloVertical ? (
-        <MobileObjectHalo colors={item.mobileHalo} active={active || hovered} />
+        <MobileObjectHalo colors={item.mobileHalo} active={active || hovered} pressed={pressed} />
       ) : (
         <>
           <mesh
@@ -725,9 +737,9 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
           >
             <ringGeometry args={[0.9, 1.42, 72]} />
             <meshBasicMaterial
-              color={(item.halo && item.halo.core) || item.accent}
+              color={pressed ? ((item.halo && item.halo.pressed) || item.accent) : ((item.halo && item.halo.core) || item.accent)}
               transparent
-              opacity={0.16}
+              opacity={pressed ? 0.34 : 0.13}
               side={THREE.DoubleSide}
               depthWrite={false}
               blending={THREE.AdditiveBlending}
@@ -740,9 +752,9 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
           >
             <ringGeometry args={[1.0, 1.78, 72]} />
             <meshBasicMaterial
-              color={(item.halo && item.halo.glow) || item.accent}
+              color={pressed ? ((item.halo && item.halo.pressed) || item.accent) : ((item.halo && item.halo.glow) || item.accent)}
               transparent
-              opacity={0.055}
+              opacity={pressed ? 0.12 : 0.045}
               side={THREE.DoubleSide}
               depthWrite={false}
               blending={THREE.AdditiveBlending}
@@ -755,9 +767,9 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
           >
             <ringGeometry args={[0.52, 0.9, 64]} />
             <meshBasicMaterial
-              color={(item.halo && item.halo.rim) || item.accent}
+              color={pressed ? ((item.halo && item.halo.pressed) || item.accent) : ((item.halo && item.halo.rim) || item.accent)}
               transparent
-              opacity={0.07}
+              opacity={pressed ? 0.14 : 0.06}
               side={THREE.DoubleSide}
               depthWrite={false}
             />
