@@ -36,9 +36,10 @@ const MENU_ITEMS = [
     tabletScale: 0.76,
     mobileScale: 0.46,
     shortLabel: getStoredLanguage() === 'en' ? 'See the purpose of sustainability' : '看見永續初衷',
-    accent: '#8fd3ff',
-    // 手機版專用色暈：眼睛本體偏天空藍，色暈改用對比的柔橘金；平板 / 電腦版不受影響
-    mobileHalo: { core: '#ffb15c', glow: '#ff7a3d', rim: '#fff3dc' },
+    accent: '#3aa7ff',
+    halo: { core: '#3aa7ff', glow: '#76d6ff', rim: '#eaf8ff' },
+    // 眼睛導覽：藍色系色暈，和另外兩個入口明顯區分
+    mobileHalo: { core: '#3aa7ff', glow: '#76d6ff', rim: '#eaf8ff' },
     route: '/pages/about.html',
     hoverText: '了解我們的理念：以 AI、資料地圖與互動教育，讓每一次海鮮選擇更透明、更友善海洋。'
   },
@@ -53,9 +54,10 @@ const MENU_ITEMS = [
     tabletScale: 0.78,
     mobileScale: 0.47,
     shortLabel: getStoredLanguage() === 'en' ? 'Find nearby friendly seafood' : '找附近友善海鮮',
-    accent: '#7ee7d4',
-    // 手機版專用色暈：小魚本體偏薄荷綠，色暈改用對比的珊瑚粉橘；柔和不搶主體
-    mobileHalo: { core: '#ff8f86', glow: '#ff5f73', rim: '#fff0ec' },
+    accent: '#20c997',
+    halo: { core: '#20c997', glow: '#7af0c8', rim: '#eafff7' },
+    // 友善小魚：綠色系色暈，凸顯地圖與友善海鮮意象
+    mobileHalo: { core: '#20c997', glow: '#7af0c8', rim: '#eafff7' },
     route: '/pages/map.html',
     hoverText: '跟著小魚游向附近友善海鮮據點，探索推薦路線與在地永續資訊。'
   },
@@ -70,9 +72,10 @@ const MENU_ITEMS = [
     tabletScale: 0.76,
     mobileScale: 0.46,
     shortLabel: getStoredLanguage() === 'en' ? 'Understand sustainability labels' : '理解永續標籤',
-    accent: '#d4b3ff',
-    // 手機版專用色暈：牛頓擺球組本體偏柔紫，色暈改用對比的暖黃金；保留科技感但不刺眼
-    mobileHalo: { core: '#ffe06a', glow: '#ffb72f', rim: '#fff8d6' },
+    accent: '#a86cff',
+    halo: { core: '#a86cff', glow: '#d7a8ff', rim: '#f8edff' },
+    // AR 牛頓擺球組：紫色系色暈，降低亮度並和藍、綠兩入口拉開差異
+    mobileHalo: { core: '#a86cff', glow: '#d7a8ff', rim: '#f8edff' },
     route: '/pages/sustainability.html',
     hoverText: '透過像牛頓擺一樣有節奏的互動，理解海鮮來源、標籤與永續價值。'
   }
@@ -221,6 +224,7 @@ function ResponsiveMenuObjects({ activeKey, setActiveKey }) {
               objectScale: layout.scale,
               showBase: layout.showBase,
               haloVertical: layout.haloVertical,
+              halo: item.halo,
               mobileHalo: item.mobileHalo
             }}
             active={item.key === activeKey}
@@ -596,17 +600,17 @@ function MobileObjectHalo({ colors, active }) {
     <group
       ref={groupRef}
       // 手機版專用：放在模型後方，並略低於標題文字，避免遮擋模型與說明文字
-      position={[0, 0.74, -0.32]}
-      scale={[0.82, 0.98, 1]}
+      position={[0, 0.72, -0.34]}
+      scale={[0.9, 1.08, 1]}
       rotation={[0, 0, 0]}
     >
       {/* 外層色暈：範圍保守、透明度低，只形成柔和 O 型氛圍 */}
       <mesh ref={outerRef} renderOrder={0}>
-        <ringGeometry args={[0.72, 1.26, 96]} />
+        <ringGeometry args={[0.76, 1.38, 96]} />
         <meshBasicMaterial
           color={haloColors.glow}
           transparent
-          opacity={0.052}
+          opacity={0.045}
           side={THREE.DoubleSide}
           depthWrite={false}
           depthTest={true}
@@ -616,11 +620,11 @@ function MobileObjectHalo({ colors, active }) {
 
       {/* 中層色暈：讓三個模型各自有不同色系，但不會蓋住 3D 模型 */}
       <mesh ref={softRef} position={[0, 0, 0.01]} renderOrder={1}>
-        <ringGeometry args={[0.58, 1.16, 96]} />
+        <ringGeometry args={[0.6, 1.24, 96]} />
         <meshBasicMaterial
           color={haloColors.core}
           transparent
-          opacity={0.09}
+          opacity={0.075}
           side={THREE.DoubleSide}
           depthWrite={false}
           depthTest={true}
@@ -630,11 +634,11 @@ function MobileObjectHalo({ colors, active }) {
 
       {/* 核心 O 型色圈：細、淡、清楚，但不喧賓奪主 */}
       <mesh ref={coreRef} position={[0, 0, 0.02]} renderOrder={2}>
-        <ringGeometry args={[0.89, 0.99, 128]} />
+        <ringGeometry args={[0.92, 1.04, 128]} />
         <meshBasicMaterial
           color={haloColors.core}
           transparent
-          opacity={0.22}
+          opacity={0.18}
           side={THREE.DoubleSide}
           depthWrite={false}
           depthTest={true}
@@ -644,11 +648,11 @@ function MobileObjectHalo({ colors, active }) {
 
       {/* 內側高光：用極淡亮邊增加質感，避免看起來像粗色框 */}
       <mesh ref={rimRef} position={[0, 0, 0.03]} renderOrder={3}>
-        <ringGeometry args={[0.99, 1.035, 128]} />
+        <ringGeometry args={[1.04, 1.085, 128]} />
         <meshBasicMaterial
           color={haloColors.rim}
           transparent
-          opacity={0.13}
+          opacity={0.105}
           side={THREE.DoubleSide}
           depthWrite={false}
           depthTest={true}
@@ -656,7 +660,7 @@ function MobileObjectHalo({ colors, active }) {
         />
       </mesh>
 
-      <pointLight color={haloColors.glow} intensity={active ? 0.32 : 0.2} distance={2.1} decay={2} />
+      <pointLight color={haloColors.glow} intensity={active ? 0.24 : 0.13} distance={2.2} decay={2} />
     </group>
   )
 }
@@ -677,9 +681,9 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
     // 增加一點整體的呼吸起伏
     ref.current.position.y = item.position[1] + Math.sin(t * 1.5 + item.position[0]) * 0.06
     if (haloRef.current) {
-      haloRef.current.material.opacity = active || hovered ? 0.6 : 0.2
-      haloRef.current.rotation.z += 0.01
-      haloRef.current.scale.setScalar(active || hovered ? 1.2 : 1)
+      haloRef.current.material.opacity = active || hovered ? 0.34 : 0.16
+      haloRef.current.rotation.z += 0.006
+      haloRef.current.scale.setScalar(active || hovered ? 1.14 : 1)
     }
   })
 
@@ -694,6 +698,13 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
 
   return (
     <group ref={ref} position={item.position} scale={item.objectScale || 1} {...events}>
+      {/* 透明點擊範圍：手機版牛頓擺球組較細，原本只點模型本體容易失敗；
+          這個透明橢圓把可點選範圍和色暈一致圈起來，不改變畫面外觀。 */}
+      <mesh position={[0, 0.72, 0.02]} scale={[1.35, 1.68, 0.18]} renderOrder={10}>
+        <sphereGeometry args={[0.92, 32, 16]} />
+        <meshBasicMaterial transparent opacity={0.01} depthWrite={false} color="#ffffff" />
+      </mesh>
+
       <Float speed={active ? 2.3 : 1.4} rotationIntensity={0.25} floatIntensity={0.3}>
         {item.key === 'guide' && <EyesGuide active={active || hovered} color={item.accent} showBase={item.showBase} />}
         {item.key === 'map' && <FriendlyFish active={active || hovered} color={item.accent} showBase={item.showBase} />}
@@ -712,16 +723,44 @@ function InteractiveMenuObject({ item, active, setActiveKey }) {
             position={[0, -0.75, 0]}
             rotation={[-Math.PI / 2, 0, 0]}
           >
-            <ringGeometry args={[0.88, 1.32, 56]} />
-            <meshBasicMaterial color={item.accent} transparent opacity={0.22} side={THREE.DoubleSide} />
+            <ringGeometry args={[0.9, 1.42, 72]} />
+            <meshBasicMaterial
+              color={(item.halo && item.halo.core) || item.accent}
+              transparent
+              opacity={0.16}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+              blending={THREE.AdditiveBlending}
+            />
+          </mesh>
+          {/* 外層柔色色暈：標出可點選範圍，但降低亮度避免三個入口過亮 */}
+          <mesh
+            position={[0, -0.745, 0]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            <ringGeometry args={[1.0, 1.78, 72]} />
+            <meshBasicMaterial
+              color={(item.halo && item.halo.glow) || item.accent}
+              transparent
+              opacity={0.055}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+              blending={THREE.AdditiveBlending}
+            />
           </mesh>
           {/* 內光圈 */}
           <mesh
-            position={[0, -0.74, 0]}
+            position={[0, -0.735, 0]}
             rotation={[-Math.PI / 2, 0, 0]}
           >
-            <ringGeometry args={[0.5, 0.88, 56]} />
-            <meshBasicMaterial color={item.accent} transparent opacity={0.06} side={THREE.DoubleSide} />
+            <ringGeometry args={[0.52, 0.9, 64]} />
+            <meshBasicMaterial
+              color={(item.halo && item.halo.rim) || item.accent}
+              transparent
+              opacity={0.07}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+            />
           </mesh>
         </>
       )}
