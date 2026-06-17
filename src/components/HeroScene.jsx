@@ -682,9 +682,13 @@ function CrystalBall({ active, pressed, color = '#8eddf2', halo, mobile = false 
   const groupRef = useRef()
   const outerShellRef = useRef()
   const innerShellRef = useRef()
+  const tintShellRef = useRef()
   const rimRef = useRef()
   const backRimRef = useRef()
   const sparkleGroupRef = useRef()
+  const causticRef = useRef()
+  const shadowRef = useRef()
+  const glowRef = useRef()
 
   const rimColor = pressed ? ((halo && halo.pressed) || color) : ((halo && halo.core) || color)
   const glowColor = (halo && halo.glow) || color
@@ -711,19 +715,22 @@ function CrystalBall({ active, pressed, color = '#8eddf2', halo, mobile = false 
     }
     if (outerShellRef.current) {
       outerShellRef.current.rotation.y = Math.sin(t * 0.25) * 0.04
-      outerShellRef.current.material.opacity = pressed ? 0.3 : (active ? 0.25 : 0.2)
+      outerShellRef.current.material.opacity = pressed ? 0.33 : (active ? 0.28 : 0.23)
     }
     if (innerShellRef.current) {
       innerShellRef.current.rotation.y = -Math.sin(t * 0.2) * 0.03
-      innerShellRef.current.material.opacity = pressed ? 0.16 : (active ? 0.12 : 0.09)
+      innerShellRef.current.material.opacity = pressed ? 0.18 : (active ? 0.15 : 0.12)
+    }
+    if (tintShellRef.current) {
+      tintShellRef.current.material.opacity = pressed ? 0.13 : (active ? 0.105 : 0.082)
     }
     if (rimRef.current) {
       rimRef.current.rotation.z += 0.0032
-      rimRef.current.material.opacity = pressed ? 0.52 : (active ? 0.38 : 0.28)
+      rimRef.current.material.opacity = pressed ? 0.68 : (active ? 0.5 : 0.38)
     }
     if (backRimRef.current) {
       backRimRef.current.rotation.z -= 0.0023
-      backRimRef.current.material.opacity = pressed ? 0.2 : (active ? 0.16 : 0.12)
+      backRimRef.current.material.opacity = pressed ? 0.28 : (active ? 0.22 : 0.16)
     }
     if (sparkleGroupRef.current) {
       sparkleGroupRef.current.children.forEach((sparkle, index) => {
@@ -734,97 +741,143 @@ function CrystalBall({ active, pressed, color = '#8eddf2', halo, mobile = false 
         sparkle.scale.setScalar(1 + Math.sin(t * 2.4 + base[4]) * 0.16)
       })
     }
+    if (causticRef.current) {
+      causticRef.current.material.opacity = pressed ? 0.28 : (active ? 0.22 : 0.16)
+      causticRef.current.scale.x = 1.28 + Math.sin(t * 1.4) * 0.05
+      causticRef.current.scale.y = 0.42 + Math.cos(t * 1.2) * 0.02
+    }
+    if (shadowRef.current) {
+      shadowRef.current.material.opacity = pressed ? 0.28 : (active ? 0.23 : 0.18)
+      shadowRef.current.scale.x = 1.22 + Math.sin(t * 0.9) * 0.02
+    }
+    if (glowRef.current) {
+      glowRef.current.material.opacity = pressed ? 0.16 : (active ? 0.12 : 0.08)
+    }
   })
 
   return (
     <group ref={groupRef} position={[0, 0.72, 0.02]}>
-      {/* 外層玻璃球：更明顯的透明玻璃球體 */}
+      {/* 深色接觸陰影：讓球體更像放在沙灘上的實體玻璃球 */}
+      <mesh ref={shadowRef} position={[0.08, -1.57, 0.08]} rotation={[-Math.PI / 2, 0, 0.16]} scale={[1.22, 0.42, 1]} renderOrder={0}>
+        <circleGeometry args={[1, 64]} />
+        <meshBasicMaterial color="#6f7f90" transparent opacity={0.18} depthWrite={false} />
+      </mesh>
+
+      {/* 彩色投影 / 映照：營造玻璃球折射到沙地上的光感 */}
+      <mesh ref={causticRef} position={[0, -1.54, 0]} rotation={[-Math.PI / 2, 0, -0.08]} scale={[1.28, 0.42, 1]} renderOrder={0}>
+        <circleGeometry args={[1, 64]} />
+        <meshBasicMaterial color={rimColor} transparent opacity={0.16} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </mesh>
+      <mesh ref={glowRef} position={[0, -1.52, 0]} rotation={[-Math.PI / 2, 0, 0.32]} scale={[0.92, 0.18, 1]} renderOrder={0}>
+        <circleGeometry args={[1, 64]} />
+        <meshBasicMaterial color={brightColor} transparent opacity={0.08} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </mesh>
+
+      {/* 外層玻璃球：更強光澤與玻璃折射 */}
       <mesh ref={outerShellRef} renderOrder={1}>
         <sphereGeometry args={[1.52, 88, 64]} />
         <meshPhysicalMaterial
           color={glowColor}
           transparent
-          opacity={0.2}
-          roughness={0.01}
+          opacity={0.23}
+          roughness={0.005}
           metalness={0}
           clearcoat={1}
-          clearcoatRoughness={0.01}
-          transmission={0.86}
-          thickness={1.25}
-          ior={1.48}
-          envMapIntensity={2.2}
-          attenuationColor={glowColor}
-          attenuationDistance={3.2}
+          clearcoatRoughness={0.005}
+          reflectivity={1}
+          transmission={0.92}
+          thickness={1.48}
+          ior={1.5}
+          envMapIntensity={2.7}
+          attenuationColor={rimColor}
+          attenuationDistance={2.2}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
       </mesh>
 
-      {/* 內層彩色折射感：讓三顆球色系更清楚，但不遮擋內容物 */}
-      <mesh ref={innerShellRef} renderOrder={0} scale={[0.93, 0.93, 0.93]}>
+      {/* 內層玻璃：讓色彩更清楚，同時保留看見球內內容物 */}
+      <mesh ref={innerShellRef} renderOrder={1} scale={[0.95, 0.95, 0.95]}>
         <sphereGeometry args={[1.46, 72, 48]} />
         <meshPhysicalMaterial
           color={color}
           transparent
-          opacity={0.09}
-          roughness={0.03}
+          opacity={0.12}
+          roughness={0.02}
           metalness={0}
           clearcoat={1}
-          clearcoatRoughness={0.03}
-          transmission={0.42}
-          thickness={0.65}
-          ior={1.38}
+          clearcoatRoughness={0.02}
+          transmission={0.55}
+          thickness={0.85}
+          ior={1.4}
           side={THREE.BackSide}
           depthWrite={false}
         />
       </mesh>
 
-      {/* 正面亮邊，強化「這是一顆玻璃水晶球」的輪廓 */}
-      <mesh ref={rimRef} position={[0, 0, 0.05]} renderOrder={4}>
-        <torusGeometry args={[1.525, 0.018, 20, 180]} />
-        <meshBasicMaterial
-          color={brightColor}
-          transparent
-          opacity={0.28}
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-
-      {/* 後側柔和色邊，讓球體更立體 */}
-      <mesh ref={backRimRef} position={[0, 0, -0.16]} rotation={[0, 0, Math.PI * 0.08]} renderOrder={1}>
-        <torusGeometry args={[1.47, 0.022, 16, 160]} />
+      {/* 額外淡色染色層，讓粉藍 / 粉橘 / 粉紅更明顯 */}
+      <mesh ref={tintShellRef} renderOrder={0} scale={[0.88, 0.88, 0.88]}>
+        <sphereGeometry args={[1.36, 64, 42]} />
         <meshBasicMaterial
           color={rimColor}
           transparent
-          opacity={0.12}
+          opacity={0.082}
+          side={THREE.BackSide}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
 
-      {/* 球體內部的橫向折射亮線 */}
-      <mesh position={[0, -0.06, 0.08]} scale={[1.05, 0.34, 1]} renderOrder={2}>
-        <torusGeometry args={[1.16, 0.011, 16, 144]} />
-        <meshBasicMaterial color={brightColor} transparent opacity={active ? 0.26 : 0.16} depthWrite={false} />
-      </mesh>
-      <mesh position={[0, 0.28, 0.09]} scale={[0.82, 0.18, 1]} renderOrder={2}>
-        <torusGeometry args={[1.04, 0.008, 16, 144]} />
-        <meshBasicMaterial color={rimColor} transparent opacity={active ? 0.18 : 0.11} depthWrite={false} />
+      {/* 正面亮邊 */}
+      <mesh ref={rimRef} position={[0, 0, 0.06]} renderOrder={4}>
+        <torusGeometry args={[1.525, 0.02, 20, 180]} />
+        <meshBasicMaterial
+          color={brightColor}
+          transparent
+          opacity={0.38}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
       </mesh>
 
-      {/* 前景玻璃高光 */}
-      <mesh position={[-0.58, 0.72, 1.22]} rotation={[0, 0, -0.42]} scale={[0.62, 0.2, 1]} renderOrder={5}>
-        <circleGeometry args={[0.46, 48]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={pressed ? 0.6 : (active ? 0.48 : 0.36)} depthWrite={false} />
+      {/* 背面色邊 */}
+      <mesh ref={backRimRef} position={[0, 0, -0.16]} rotation={[0, 0, Math.PI * 0.08]} renderOrder={1}>
+        <torusGeometry args={[1.47, 0.026, 16, 160]} />
+        <meshBasicMaterial
+          color={rimColor}
+          transparent
+          opacity={0.16}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
       </mesh>
-      <mesh position={[0.68, -0.26, 1.18]} rotation={[0, 0, -0.2]} scale={[0.42, 0.12, 1]} renderOrder={5}>
+
+      {/* 玻璃球內部折射線 */}
+      <mesh position={[0, -0.08, 0.08]} scale={[1.08, 0.34, 1]} renderOrder={2}>
+        <torusGeometry args={[1.18, 0.012, 16, 144]} />
+        <meshBasicMaterial color={brightColor} transparent opacity={active ? 0.32 : 0.21} depthWrite={false} />
+      </mesh>
+      <mesh position={[0, 0.28, 0.09]} scale={[0.84, 0.18, 1]} renderOrder={2}>
+        <torusGeometry args={[1.04, 0.009, 16, 144]} />
+        <meshBasicMaterial color={rimColor} transparent opacity={active ? 0.24 : 0.16} depthWrite={false} />
+      </mesh>
+
+      {/* 大片高光與映照，讓使用者更容易看出玻璃質感 */}
+      <mesh position={[-0.6, 0.76, 1.22]} rotation={[0, 0, -0.42]} scale={[0.66, 0.22, 1]} renderOrder={5}>
+        <circleGeometry args={[0.46, 48]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={pressed ? 0.7 : (active ? 0.58 : 0.45)} depthWrite={false} />
+      </mesh>
+      <mesh position={[0.7, -0.24, 1.18]} rotation={[0, 0, -0.2]} scale={[0.46, 0.14, 1]} renderOrder={5}>
         <circleGeometry args={[0.32, 36]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={active ? 0.32 : 0.22} depthWrite={false} />
+      </mesh>
+      <mesh position={[-0.1, 1.05, 1.18]} rotation={[0, 0, 0.02]} scale={[0.9, 0.05, 1]} renderOrder={5}>
+        <circleGeometry args={[0.34, 36]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={active ? 0.24 : 0.16} depthWrite={false} />
       </mesh>
-      <mesh position={[-0.08, 1.05, 1.18]} rotation={[0, 0, 0.02]} scale={[0.82, 0.05, 1]} renderOrder={5}>
-        <circleGeometry args={[0.34, 36]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={active ? 0.18 : 0.12} depthWrite={false} />
+      <mesh position={[0.22, 0.46, 1.2]} rotation={[0, 0, -0.92]} scale={[0.9, 0.036, 1]} renderOrder={5}>
+        <circleGeometry args={[0.28, 32]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={active ? 0.18 : 0.11} depthWrite={false} />
       </mesh>
 
       {/* 球內微光星點 */}
@@ -837,13 +890,7 @@ function CrystalBall({ active, pressed, color = '#8eddf2', halo, mobile = false 
         ))}
       </group>
 
-      {/* 底部柔和接觸影與色光 */}
-      <mesh position={[0, -1.52, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[1.34, 0.46, 1]} renderOrder={0}>
-        <circleGeometry args={[1, 64]} />
-        <meshBasicMaterial color={rimColor} transparent opacity={active ? 0.16 : 0.09} depthWrite={false} />
-      </mesh>
-
-      <pointLight color={glowColor} intensity={pressed ? 0.62 : (active ? 0.42 : 0.24)} distance={mobile ? 2.5 : 3.2} decay={2} />
+      <pointLight color={glowColor} intensity={pressed ? 0.78 : (active ? 0.56 : 0.34)} distance={mobile ? 2.6 : 3.4} decay={2} />
     </group>
   )
 }
@@ -861,7 +908,7 @@ function CrystalContentLabel({ item, active, mobile = false }) {
         <meshBasicMaterial
           color={item.accent}
           transparent
-          opacity={active ? 0.1 : 0.075}
+          opacity={active ? 0.16 : 0.12}
           depthWrite={false}
           depthTest={false}
         />
@@ -871,7 +918,7 @@ function CrystalContentLabel({ item, active, mobile = false }) {
         <meshBasicMaterial
           color="#ffffff"
           transparent
-          opacity={active ? 0.2 : 0.15}
+          opacity={active ? 0.28 : 0.22}
           depthWrite={false}
           depthTest={false}
         />
@@ -881,7 +928,7 @@ function CrystalContentLabel({ item, active, mobile = false }) {
         <meshBasicMaterial
           color="#ffffff"
           transparent
-          opacity={active ? 0.18 : 0.12}
+          opacity={active ? 0.2 : 0.14}
           depthWrite={false}
           depthTest={false}
         />
