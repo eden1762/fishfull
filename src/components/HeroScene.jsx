@@ -78,17 +78,13 @@ const MENU_ITEMS = [
 ]
 
 export default function HeroScene() {
-  const [lang] = useState(getStoredLanguage())
-  const [activeKey, setActiveKey] = useState('guide')
-  const activeItem = MENU_ITEMS.find(item => item.key === activeKey) || MENU_ITEMS[0]
-
   return (
     <div className="hero-shell">
       <Canvas camera={{ position: [0, 1.9, 7.2], fov: 48 }} dpr={[1, 2]} shadows>
         <color attach="background" args={['#d6eeff']} />
         <fog attach="fog" args={['#c8e8ff', 18, 42]} />
         <Suspense fallback={null}>
-          <BeachWorld activeKey={activeKey} setActiveKey={setActiveKey} />
+          <BeachWorld />
         </Suspense>
         <OrbitControls
           enablePan={false}
@@ -108,27 +104,6 @@ export default function HeroScene() {
             幫助消費者找到友善海鮮，也讓漁業、餐飲與教育場域一起支持海洋資源管理。
           </p>
         </div>
-
-        <div className="hero-menu glass-card">
-          {MENU_ITEMS.map(item => (
-            <button
-              key={item.key}
-              className={`hero-menu-item ${item.key === activeKey ? 'active' : ''}`}
-              onMouseEnter={() => setActiveKey(item.key)}
-              onFocus={() => setActiveKey(item.key)}
-              onClick={() => { window.location.href = item.route }}
-            >
-              <span className="hero-menu-title">{item.title}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="hero-status glass-card">
-          <span className="status-kicker">目前聚焦</span>
-          <h2>{activeItem.title}</h2>
-          <p>{activeItem.hoverText}</p>
-          <div className="status-hint">提示：滑鼠拖曳可 720° 環視，點擊任一水晶球即可進入對應頁面。</div>
-        </div>
       </div>
     </div>
   )
@@ -137,7 +112,7 @@ export default function HeroScene() {
 /* ============================================================
    Beach World — 整體場景
 ============================================================ */
-function BeachWorld({ activeKey, setActiveKey }) {
+function BeachWorld() {
   return (
     <>
       <ambientLight intensity={1.5} />
@@ -179,8 +154,6 @@ function BeachWorld({ activeKey, setActiveKey }) {
       <ShoreFoam />
       <Footsteps />
       <SeashellDecor />
-
-      <ResponsiveMenuObjects activeKey={activeKey} setActiveKey={setActiveKey} />
     </>
   )
 }
