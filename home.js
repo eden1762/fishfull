@@ -1,67 +1,67 @@
 const messages = {
   zh: {
     pageTitle: '永續漁獲地圖 | 首頁',
-    pageDescription: '輕量、清楚、適合海鮮市場現場使用的永續漁獲地圖首頁。',
+    pageDescription: '取消首頁 720 度旋轉與 3D 首頁入口，改為輕量、清楚、陽光海灘風格的永續漁獲地圖首頁。',
     brandKicker: 'SUSTAINABLE CATCH MAP',
     brandName: '永續漁獲地圖',
     navAbout: '我們的理念',
     navMap: '友善海鮮地圖',
     navSustainability: 'AR 與永續標籤',
-    heroEyebrow: '海邊市集也能秒懂的永續選擇',
-    heroTitle: '用一個輕鬆的海邊入口，找到友善海鮮、理解永續標籤。',
-    heroText: 'Sustainable Catch Map 整合 AI 推薦、漁獲資訊與永續標籤，幫助消費者在市場、餐廳與日常採買時快速做出更透明、更友善海洋的選擇。',
-    ctaMap: '找附近友善海鮮',
-    ctaAbout: '看見永續初衷',
-    liteLabel: '市場現場友善版',
-    liteTitle: '少動畫、快載入、好點選',
-    liteText: '首頁不再依賴 3D Canvas 與大型互動動畫，用清楚入口與靜態視覺保留沉浸感。',
-    quickEyebrow: '選一個想探索的方向',
-    quickTitle: '三個入口保留原功能，畫面更簡潔清楚',
-    cardAboutTitle: '我們的理念',
-    cardAboutText: '看見永續初衷，了解為什麼每一次海鮮選擇都能支持海洋。',
-    cardMapTitle: '附近的友善海鮮地圖',
-    cardMapText: '找附近友善餐廳與海鮮據點，讓採買與用餐更安心。',
-    cardSustainabilityTitle: 'AR 互動與永續標籤',
-    cardSustainabilityText: '理解永續標籤、漁法、產地與資源狀態，讓資訊更容易被看見。',
-    cardAction: '進入頁面',
-    trustOneTitle: '輕量',
-    trustOneText: '移除首頁大型 3D 動畫',
-    trustTwoTitle: '清楚',
-    trustTwoText: '三個主要功能一眼可點',
-    trustThreeTitle: '開心',
-    trustThreeText: '海洋、沙灘、陽光的明亮氛圍'
+    heroEyebrow: '市場現場也能快速使用',
+    heroTitle: '海洋、沙灘、陽光，一眼找到友善海鮮。',
+    heroText: '首頁取消 720 度旋轉與大型 3D 動畫，改成靜態沉浸式海邊背景。即使在海鮮市場網路不穩，也能快速載入、清楚點選。',
+    badgeStatic: '不可旋轉背景',
+    badgeInput: '純 input 按鈕',
+    badgeFast: '市場友善',
+    choiceEyebrow: 'CHOOSE YOUR JOURNEY',
+    choiceTitle: '三個入口，像大型品牌首頁一樣直接、明亮、好點。',
+    buttonAbout: '我們的理念｜看見永續初衷｜3D眼睛導覽',
+    buttonAboutCompact: '我們的理念｜看見永續初衷',
+    buttonAboutHint: '用最少負擔的入口，看懂團隊為什麼推動永續海鮮。',
+    buttonMap: '附近的友善海鮮地圖｜找附近友善餐廳｜3D友善小魚',
+    buttonMapCompact: '友善海鮮地圖｜找附近餐廳',
+    buttonMapHint: '直接進入地圖，快速找到身邊可支持的友善店家。',
+    buttonSustainability: 'AR互動與永續標籤｜理解永續標籤｜3D牛頓擺球組',
+    buttonSustainabilityCompact: 'AR 永續標籤｜理解標籤',
+    buttonSustainabilityHint: '把標籤、漁法、產地與資源狀態變成容易理解的資訊。',
+    stripOneTitle: '取消旋轉',
+    stripOneText: '不使用首頁 720 度可旋轉場景，降低市場現場載入負擔。',
+    stripTwoTitle: '純按鈕入口',
+    stripTwoText: '三個主要選項都改為 input[type=button]，互動更直覺。',
+    stripThreeTitle: '明亮品牌感',
+    stripThreeText: '使用海洋藍、沙灘米、陽光黃，呈現輕鬆簡潔的快樂氛圍。'
   },
   en: {
     pageTitle: 'Sustainable Catch Map | Home',
-    pageDescription: 'A lightweight, clear home page designed for real seafood market conditions.',
+    pageDescription: 'A sunny, lightweight home page without the 720-degree rotating scene or heavy 3D home-page entry points.',
     brandKicker: 'SUSTAINABLE CATCH MAP',
     brandName: 'Sustainable Catch Map',
     navAbout: 'Our Philosophy',
     navMap: 'Friendly Seafood Map',
     navSustainability: 'AR & Sustainability Labels',
-    heroEyebrow: 'Sustainable choices that are easy to understand at the seaside market',
-    heroTitle: 'Find ocean-friendly seafood and understand sustainability labels from one sunny beach entrance.',
-    heroText: 'Sustainable Catch Map brings together AI recommendations, seafood information, and sustainability labels so shoppers can make clearer, more ocean-friendly choices in markets, restaurants, and everyday grocery trips.',
-    ctaMap: 'Find friendly seafood nearby',
-    ctaAbout: 'See our sustainability purpose',
-    liteLabel: 'Market-ready version',
-    liteTitle: 'Less animation, faster loading, easier tapping',
-    liteText: 'The home page no longer depends on 3D Canvas or heavy animations. Clear entry points and static visuals keep the immersive feeling lightweight.',
-    quickEyebrow: 'Choose what you want to explore',
-    quickTitle: 'The three original functions stay, now with a simpler and clearer screen',
-    cardAboutTitle: 'Our Philosophy',
-    cardAboutText: 'See the sustainability purpose and learn why every seafood choice can support the ocean.',
-    cardMapTitle: 'Nearby Friendly Seafood Map',
-    cardMapText: 'Find friendly seafood restaurants and locations nearby, making shopping and dining easier to trust.',
-    cardSustainabilityTitle: 'AR Interaction & Sustainability Labels',
-    cardSustainabilityText: 'Understand sustainability labels, fishing methods, origins, and resource status with clearer information.',
-    cardAction: 'Open page',
-    trustOneTitle: 'Lightweight',
-    trustOneText: 'Heavy home-page 3D animation removed',
-    trustTwoTitle: 'Clear',
-    trustTwoText: 'Three main functions are instantly tappable',
-    trustThreeTitle: 'Joyful',
-    trustThreeText: 'Bright ocean, beach, and sunshine mood'
+    heroEyebrow: 'Fast enough for real market conditions',
+    heroTitle: 'Ocean, beach, sunshine — find friendly seafood at a glance.',
+    heroText: 'The home page no longer uses the 720-degree rotating scene or heavy 3D animation. It now uses a static immersive beach background, so it loads faster and stays clear even in unstable seafood-market networks.',
+    badgeStatic: 'Static background',
+    badgeInput: 'Pure input buttons',
+    badgeFast: 'Market friendly',
+    choiceEyebrow: 'CHOOSE YOUR JOURNEY',
+    choiceTitle: 'Three entries that feel direct, bright, and easy to tap like a major brand landing page.',
+    buttonAbout: 'Our Philosophy | See the purpose | 3D Eye Guide',
+    buttonAboutCompact: 'Our Philosophy | Purpose',
+    buttonAboutHint: 'Understand why the team promotes sustainable seafood with a low-friction entry point.',
+    buttonMap: 'Nearby Friendly Seafood Map | Find restaurants | 3D Friendly Fish',
+    buttonMapCompact: 'Friendly Map | Restaurants',
+    buttonMapHint: 'Go directly to the map and quickly find friendly places nearby.',
+    buttonSustainability: 'AR & Sustainability Labels | Understand labels | 3D Newton Cradle',
+    buttonSustainabilityCompact: 'AR Labels | Learn',
+    buttonSustainabilityHint: 'Turn labels, fishing methods, origins, and resource status into easier information.',
+    stripOneTitle: 'No rotation',
+    stripOneText: 'The 720-degree rotating home scene is removed to reduce loading burden in market conditions.',
+    stripTwoTitle: 'Pure button entry',
+    stripTwoText: 'The three main options now use input[type=button] for a more direct interaction.',
+    stripThreeTitle: 'Bright brand mood',
+    stripThreeText: 'Ocean blue, beach sand, and sunshine yellow create a light, simple, joyful mood.'
   }
 }
 
@@ -87,6 +87,14 @@ function setLanguage(lang) {
     if (dictionary[key]) node.textContent = dictionary[key]
   })
 
+  const useCompactButtonText = window.matchMedia('(max-width: 520px)').matches
+  document.querySelectorAll('[data-i18n-value]').forEach((node) => {
+    const fullKey = node.getAttribute('data-i18n-value')
+    const compactKey = node.getAttribute('data-i18n-compact-value')
+    const key = useCompactButtonText && compactKey ? compactKey : fullKey
+    if (dictionary[key]) node.value = dictionary[key]
+  })
+
   document.querySelectorAll('.language-toggle').forEach((button) => {
     const nextLabel = selected === 'en' ? '中' : 'EN'
     const ariaLabel = selected === 'en' ? 'Switch to Chinese' : '切換成英文'
@@ -103,13 +111,27 @@ function setLanguage(lang) {
   }
 }
 
+function initJourneyInputs() {
+  document.querySelectorAll('.journey-input[type="button"]').forEach((input) => {
+    input.addEventListener('click', () => {
+      const route = input.getAttribute('data-route')
+      if (route) window.location.href = route
+    })
+  })
+}
+
 function initHome() {
   setLanguage(getLanguage())
+  initJourneyInputs()
 
   document.querySelectorAll('.language-toggle').forEach((button) => {
     button.addEventListener('click', () => {
       setLanguage(getLanguage() === 'en' ? 'zh' : 'en')
     })
+  })
+
+  window.addEventListener('resize', () => {
+    setLanguage(getLanguage())
   })
 }
 
