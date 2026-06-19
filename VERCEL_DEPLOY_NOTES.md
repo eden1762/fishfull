@@ -1,35 +1,31 @@
 # Vercel 部署注意事項
 
-本版改成「單一維護來源」：Repository 內只保留根目錄 HTML/CSS/JS 原始檔，不提交 `public/`。
+本版本已移除 build 到新子資料夾的流程：
 
-部署流程如下：
+- `vercel.json` **沒有** `buildCommand`
+- `vercel.json` **沒有** `outputDirectory`
+- 專案內 **沒有** `dist/`
+- 專案內 **沒有** `public/`
+- 專案內 **沒有** `.jsx` 檔案
+- 三個子頁使用 `pages/pages.js` 作為共用 single source，不再保留三份重複 bundle
 
-1. 維護人員修改根目錄檔案：`index.html`、`home.css`、`home.js`、`site-i18n.js`、`pages/`。
-2. Vercel 執行 `npm run build`。
-3. `build-static.cjs` 自動產生 `public/`。
-4. Vercel 以 `public/` 作為 Output Directory 部署。
+## 建議 Vercel 設定
 
-## Vercel 正確設定
+在 Vercel 專案設定中：
 
-```text
-Framework Preset: Other
-Build Command: npm run build
-Output Directory: public
-Install Command: npm install --no-audit --no-fund
-```
+- Framework Preset：Other
+- Build Command：留空
+- Output Directory：留空
+- Install Command：可留空或使用預設
 
-`vercel.json` 已設定：
+若 Vercel 後台曾手動設定 Build Command 或 Output Directory，請清空，避免仍部署舊的 `public` 或 `dist` 輸出。
 
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "public"
-}
-```
+## GitHub 更新後網站沒變時
 
-## 重要提醒
+請依序檢查：
 
-- 不要使用 `dist`。
-- 不要提交 `public/`。
-- 不要修改 `public/index.html`；它是 build 產物。
-- 若 Vercel 最新 deployment 是 ERROR，production 會停在上一個成功部署，因此網站看起來會完全沒變。
+1. GitHub 是否真的 commit 了刪除舊檔案的變更。
+2. Vercel 專案是否連到正確 repository 與 branch。
+3. Vercel Deployment Logs 是否仍在執行舊的 build command。
+4. 瀏覽器是否快取舊版，可用無痕視窗或 `Ctrl + F5` 測試。
+5. 若要強制重部署，可在 Vercel Dashboard 對最新 commit 點選 Redeploy。

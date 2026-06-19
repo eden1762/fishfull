@@ -1,4 +1,4 @@
-/* AR + 3D fish enhancement for pages/sustainability.html only. */
+/* AR interactive fish enhancement for pages/sustainability.html only. */
 .sustainability-layout .model-stage {
   position: relative;
   overflow: hidden;
@@ -309,7 +309,7 @@
 }
 
 
-/* 隱藏「虛擬實境 AR + 3D 模型」標題文字，其他 AR 工具列功能維持不變 */
+/* 隱藏「虛擬實境 AR + 互動物件」標題文字，其他 AR 工具列功能維持不變 */
 .ar-title-pill[data-ar-title] {
   display: none !important;
 }

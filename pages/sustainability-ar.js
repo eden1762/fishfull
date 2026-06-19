@@ -7,8 +7,8 @@
       type: 'fish',
       zhTitle: '紅色魚',
       enTitle: 'Red Fish',
-      zhObject: '紅色 3D 魚',
-      enObject: 'red 3D fish',
+      zhObject: '紅色互動魚',
+      enObject: 'red interactive fish',
       zhAction: '游動',
       enAction: 'swims',
       color: '#ec3446',
@@ -19,8 +19,8 @@
       type: 'fish',
       zhTitle: '藍色魚',
       enTitle: 'Blue Fish',
-      zhObject: '藍色 3D 魚',
-      enObject: 'blue 3D fish',
+      zhObject: '藍色互動魚',
+      enObject: 'blue interactive fish',
       zhAction: '游動',
       enAction: 'swims',
       color: '#1789e8',
@@ -31,8 +31,8 @@
       type: 'fish',
       zhTitle: '金色魚',
       enTitle: 'Gold Fish',
-      zhObject: '金色 3D 魚',
-      enObject: 'gold 3D fish',
+      zhObject: '金色互動魚',
+      enObject: 'gold interactive fish',
       zhAction: '游動',
       enAction: 'swims',
       color: '#d6a326',
@@ -43,8 +43,8 @@
       type: 'boat',
       zhTitle: '資源狀態',
       enTitle: 'Resource Status',
-      zhObject: '3D 船',
-      enObject: '3D boat',
+      zhObject: '漁船互動物件',
+      enObject: 'interactive boat',
       zhAction: '漂浮',
       enAction: 'floats',
       color: '#25a6d9',
@@ -55,8 +55,8 @@
       type: 'book',
       zhTitle: '漁法資訊',
       enTitle: 'Fishing Method Information',
-      zhObject: '3D 翻頁中的書',
-      enObject: '3D page-turning book',
+      zhObject: '漁法互動書',
+      enObject: 'interactive page-turning book',
       zhAction: '翻頁',
       enAction: 'turns its pages',
       color: '#8b6fe8',
@@ -67,8 +67,8 @@
       type: 'footprint',
       zhTitle: '產地與足跡',
       enTitle: 'Origin and Footprint',
-      zhObject: '3D 足跡',
-      enObject: '3D footprint',
+      zhObject: '產地足跡互動物件',
+      enObject: 'interactive footprint',
       zhAction: '踩踏',
       enAction: 'steps forward',
       color: '#91683a',
@@ -241,8 +241,8 @@
     var objectName = lang() === 'en' ? item.enObject : item.zhObject;
     var action = lang() === 'en' ? item.enAction : item.zhAction;
     hint.textContent = state.arOn
-      ? text('目前顯示「' + cardTitle + '」：' + objectName + '正在' + action + '，會顯示在相機鏡頭畫面前。點拍照可擷取相機鏡頭與 3D 物件合成畫面。', 'Showing "' + cardTitle + '": the ' + objectName + ' ' + action + ' in front of the camera view. Tap the camera button to capture the camera view with the 3D object.')
-      : text('目前顯示「' + cardTitle + '」：' + objectName + '正在' + action + '，會顯示在網頁背景色上。點拍照可擷取此框內的 3D 物件與背景畫面。', 'Showing "' + cardTitle + '": the ' + objectName + ' ' + action + ' over the page background. Tap the camera button to capture the 3D object with the background inside this frame.');
+      ? text('目前顯示「' + cardTitle + '」：' + objectName + '正在' + action + '，會顯示在相機鏡頭畫面前。點拍照可擷取相機鏡頭與 互動物件合成畫面。', 'Showing "' + cardTitle + '": the ' + objectName + ' ' + action + ' in front of the camera view. Tap the camera button to capture the camera view with the interactive object.')
+      : text('目前顯示「' + cardTitle + '」：' + objectName + '正在' + action + '，會顯示在網頁背景色上。點拍照可擷取此框內的 互動物件與背景畫面。', 'Showing "' + cardTitle + '": the ' + objectName + ' ' + action + ' over the page background. Tap the camera button to capture the interactive object with the background inside this frame.');
   }
 
   function resizeCanvas() {
