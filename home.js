@@ -22,8 +22,8 @@
         "eyebrow": "買魚不盲選・看漁法・會料理・玩任務",
         "headline": "買對一條魚，也能讓海更有魚",
         "intro": "FishFull 漁有料是一個掃 QR Code 就能用的買魚小幫手：用紅黃綠燈看懂魚種狀態，了解漁法、產地與當季料理；魚販與店家可以把好魚故事說清楚，消費者也能把每一次購買變成支持友善漁業的行動。",
-        "noSpin": "適合魚市場、餐廳、校園與社群活動：畫面輕、載入快、按鈕清楚，現場網路不穩也能快速打開。",
-        "visualTitle": "海風、沙灘、陽光感的輕量首頁",
+        "noSpin": "適合魚市場、餐廳、校園與社群活動。",
+        "visualTitle": "海風、沙灘、陽光",
         "visualText": "讓大家一進站就知道：怎麼挑魚、去哪裡買、完成什麼永續小任務。",
         "visualTags": [
             "掃碼即用",
@@ -96,9 +96,9 @@
         "eyebrow": "Choose smarter · Know the catch · Cook with confidence · Play missions",
         "headline": "Choose the right fish, and help keep the ocean full",
         "intro": "FishFull is a QR Code seafood helper for real buying moments. Shoppers can read traffic-light fish status, fishing method, origin, and easy cooking ideas; vendors and restaurants can tell better catch stories, and every purchase can support friendly fisheries.",
-        "noSpin": "Made for seafood markets, restaurants, campuses, and social events: light pages, fast loading, clear buttons, and readable content even when the network is weak.",
-        "visualTitle": "A light beach-and-sun homepage",
-        "visualText": "A clear 2D visual replaces dizzy rotation, so visitors immediately know how to choose fish, where to buy, and which sustainability mission to try.",
+        "noSpin": "Made for seafood markets, restaurants, campuses, and social events.",
+        "visualTitle": "Light--Beach--Sun",
+        "visualText": "The replaces visitors immediately know how to choose fish, where to buy, and which sustainability mission to try.",
         "visualTags": [
             "Scan to use",
             "Market friendly",
