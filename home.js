@@ -2,111 +2,155 @@
   'use strict';
 
   var copy = {
-    zh: {
-      brand: 'FishFull 漁有料',
-      kicker: 'SUSTAINABLE CATCH MAP',
-      nav: [
-        { label: '我們的理念', href: '/pages/about.html' },
-        { label: '友善海鮮地圖', href: '/pages/map.html' },
-        { label: 'AR 永續任務', href: '/pages/sustainability.html' }
-      ],
-      eyebrow: '一掃即知・低碳漁法・採購行為驗證',
-      headline: '讓每一次買魚，都成為守護海洋的選擇',
-      intro: 'FishFull 漁有料把永續評級、低碳漁法、零失敗食譜與遊戲化任務整合成免下載網頁工具；消費者掃 QR Code 就能看懂魚種、知道怎麼煮，店家也能用採購前後數據證明永續海鮮真的被買單。',
-      noSpin: '評審回饋已納入：不只看瀏覽量，也追蹤永續魚種銷售量、食譜到採購轉換與回訪行為。',
-      visualTitle: '海鮮市場也能順暢展示的靜態首頁',
-      visualText: '取消 720° 旋轉與沉重模型，以海洋、沙灘、陽光的 2D 視覺建立輕鬆入口；在市場弱網路、校園倡議與成果展攤位中，都能快速讀取、清楚點選。',
-      visualTags: ['免下載', '弱網路友善', '純 HTML/CSS/JS'],
-      actionTitle: '從理解，到購買，再回到數據驗證',
-      actionHint: '三個入口皆為純 input[type=button]，避免重複網頁程式，讓維護者只看得到單一來源。',
-      actions: [
-        {
-          tone: 'blue',
-          href: '/pages/about.html',
-          number: '01',
-          title: '我們的理念',
-          subtitle: '以低碳漁法為核心，串起居民、攤商與推廣者',
-          badge: '策略與誘因',
-          description: '回應委員 C：把「不會挑、不會煮」轉化為購買低碳漁法魚種的入口，讓消費者需求、攤商銷售與倡議推廣形成同一套行動迴圈。'
-        },
-        {
-          tone: 'orange',
-          href: '/pages/map.html',
-          number: '02',
-          title: '友善海鮮地圖',
-          subtitle: '把 QR Code、通路與在地故事帶到採購現場',
-          badge: '場域導入',
-          description: '回應委員 D：以新北社區、校園與合作通路為落地場景，呈現可簽署 MOU、訪談紀錄、場勘照片與實際導入的準備度。'
-        },
-        {
-          tone: 'pink',
-          href: '/pages/sustainability.html',
-          number: '03',
-          title: 'AR 永續任務',
-          subtitle: '用遊戲化徽章，讓永續標籤變成願意分享的行動',
-          badge: '遊戲任務',
-          description: '把紅黃綠燈評級、產地足跡與料理任務做成可互動、可拍照、可回饋的體驗，增加停留時間，也把學習導向實際採購。'
-        }
-      ],
-      stats: [
-        { value: '3秒', label: '看懂永續評級' },
-        { value: '0APP', label: '掃碼即用' },
-        { value: '前後測', label: '驗證採購改變' }
-      ]
+    "zh": {
+        "brand": "FishFull 漁有料",
+        "kicker": "SUSTAINABLE CATCH MAP",
+        "nav": [
+            {
+                "label": "我們的理念",
+                "href": "/pages/about.html"
+            },
+            {
+                "label": "友善海鮮地圖",
+                "href": "/pages/map.html"
+            },
+            {
+                "label": "AR 永續小任務",
+                "href": "/pages/sustainability.html"
+            }
+        ],
+        "eyebrow": "買魚不盲選・看漁法・會料理・玩任務",
+        "headline": "買對一條魚，也能讓海更有魚",
+        "intro": "FishFull 漁有料是一個掃 QR Code 就能用的買魚小幫手：用紅黃綠燈看懂魚種狀態，了解漁法、產地與當季料理；魚販與店家可以把好魚故事說清楚，消費者也能把每一次購買變成支持友善漁業的行動。",
+        "noSpin": "適合魚市場、餐廳、校園與社群活動：畫面輕、載入快、按鈕清楚，現場網路不穩也能快速打開。",
+        "visualTitle": "海風、沙灘、陽光感的輕量首頁",
+        "visualText": "用清楚的 2D 視覺取代容易暈眩的旋轉畫面，讓使用者一進站就知道：怎麼挑魚、去哪裡買、完成什麼永續小任務。",
+        "visualTags": [
+            "掃碼即用",
+            "市場好讀",
+            "手機友善"
+        ],
+        "actionTitle": "今天想怎麼開始？",
+        "actionHint": "三個入口對應三種需求：了解理念、找到友善店家、用互動任務學會辨識標籤。",
+        "actions": [
+            {
+                "tone": "blue",
+                "href": "/pages/about.html",
+                "number": "01",
+                "title": "我們的理念",
+                "subtitle": "用漁業知識，幫大家買到更安心的當季好魚",
+                "badge": "先懂再買",
+                "description": "把「不知道怎麼挑、怎麼煮」說成簡單選魚方法：看魚種、看漁法、看季節，讓消費者買得安心，魚販也更容易介紹好漁獲。"
+            },
+            {
+                "tone": "orange",
+                "href": "/pages/map.html",
+                "number": "02",
+                "title": "友善海鮮地圖",
+                "subtitle": "找魚攤、餐廳與社區合作點，把好魚帶到你身邊",
+                "badge": "就近採買",
+                "description": "把合作魚攤、餐廳、社區與校園標在地圖上，搭配推薦魚種、料理建議與購買回饋，讓好選擇更容易被看見。"
+            },
+            {
+                "tone": "pink",
+                "href": "/pages/sustainability.html",
+                "number": "03",
+                "title": "AR 永續小任務",
+                "subtitle": "用遊戲感學會看標籤，拍照分享再完成購買回饋",
+                "badge": "玩中學",
+                "description": "把紅黃綠燈、產地故事、漁法知識做成徽章任務，讓年輕人願意停下來、懂得選，也願意分享給朋友。"
+            }
+        ],
+        "stats": [
+            {
+                "value": "3秒",
+                "label": "看懂魚種狀態"
+            },
+            {
+                "value": "免下載",
+                "label": "掃碼直接用"
+            },
+            {
+                "value": "買後回饋",
+                "label": "知道大家怎麼選"
+            }
+        ]
     },
-    en: {
-      brand: 'FishFull',
-      kicker: 'SUSTAINABLE CATCH MAP',
-      nav: [
-        { label: 'Our Philosophy', href: '/pages/about.html' },
-        { label: 'Friendly Seafood Map', href: '/pages/map.html' },
-        { label: 'AR Missions', href: '/pages/sustainability.html' }
-      ],
-      eyebrow: 'Scan-to-know · Low-carbon fishing · Purchase verification',
-      headline: 'Turn every seafood purchase into a choice for the ocean',
-      intro: 'FishFull combines sustainability ratings, low-carbon fishing information, foolproof recipes, and gamified missions into a no-download web tool. Shoppers can scan a QR Code, understand what to buy and how to cook it, while partners can verify whether sustainable seafood sales actually increase.',
-      noSpin: 'Committee feedback included: beyond views and scans, we track sustainable fish sales, recipe-to-purchase conversion, and repeat visits.',
-      visualTitle: 'A static homepage that works in real seafood markets',
-      visualText: 'The 720° rotation and heavy models are removed. A 2D ocean, beach, and sunshine interface keeps the site fast, readable, and easy to tap in weak-network markets, schools, and exhibition booths.',
-      visualTags: ['No download', 'Weak-network friendly', 'Pure HTML/CSS/JS'],
-      actionTitle: 'From learning to buying to measurable impact',
-      actionHint: 'All three entries are pure input[type=button] controls, with single-source page code for easier maintenance.',
-      actions: [
-        {
-          tone: 'blue',
-          href: '/pages/about.html',
-          number: '01',
-          title: 'Our Philosophy',
-          subtitle: 'A low-carbon fishing strategy connecting residents, vendors, and advocates',
-          badge: 'Strategy loop',
-          description: 'The site turns “I cannot choose or cook fish” into a gateway for choosing low-carbon seafood, connecting consumer needs, vendor sales, and advocacy into one action loop.'
-        },
-        {
-          tone: 'orange',
-          href: '/pages/map.html',
-          number: '02',
-          title: 'Friendly Seafood Map',
-          subtitle: 'Bring QR Codes, channels, and local stories into the purchase scene',
-          badge: 'Field pilot',
-          description: 'The map frames New Taipei communities, campuses, and partner stores as pilot sites, with MOU evidence, interviews, field photos, and on-site implementation readiness.'
-        },
-        {
-          tone: 'pink',
-          href: '/pages/sustainability.html',
-          number: '03',
-          title: 'AR Missions',
-          subtitle: 'Turn sustainability labels into interactive, shareable actions',
-          badge: 'Game tasks',
-          description: 'Traffic-light ratings, origin footprints, and cooking tasks become interactive missions that increase engagement and guide learning toward real purchases.'
-        }
-      ],
-      stats: [
-        { value: '3 sec', label: 'Understand rating' },
-        { value: '0 app', label: 'Scan to use' },
-        { value: 'Before/after', label: 'Verify purchase change' }
-      ]
+    "en": {
+        "brand": "FishFull",
+        "kicker": "SUSTAINABLE CATCH MAP",
+        "nav": [
+            {
+                "label": "Our Idea",
+                "href": "/pages/about.html"
+            },
+            {
+                "label": "Seafood Map",
+                "href": "/pages/map.html"
+            },
+            {
+                "label": "AR Missions",
+                "href": "/pages/sustainability.html"
+            }
+        ],
+        "eyebrow": "Choose smarter · Know the catch · Cook with confidence · Play missions",
+        "headline": "Choose the right fish, and help keep the ocean full",
+        "intro": "FishFull is a QR Code seafood helper for real buying moments. Shoppers can read traffic-light fish status, fishing method, origin, and easy cooking ideas; vendors and restaurants can tell better catch stories, and every purchase can support friendly fisheries.",
+        "noSpin": "Made for seafood markets, restaurants, campuses, and social events: light pages, fast loading, clear buttons, and readable content even when the network is weak.",
+        "visualTitle": "A light beach-and-sun homepage",
+        "visualText": "A clear 2D visual replaces dizzy rotation, so visitors immediately know how to choose fish, where to buy, and which sustainability mission to try.",
+        "visualTags": [
+            "Scan to use",
+            "Market friendly",
+            "Mobile friendly"
+        ],
+        "actionTitle": "How would you like to start?",
+        "actionHint": "Three entrances match three needs: understand the idea, find friendly stores, and learn labels through interactive missions.",
+        "actions": [
+            {
+                "tone": "blue",
+                "href": "/pages/about.html",
+                "number": "01",
+                "title": "Our Idea",
+                "subtitle": "Use fisheries knowledge to help people buy better seasonal seafood",
+                "badge": "Know then buy",
+                "description": "Turn “I do not know how to choose or cook fish” into simple buying guidance: species, fishing method, and season, so shoppers feel confident and vendors can explain good catches clearly."
+            },
+            {
+                "tone": "orange",
+                "href": "/pages/map.html",
+                "number": "02",
+                "title": "Seafood Map",
+                "subtitle": "Find stalls, restaurants, and community spots that bring good catches closer",
+                "badge": "Buy nearby",
+                "description": "Partner stalls, restaurants, communities, and campuses are shown on the map with recommended species, cooking ideas, and purchase feedback."
+            },
+            {
+                "tone": "pink",
+                "href": "/pages/sustainability.html",
+                "number": "03",
+                "title": "AR Missions",
+                "subtitle": "Learn labels with game-like tasks, photo sharing, and purchase feedback",
+                "badge": "Learn by playing",
+                "description": "Traffic lights, origin stories, and fishing-method knowledge become badge missions that help younger visitors stop, learn, choose, and share."
+            }
+        ],
+        "stats": [
+            {
+                "value": "3 sec",
+                "label": "Read fish status"
+            },
+            {
+                "value": "No app",
+                "label": "Scan and use"
+            },
+            {
+                "value": "Feedback",
+                "label": "Learn what people choose"
+            }
+        ]
     }
-  };
+};
 
   function lang() {
     return window.SCMLanguage ? window.SCMLanguage.current() : (localStorage.getItem('scm-language') === 'en' ? 'en' : 'zh');
@@ -154,8 +198,8 @@
   function setMeta(text, currentLang) {
     document.documentElement.lang = currentLang === 'en' ? 'en' : 'zh-Hant';
     document.title = currentLang === 'en'
-      ? 'FishFull | Scan-to-know sustainable seafood action'
-      : 'FishFull 漁有料｜一掃即知的永續海鮮行動';
+      ? 'FishFull | Choose seafood with confidence'
+      : 'FishFull 漁有料｜買對一條魚，也能讓海更有魚';
     var desc = document.querySelector('meta[name="description"]');
     if (desc) desc.setAttribute('content', text.intro);
   }

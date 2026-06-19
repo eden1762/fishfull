@@ -78,12 +78,12 @@ function buildReplyMessages(userMsg) {
   if (userMsg.includes('AR') || userMsg.includes('體驗')) {
     return [{
       type: 'text',
-      text: '📱 請在首頁點選「AR 永續任務」，掃描標籤、解鎖徽章、查看漁法故事，也可在支援裝置上開啟相機互動。'
+      text: '📱 請在首頁點選「AR 永續小任務」，掃描標籤、解鎖徽章、查看漁法故事，也可在支援裝置上開啟相機互動。'
     }];
   }
 
   return [{
     type: 'text',
-    text: `您好，歡迎來到 FishFull 漁有料。\n您剛才說的是：「${userMsg}」\n可輸入「推薦」或進站探索友善海鮮地圖與 AR 永續任務。`
+    text: `您好，歡迎來到 FishFull 漁有料。\n您剛才說的是：「${userMsg}」\n可輸入「推薦」或進站探索友善海鮮地圖與 AR 永續小任務。`
   }];
 }

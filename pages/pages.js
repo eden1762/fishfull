@@ -2,219 +2,597 @@
   'use strict';
 
   var pages = {
-    about: {
-      zh: {
-        title: '我們的理念',
-        metaTitle: 'FishFull 漁有料｜我們的理念',
-        description: 'FishFull 漁有料以低碳漁法為核心，串起居民、攤商、餐飲與推廣者，讓永續海鮮從資訊導覽走向可驗證的採購行動。',
-        eyebrow: 'LOW-CARBON SEAFOOD ACTION',
-        headline: '不是叫大家「多看資訊」，而是讓低碳漁法真的被選擇',
-        lead: 'FishFull 漁有料把居民的料理門檻、攤商的推廣困境、推廣者的教育任務串成同一個採購迴圈：掃碼看懂、安心購買、照著食譜煮、回饋數據，最後用前後比較證明永續消費行為是否改變。',
-        badges: ['低碳漁法核心', '三方誘因系統', '採購前後測'],
-        sections: [
-          {
-            kind: 'cards',
-            eyebrow: 'COMMITTEE C RESPONSE',
-            title: '三種受眾不再各做各的，而是同一條行動鏈',
-            body: '以推動低碳漁法為主軸，將居民、友善攤商／餐飲、推廣者設計成彼此有誘因的互動模式。',
-            cards: [
-              { icon: '👥', title: '居民與自煮族', body: '痛點是「不會挑、不會煮」。網站提供紅黃綠燈評級、當季魚種、零失敗食譜，降低第一次購買低碳魚種的心理成本。' },
-              { icon: '🧊', title: '友善魚攤與綠色餐飲', body: '痛點是「生態價值難以被看見」。QR Code 牌卡把漁法、產地、料理建議放到冷藏櫃旁，讓店家能把專業說清楚。' },
-              { icon: '📣', title: '推廣者與校園社區', body: '痛點是「倡議難轉為行動」。遊戲化任務與採購回饋表單，讓活動成效不只停在宣傳，而能回收行為數據。' }
+    "about": {
+        "zh": {
+            "title": "我們的理念",
+            "metaTitle": "FishFull 漁有料｜我們的理念",
+            "description": "FishFull 漁有料用低碳漁法、當季魚種、料理建議與購買回饋，讓消費者、魚販、餐飲店與漁業從業者一起把友善漁獲推到餐桌上。",
+            "eyebrow": "友善漁業行動",
+            "headline": "從「看不懂魚」到「願意買好魚」",
+            "lead": "FishFull 漁有料把買魚現場常遇到的問題說簡單：這條魚現在適不適合買？用什麼漁法捕撈？回家怎麼煮？掃一下就看懂，也讓魚販、餐飲店與漁業從業者更容易把好漁獲介紹給更多人。",
+            "badges": [
+                "看得懂的漁法",
+                "魚販好介紹",
+                "買後有回饋"
+            ],
+            "sections": [
+                {
+                    "kind": "cards",
+                    "eyebrow": "誰會用 FishFull",
+                    "title": "給消費者、魚販、漁業從業者與年輕人的共同入口",
+                    "body": "每一種使用者都能找到自己的下一步：消費者會挑魚，魚販說得清楚，漁業從業者看見市場反應，年輕人用任務學會永續。",
+                    "cards": [
+                        {
+                            "icon": "👥",
+                            "title": "消費者與自煮族",
+                            "body": "不用背艱深名詞，只要看紅黃綠燈、當季提醒與簡單食譜，就能知道今天哪種魚適合買、回家怎麼煮。"
+                        },
+                        {
+                            "icon": "🧊",
+                            "title": "魚販與餐飲店",
+                            "body": "QR Code 牌卡能放在魚攤或菜單旁，讓漁法、產地、料理方式一掃就懂，幫店家把好魚賣點說得更有說服力。"
+                        },
+                        {
+                            "icon": "🐟",
+                            "title": "漁業從業者與推廣者",
+                            "body": "把漁法故事、在地產地與購買回饋整理在同一個地方，讓好漁獲不只被看見，也被真正買回家。"
+                        }
+                    ]
+                },
+                {
+                    "kind": "flow",
+                    "eyebrow": "買魚路線",
+                    "title": "FishFull 把挑魚變簡單",
+                    "body": "食譜、地圖與小任務都服務同一件事：讓使用者願意選擇友善漁獲。",
+                    "steps": [
+                        {
+                            "label": "掃",
+                            "title": "魚攤 QR Code",
+                            "body": "在魚攤、餐廳或活動現場直接掃。"
+                        },
+                        {
+                            "label": "看",
+                            "title": "魚種狀態",
+                            "body": "用紅黃綠燈與當季提醒快速判斷。"
+                        },
+                        {
+                            "label": "選",
+                            "title": "友善漁獲",
+                            "body": "了解漁法、產地與推薦料理後再下手。"
+                        },
+                        {
+                            "label": "煮",
+                            "title": "簡單料理",
+                            "body": "清蒸、乾煎、味噌湯等做法降低失敗感。"
+                        },
+                        {
+                            "label": "回",
+                            "title": "買後回饋",
+                            "body": "留下購買與料理心得，幫店家知道大家喜歡什麼。"
+                        }
+                    ]
+                },
+                {
+                    "kind": "metrics",
+                    "eyebrow": "看得到改變",
+                    "title": "不只有人掃碼，也要知道有沒有真的買",
+                    "body": "網站用店家銷售紀錄與消費者回饋，了解哪些魚種更容易被接受，哪種說法更能帶動購買。",
+                    "metrics": [
+                        {
+                            "value": "買前買後",
+                            "label": "比較友善魚種的詢問與購買變化"
+                        },
+                        {
+                            "value": "食譜帶路",
+                            "label": "看完料理建議後是否更願意購買"
+                        },
+                        {
+                            "value": "店家觀察",
+                            "label": "記錄常被詢問的魚種、價格與料理問題"
+                        },
+                        {
+                            "value": "消費回饋",
+                            "label": "了解大家是否從只看價格，改成也看漁法與季節"
+                        }
+                    ]
+                },
+                {
+                    "kind": "timeline",
+                    "eyebrow": "每月行動",
+                    "title": "6 到 11 月：把好魚推到真實購買現場",
+                    "body": "每個月都做一件看得見的事，讓魚販、店家與消費者一起累積使用經驗。",
+                    "rows": [
+                        {
+                            "month": "06月",
+                            "title": "魚種小檔案",
+                            "body": "整理常見魚種、季節、漁法、產地與料理建議。"
+                        },
+                        {
+                            "month": "07月",
+                            "title": "合作店家邀請",
+                            "body": "拜訪魚攤、餐飲店與社區夥伴，確認 QR Code 牌卡放置方式。"
+                        },
+                        {
+                            "month": "08月",
+                            "title": "社區與校園試用",
+                            "body": "帶到新北社區或校園活動，觀察使用者看不看得懂、願不願意買。"
+                        },
+                        {
+                            "month": "09月",
+                            "title": "魚攤與餐飲上線",
+                            "body": "在合作點位放上牌卡與推薦魚種，開始收集購買回饋。"
+                        },
+                        {
+                            "month": "10月",
+                            "title": "追蹤購買反應",
+                            "body": "整理哪些魚種被問最多、哪些食譜最容易帶動購買。"
+                        },
+                        {
+                            "month": "11月",
+                            "title": "分享成果",
+                            "body": "用實際故事、照片與回饋整理成可複製的友善海鮮推廣包。"
+                        }
+                    ]
+                }
             ]
-          },
-          {
-            kind: 'flow',
-            eyebrow: 'ACTION LOOP',
-            title: 'FishFull 採購轉換模型',
-            body: '把「料理教學」直接連到「買低碳漁法魚種」：食譜不是獨立內容，而是降低購買阻力的轉換工具。',
-            steps: [
-              { label: '掃', title: '魚攤 QR Code', body: '合作通路冷藏櫃旁放置牌卡。' },
-              { label: '懂', title: '3秒永續評級', body: '當季、漁法、產地、建議料理一頁看完。' },
-              { label: '買', title: '選擇友善魚種', body: '將「知道」轉成實際購買。' },
-              { label: '煮', title: '零失敗食譜', body: '降低回家處理魚的失敗焦慮。' },
-              { label: '證', title: '前後行為追蹤', body: '比較導入前後的銷售量、回訪與回饋。' }
-            ]
-          },
-          {
-            kind: 'metrics',
-            eyebrow: 'COMMITTEE A RESPONSE',
-            title: '成效驗證：從瀏覽量升級為採購行為改變',
-            body: '除了 QR Code 掃描與頁面停留，新增能讓評審信服的前後比較指標。',
-            metrics: [
-              { value: '導入前後', label: '合作通路永續魚種銷售量差異' },
-              { value: '食譜→購買', label: '食譜點擊後的購買回饋與再訪率' },
-              { value: '店家紀錄', label: '友善魚種銷售品項、數量與詢問次數' },
-              { value: '行動回饋', label: '消費者是否從價格盲選改成看漁法與季節' }
-            ]
-          },
-          {
-            kind: 'timeline',
-            eyebrow: 'COMMITTEE B・D RESPONSE',
-            title: '11 月前完成首波實踐：每月都留下可查核佐證',
-            body: '把原本 6–11 月計畫拆成評審看得懂的落地證據，避免只寫願景。',
-            rows: [
-              { month: '06月', title: '資料庫與魚種選題', body: '建立評級、季節、漁法、食譜欄位；整理授權申請與資料來源紀錄。' },
-              { month: '07月', title: 'MOU 與示範場域確認', body: '準備合作意向書、店家訪談紀錄、場域照片與 QR Code 牌卡版型。' },
-              { month: '08月', title: '新北社區／校園小測', body: '帶工具到現場測試，記錄使用者卡點、詢問問題與採購意願。' },
-              { month: '09月', title: '正式導入合作通路', body: '店家說明、牌卡上架、社群導流與第一輪銷售資料紀錄。' },
-              { month: '10月', title: '消費行為追蹤', body: '追蹤永續魚種銷售、食譜點擊、回訪率與消費者回饋。' },
-              { month: '11月', title: '實驗報告與成果展', body: '輸出前後比較、個案故事、可複製導入模組與下一階段合作名單。' }
-            ]
-          }
-        ]
-      },
-      en: {
-        title: 'Our Philosophy',
-        metaTitle: 'FishFull | Our Philosophy',
-        description: 'FishFull connects residents, seafood vendors, restaurants, and advocates around low-carbon fishing, turning information into measurable purchase action.',
-        eyebrow: 'LOW-CARBON SEAFOOD ACTION',
-        headline: 'Not more information, but low-carbon seafood that people actually choose',
-        lead: 'FishFull connects the cooking barrier, vendor promotion challenge, and advocacy mission into one purchase loop: scan, understand, buy, cook, and verify behavioral change with before-and-after data.',
-        badges: ['Low-carbon core', 'Stakeholder incentives', 'Before/after measurement'],
-        sections: [
-          { kind: 'cards', eyebrow: 'STAKEHOLDER LOOP', title: 'Three audiences, one connected action chain', body: 'Residents, vendors, restaurants, and advocates are designed as mutually reinforcing participants.', cards: [
-            { icon: '👥', title: 'Residents and home cooks', body: 'Traffic-light ratings, seasonal fish, and foolproof recipes reduce the barrier to buying low-carbon seafood.' },
-            { icon: '🧊', title: 'Friendly vendors and green restaurants', body: 'QR Code cards beside seafood displays help partners explain fishing methods, origin, and ecological value.' },
-            { icon: '📣', title: 'Advocates and campuses', body: 'Missions and feedback forms turn campaigns into measurable purchase behavior, not just awareness.' }
-          ]},
-          { kind: 'flow', eyebrow: 'ACTION LOOP', title: 'FishFull purchase conversion model', body: 'Recipes are not separate content; they are conversion tools that reduce purchase anxiety.', steps: [
-            { label: 'Scan', title: 'QR Code at the stall', body: 'Cards are placed at partner channels.' },
-            { label: 'Know', title: '3-second rating', body: 'Season, method, origin, and cooking ideas in one view.' },
-            { label: 'Buy', title: 'Choose friendly seafood', body: 'Turn awareness into a purchase.' },
-            { label: 'Cook', title: 'Foolproof recipe', body: 'Reduce the fear of cooking fish.' },
-            { label: 'Verify', title: 'Track behavior', body: 'Compare sales, revisits, and feedback before and after launch.' }
-          ]},
-          { kind: 'metrics', eyebrow: 'MEASUREMENT', title: 'From page views to real purchase change', body: 'The site adds evidence that can convince judges and partners.', metrics: [
-            { value: 'Before/after', label: 'Sustainable fish sales at partner channels' },
-            { value: 'Recipe → buy', label: 'Recipe clicks, purchase feedback, and revisit rate' },
-            { value: 'Vendor logs', label: 'Friendly species sold, quantity, and customer questions' },
-            { value: 'Action feedback', label: 'Whether shoppers moved beyond price-only choice' }
-          ]},
-          { kind: 'timeline', eyebrow: 'ROADMAP', title: 'Evidence-ready implementation before November', body: 'Each month leaves field evidence, not just a plan.', rows: [
-            { month: 'Jun', title: 'Database and species scope', body: 'Set rating, season, fishing method, recipe fields, and source records.' },
-            { month: 'Jul', title: 'MOU and pilot sites', body: 'Prepare letters, interview notes, field photos, and QR card design.' },
-            { month: 'Aug', title: 'New Taipei community / campus test', body: 'Test on site and record user barriers and purchase intent.' },
-            { month: 'Sep', title: 'Channel launch', body: 'Partner onboarding, card placement, social traffic, and first sales records.' },
-            { month: 'Oct', title: 'Behavior tracking', body: 'Track sustainable fish sales, recipe clicks, revisits, and feedback.' },
-            { month: 'Nov', title: 'Report and showcase', body: 'Deliver before/after analysis, case stories, and the replicable model.' }
-          ]}
-        ]
-      }
-    },
-    map: {
-      zh: {
-        title: '友善海鮮地圖',
-        metaTitle: 'FishFull 漁有料｜友善海鮮地圖',
-        description: '用友善海鮮地圖呈現合作通路、示範場域、低碳漁法與採購任務，把 QR Code 帶進真實魚攤、餐廳、社區與校園。',
-        eyebrow: 'FIELD PILOT MAP',
-        headline: '把永續海鮮放到使用者真的會購買的地方',
-        lead: '地圖不只是找店，而是把魚攤、餐廳、社區、校園與倡議活動串成一條可追蹤的採購路徑。每個點位都能放上 QR Code 牌卡、推薦低碳漁法魚種、食譜任務與銷售前後測。',
-        badges: ['合作通路', '場勘佐證', '銷售追蹤'],
-        filters: ['全部', '市場', '餐廳', '社區', '校園'],
-        locations: [
-          { id: 1, type: '市場', name: '板橋友善漁獲市場', area: '新北市板橋區', species: '鬼頭刀、白帶魚、鯖魚', tag: '低碳漁法示範點', note: '適合放置 QR Code 牌卡與採購前後測表單。', x: 58, y: 58 },
-          { id: 2, type: '餐廳', name: '叩米友善餐桌', area: '台北都會示範通路', species: '當季魚種料理、零失敗食譜', tag: '料理轉換示範', note: '把「不知道怎麼煮」變成願意下單的餐桌故事。', x: 72, y: 36 },
-          { id: 3, type: '市場', name: '八斗子友善魚攤', area: '基隆八斗子', species: '在地當季漁獲、定置網魚種', tag: '漁法與產地故事', note: '以漁人訪談與現地照片補強落地可信度。', x: 83, y: 24 },
-          { id: 4, type: '社區', name: '新北社區食魚小行動', area: '新北市在地社區', species: '家常料理任務', tag: '小型倡議活動', note: '可蒐集家庭料理回饋、購買意願與再訪率。', x: 48, y: 44 },
-          { id: 5, type: '校園', name: '校園永續海鮮任務站', area: '新北校園／青年活動', species: '標籤解謎、徽章任務', tag: '遊戲化教育', note: '用遊戲任務把永續標籤從知識變成分享。', x: 38, y: 28 }
-        ],
-        playbook: {
-          eyebrow: 'MARKETING FUNNEL',
-          title: '採購現場的行銷設計',
-          body: '每個合作點位都用同一套「看見價值 → 降低門檻 → 形成購買 → 回收數據」流程。',
-          cards: [
-            { icon: '🏷️', title: '冷藏櫃旁 QR Code', body: '讓資訊出現在購買當下，而不是活動結束後才想起來。' },
-            { icon: '🟢', title: '紅黃綠燈採購提示', body: '用最直覺的符號降低判斷成本，讓低碳漁法更容易被選。' },
-            { icon: '🍳', title: '食譜任務與店家推薦', body: '把料理焦慮轉成「今天就能煮」的購買理由。' },
-            { icon: '📊', title: '店家與消費者回饋', body: '收集銷售量、詢問次數、回訪與心得，做出可驗證成效。' }
-          ]
-        }
-      },
-      en: {
-        title: 'Friendly Seafood Map',
-        metaTitle: 'FishFull | Friendly Seafood Map',
-        description: 'The map connects partner channels, pilot sites, low-carbon fishing information, and purchase missions across markets, restaurants, communities, and campuses.',
-        eyebrow: 'FIELD PILOT MAP',
-        headline: 'Put sustainable seafood where people actually buy seafood',
-        lead: 'The map is more than a store finder. It connects stalls, restaurants, communities, campuses, and campaigns into a measurable purchase pathway with QR cards, low-carbon recommendations, recipe missions, and before/after sales tracking.',
-        badges: ['Partner channels', 'Field evidence', 'Sales tracking'],
-        filters: ['All', 'Market', 'Restaurant', 'Community', 'Campus'],
-        locations: [
-          { id: 1, type: 'Market', name: 'Banqiao Friendly Seafood Market', area: 'Banqiao, New Taipei', species: 'Mahi-mahi, cutlassfish, mackerel', tag: 'Low-carbon pilot', note: 'QR cards and before/after purchase forms can be placed here.', x: 58, y: 58 },
-          { id: 2, type: 'Restaurant', name: 'Friendly Seafood Table', area: 'Taipei demo channel', species: 'Seasonal dishes and recipes', tag: 'Cooking conversion', note: 'Turns “I cannot cook fish” into a story that supports ordering.', x: 72, y: 36 },
-          { id: 3, type: 'Market', name: 'Badouzi Friendly Fish Stall', area: 'Badouzi, Keelung', species: 'Local seasonal catch and set-net fish', tag: 'Fishing method story', note: 'Interviews and field photos strengthen implementation credibility.', x: 83, y: 24 },
-          { id: 4, type: 'Community', name: 'New Taipei Community Fish Action', area: 'Local community site', species: 'Home cooking missions', tag: 'Small advocacy action', note: 'Collect cooking feedback, purchase intent, and revisit data.', x: 48, y: 44 },
-          { id: 5, type: 'Campus', name: 'Campus Seafood Mission Station', area: 'New Taipei campus / youth event', species: 'Label puzzles and badges', tag: 'Gamified education', note: 'Turns sustainability labels into shareable learning missions.', x: 38, y: 28 }
-        ],
-        playbook: {
-          eyebrow: 'MARKETING FUNNEL',
-          title: 'Marketing design at the purchase scene',
-          body: 'Each pilot point follows the same flow: show value, lower barriers, create purchases, and collect evidence.',
-          cards: [
-            { icon: '🏷️', title: 'QR Code by the display', body: 'Information appears at the moment of purchase, not after the campaign ends.' },
-            { icon: '🟢', title: 'Traffic-light guidance', body: 'Simple symbols reduce decision cost and make low-carbon seafood easier to choose.' },
-            { icon: '🍳', title: 'Recipe missions', body: 'Cooking anxiety becomes a reason to buy today.' },
-            { icon: '📊', title: 'Feedback and sales logs', body: 'Sales, questions, revisits, and comments become measurable impact evidence.' }
-          ]
-        }
-      }
-    },
-    sustainability: {
-      zh: {
-        title: 'AR 永續任務',
-        metaTitle: 'FishFull 漁有料｜AR 永續任務',
-        description: '透過 AR 永續任務、徽章與拍照分享，把紅黃綠燈評級、漁法資訊、產地足跡與零失敗食譜轉化為可參與的遊戲化學習。',
-        eyebrow: 'GAMEFUL SUSTAINABILITY LABELS',
-        headline: '把永續標籤變成一場可以完成、可以分享、可以導向購買的任務',
-        lead: '遊戲化不是為了炫技，而是為了讓使用者在魚攤前願意停下來：掃描標籤、解鎖漁法故事、取得食譜任務、拍照分享，最後回到合作通路完成友善採購。',
-        badges: ['徽章任務', '拍照分享', '採購回饋'],
-        labels: [
-          { title: '資源狀態', body: '用紅黃綠燈提示當季與資源狀況，幫助使用者 3 秒內判斷是否適合購買。' },
-          { title: '漁法資訊', body: '標示定置網、延繩釣、養殖等方式，讓低碳漁法與友善捕撈的差異看得懂。' },
-          { title: '產地與足跡', body: '呈現產地、運輸距離與在地採購指標，把生態價值連回真實通路與漁人故事。' }
-        ],
-        missions: {
-          eyebrow: 'PLAYER JOURNEY',
-          title: '四步驟任務設計：讓永續資訊有下一步',
-          body: '每一步都設計成可點擊、可回饋、可被店家記錄的行動。',
-          cards: [
-            { icon: '🔍', title: '掃描解鎖', body: '掃描 QR Code 後看到今日推薦魚種與永續評級。' },
-            { icon: '🎖️', title: '完成徽章', body: '回答漁法與產地小問題，取得「低碳漁法徽章」。' },
-            { icon: '🍽️', title: '帶走食譜', body: '選擇清蒸、乾煎、味噌湯等零失敗料理任務。' },
-            { icon: '🧾', title: '回饋採購', body: '完成購買或料理後回填心得，成為成效驗證資料。' }
-          ]
         },
-        arHint: '點選左側三張標籤卡，可切換右側互動物件；開啟 AR 後可使用相機畫面，未開啟時也能在網頁內展示。'
-      },
-      en: {
-        title: 'AR Missions',
-        metaTitle: 'FishFull | AR Missions',
-        description: 'AR missions, badges, and photo sharing turn ratings, fishing methods, origin footprints, and recipes into participatory learning.',
-        eyebrow: 'GAMEFUL SUSTAINABILITY LABELS',
-        headline: 'Turn sustainability labels into missions that users can complete, share, and bring back to purchase',
-        lead: 'Gamification is not decoration. It gives shoppers a reason to stop at the seafood stall: scan a label, unlock the fishing story, take a recipe mission, share a photo, and return to a partner channel to purchase.',
-        badges: ['Badge missions', 'Photo sharing', 'Purchase feedback'],
-        labels: [
-          { title: 'Resource Status', body: 'Traffic-light cues help users judge seasonality and resource status in three seconds.' },
-          { title: 'Fishing Method', body: 'Shows set nets, longline fishing, aquaculture, and the difference between low-carbon and conventional choices.' },
-          { title: 'Origin and Footprint', body: 'Connects origin, transport distance, local sourcing, and fisher stories back to real channels.' }
-        ],
-        missions: {
-          eyebrow: 'PLAYER JOURNEY',
-          title: 'Four mission steps: give sustainability information a next action',
-          body: 'Every step is clickable, recordable, and useful for partners.',
-          cards: [
-            { icon: '🔍', title: 'Scan to unlock', body: 'See today’s recommended species and sustainability rating.' },
-            { icon: '🎖️', title: 'Earn a badge', body: 'Answer a fishing-method or origin question to earn a low-carbon badge.' },
-            { icon: '🍽️', title: 'Take a recipe', body: 'Choose steaming, pan-frying, miso soup, or another foolproof task.' },
-            { icon: '🧾', title: 'Submit feedback', body: 'Purchase and cooking feedback becomes impact evidence.' }
-          ]
+        "en": {
+            "title": "Our Idea",
+            "metaTitle": "FishFull | Our Idea",
+            "description": "FishFull uses low-carbon fishing, seasonal species, cooking ideas, and purchase feedback to bring friendly catches from fisheries to the table.",
+            "eyebrow": "Friendly fisheries action",
+            "headline": "From confusing fish choices to confident purchases",
+            "lead": "FishFull explains common seafood-market questions in plain language: Is this fish a good choice now? How was it caught? How can I cook it? A quick scan helps shoppers understand, and helps vendors, restaurants, and fisheries workers introduce good catches clearly.",
+            "badges": [
+                "Clear fishing methods",
+                "Vendor-friendly stories",
+                "Purchase feedback"
+            ],
+            "sections": [
+                {
+                    "kind": "cards",
+                    "eyebrow": "Who uses FishFull",
+                    "title": "One shared entrance for shoppers, vendors, fisheries workers, and young visitors",
+                    "body": "Every audience has a next step: shoppers learn how to choose, vendors explain clearly, fisheries workers see market response, and young people learn through missions.",
+                    "cards": [
+                        {
+                            "icon": "👥",
+                            "title": "Shoppers and home cooks",
+                            "body": "Traffic lights, seasonal reminders, and simple recipes help people know what to buy today and how to cook it at home."
+                        },
+                        {
+                            "icon": "🧊",
+                            "title": "Vendors and restaurants",
+                            "body": "QR Code cards beside stalls or menus make fishing method, origin, and cooking ideas easy to explain at the buying moment."
+                        },
+                        {
+                            "icon": "🐟",
+                            "title": "Fisheries workers and advocates",
+                            "body": "Fishing stories, local origin, and purchase feedback are collected in one place so good catches are seen and actually bought."
+                        }
+                    ]
+                },
+                {
+                    "kind": "flow",
+                    "eyebrow": "Buying route",
+                    "title": "FishFull makes choosing seafood easier",
+                    "body": "Recipes, maps, and missions all support one goal: helping people choose friendly catches.",
+                    "steps": [
+                        {
+                            "label": "Scan",
+                            "title": "QR Code at the stall",
+                            "body": "Scan at a stall, restaurant, or event."
+                        },
+                        {
+                            "label": "Read",
+                            "title": "Fish status",
+                            "body": "Traffic lights and seasonal reminders make the choice quick."
+                        },
+                        {
+                            "label": "Choose",
+                            "title": "Friendly catch",
+                            "body": "Check method, origin, and cooking ideas before buying."
+                        },
+                        {
+                            "label": "Cook",
+                            "title": "Simple recipe",
+                            "body": "Steaming, pan-frying, and soup ideas reduce cooking anxiety."
+                        },
+                        {
+                            "label": "Share",
+                            "title": "Purchase feedback",
+                            "body": "Feedback helps stores learn what people like."
+                        }
+                    ]
+                },
+                {
+                    "kind": "metrics",
+                    "eyebrow": "Visible change",
+                    "title": "More than scans: learn whether people really buy",
+                    "body": "Store notes and shopper feedback help reveal which species are accepted and which messages drive purchases.",
+                    "metrics": [
+                        {
+                            "value": "Before/after",
+                            "label": "Changes in questions and purchases for friendly species"
+                        },
+                        {
+                            "value": "Recipe-led",
+                            "label": "Whether cooking ideas make people more willing to buy"
+                        },
+                        {
+                            "value": "Store notes",
+                            "label": "Common questions about species, prices, and cooking"
+                        },
+                        {
+                            "value": "Shopper feedback",
+                            "label": "Whether people consider method and season, not price only"
+                        }
+                    ]
+                },
+                {
+                    "kind": "timeline",
+                    "eyebrow": "Monthly action",
+                    "title": "June to November: bring good catches into real buying places",
+                    "body": "Each month creates visible experience with vendors, stores, and shoppers.",
+                    "rows": [
+                        {
+                            "month": "Jun",
+                            "title": "Fish profiles",
+                            "body": "Organize species, season, fishing method, origin, and cooking ideas."
+                        },
+                        {
+                            "month": "Jul",
+                            "title": "Partner outreach",
+                            "body": "Visit stalls, restaurants, and community partners to plan QR card placement."
+                        },
+                        {
+                            "month": "Aug",
+                            "title": "Community and campus trial",
+                            "body": "Observe whether users understand the content and feel willing to buy."
+                        },
+                        {
+                            "month": "Sep",
+                            "title": "Stall and restaurant launch",
+                            "body": "Place cards and recommendations at partner points and start collecting feedback."
+                        },
+                        {
+                            "month": "Oct",
+                            "title": "Track buying response",
+                            "body": "Review which species receive more questions and which recipes support purchases."
+                        },
+                        {
+                            "month": "Nov",
+                            "title": "Share results",
+                            "body": "Use stories, photos, and feedback to create a repeatable friendly-seafood kit."
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "map": {
+        "zh": {
+            "title": "友善海鮮地圖",
+            "metaTitle": "FishFull 漁有料｜友善海鮮地圖",
+            "description": "找到合作魚攤、餐廳、社區與校園活動，查看推薦魚種、漁法故事、料理建議與購買回饋。",
+            "eyebrow": "找好魚地圖",
+            "headline": "想買友善海鮮，先找到最近的好店",
+            "lead": "這張地圖不是只標地址，而是把魚攤、餐廳、社區與校園活動串起來。每個點位都能看推薦魚種、漁法故事、料理提示與買後回饋，讓消費者知道去哪裡買，魚販也知道怎麼介紹。",
+            "badges": [
+                "找店家",
+                "看魚種",
+                "買後回饋"
+            ],
+            "filters": [
+                "全部",
+                "市場",
+                "餐廳",
+                "社區",
+                "校園"
+            ],
+            "locations": [
+                {
+                    "id": 1,
+                    "type": "市場",
+                    "name": "板橋友善漁獲市場",
+                    "area": "新北市板橋區",
+                    "species": "鬼頭刀、白帶魚、鯖魚",
+                    "tag": "當季好魚推薦點",
+                    "note": "適合放置 QR Code 牌卡，讓買魚的人現場看懂魚種與料理方式。",
+                    "x": 58,
+                    "y": 58
+                },
+                {
+                    "id": 2,
+                    "type": "餐廳",
+                    "name": "叩米友善餐桌",
+                    "area": "台北都會推薦點",
+                    "species": "當季魚種料理、簡單食譜",
+                    "tag": "把好魚端上桌",
+                    "note": "用餐桌故事把「不知道怎麼煮」變成「我今天想試試看」。",
+                    "x": 72,
+                    "y": 36
+                },
+                {
+                    "id": 3,
+                    "type": "市場",
+                    "name": "八斗子友善魚攤",
+                    "area": "基隆八斗子",
+                    "species": "在地當季漁獲、定置網魚種",
+                    "tag": "漁法與產地故事",
+                    "note": "用漁人故事與現場照片，讓在地好魚更有記憶點。",
+                    "x": 83,
+                    "y": 24
+                },
+                {
+                    "id": 4,
+                    "type": "社區",
+                    "name": "新北社區食魚小行動",
+                    "area": "新北市在地社區",
+                    "species": "家常料理任務",
+                    "tag": "家庭買魚練習場",
+                    "note": "收集家庭料理心得、購買意願與大家最常問的魚種問題。",
+                    "x": 48,
+                    "y": 44
+                },
+                {
+                    "id": 5,
+                    "type": "校園",
+                    "name": "校園永續海鮮任務站",
+                    "area": "新北校園／青年活動",
+                    "species": "標籤解謎、徽章任務",
+                    "tag": "年輕人互動入口",
+                    "note": "用遊戲任務把永續標籤變成可以拍照、分享、完成的體驗。",
+                    "x": 38,
+                    "y": 28
+                }
+            ],
+            "playbook": {
+                "eyebrow": "現場怎麼用",
+                "title": "讓魚攤與餐廳更好說、消費者更好買",
+                "body": "每個合作點都用同一套簡單流程：看見好魚、理解差異、敢買回家、留下回饋。",
+                "cards": [
+                    {
+                        "icon": "🏷️",
+                        "title": "魚攤旁 QR Code",
+                        "body": "讓資訊出現在購買當下，不用等回家才查資料。"
+                    },
+                    {
+                        "icon": "🟢",
+                        "title": "紅黃綠燈提示",
+                        "body": "用最直覺的顏色提醒今天哪些魚更適合選。"
+                    },
+                    {
+                        "icon": "🍳",
+                        "title": "料理建議與店家推薦",
+                        "body": "把料理焦慮變成「今天就能煮」的購買理由。"
+                    },
+                    {
+                        "icon": "📊",
+                        "title": "店家與消費者回饋",
+                        "body": "收集銷售、詢問、回訪與心得，知道大家真正喜歡什麼。"
+                    }
+                ]
+            }
         },
-        arHint: 'Tap the three label cards to switch the interactive object on the right. Turn on AR to use the camera, or keep it off for an in-page demo.'
-      }
+        "en": {
+            "title": "Seafood Map",
+            "metaTitle": "FishFull | Seafood Map",
+            "description": "Find partner stalls, restaurants, communities, and campus events with recommended species, fishing stories, cooking ideas, and purchase feedback.",
+            "eyebrow": "Good seafood map",
+            "headline": "Want friendly seafood? Find the nearest good place first",
+            "lead": "This map is more than addresses. It connects stalls, restaurants, communities, and campus events. Each point can show recommended species, fishing stories, cooking tips, and purchase feedback.",
+            "badges": [
+                "Find stores",
+                "Read species",
+                "Share feedback"
+            ],
+            "filters": [
+                "All",
+                "Market",
+                "Restaurant",
+                "Community",
+                "Campus"
+            ],
+            "locations": [
+                {
+                    "id": 1,
+                    "type": "Market",
+                    "name": "Banqiao Friendly Seafood Market",
+                    "area": "Banqiao, New Taipei",
+                    "species": "Mahi-mahi, cutlassfish, mackerel",
+                    "tag": "Seasonal recommendation point",
+                    "note": "QR cards help shoppers understand species and cooking ideas at the stall.",
+                    "x": 58,
+                    "y": 58
+                },
+                {
+                    "id": 2,
+                    "type": "Restaurant",
+                    "name": "Friendly Seafood Table",
+                    "area": "Taipei recommendation point",
+                    "species": "Seasonal seafood dishes and easy recipes",
+                    "tag": "Bring good fish to the table",
+                    "note": "A table story can turn “I cannot cook fish” into “I want to try this today.”",
+                    "x": 72,
+                    "y": 36
+                },
+                {
+                    "id": 3,
+                    "type": "Market",
+                    "name": "Badouzi Friendly Fish Stall",
+                    "area": "Badouzi, Keelung",
+                    "species": "Local seasonal catch and set-net fish",
+                    "tag": "Fishing method and origin story",
+                    "note": "Fisher stories and field photos make local catches memorable.",
+                    "x": 83,
+                    "y": 24
+                },
+                {
+                    "id": 4,
+                    "type": "Community",
+                    "name": "New Taipei Community Fish Action",
+                    "area": "Local community site",
+                    "species": "Home cooking missions",
+                    "tag": "Family seafood practice",
+                    "note": "Collect cooking feedback, purchase interest, and common fish questions.",
+                    "x": 48,
+                    "y": 44
+                },
+                {
+                    "id": 5,
+                    "type": "Campus",
+                    "name": "Campus Seafood Mission Station",
+                    "area": "New Taipei campus / youth event",
+                    "species": "Label puzzles and badge missions",
+                    "tag": "Youth interaction point",
+                    "note": "Game missions turn labels into experiences people can photograph, share, and complete.",
+                    "x": 38,
+                    "y": 28
+                }
+            ],
+            "playbook": {
+                "eyebrow": "How it works on site",
+                "title": "Help vendors explain better and shoppers buy easier",
+                "body": "Each partner point follows a simple flow: see good fish, understand the difference, feel ready to buy, and leave feedback.",
+                "cards": [
+                    {
+                        "icon": "🏷️",
+                        "title": "QR Code beside seafood",
+                        "body": "Information appears at the buying moment, not after shoppers leave."
+                    },
+                    {
+                        "icon": "🟢",
+                        "title": "Traffic-light cues",
+                        "body": "Simple colors show which seafood is easier to choose today."
+                    },
+                    {
+                        "icon": "🍳",
+                        "title": "Cooking ideas",
+                        "body": "Cooking anxiety becomes a reason to buy today."
+                    },
+                    {
+                        "icon": "📊",
+                        "title": "Store and shopper feedback",
+                        "body": "Sales, questions, revisits, and comments show what people really like."
+                    }
+                ]
+            }
+        }
+    },
+    "sustainability": {
+        "zh": {
+            "title": "AR 永續小任務",
+            "metaTitle": "FishFull 漁有料｜AR 永續小任務",
+            "description": "透過 AR 小任務、徽章與拍照分享，把紅黃綠燈、漁法故事、產地資訊與料理建議變成看得懂、玩得起、買得到的互動體驗。",
+            "eyebrow": "玩中學永續標籤",
+            "headline": "把永續標籤變成看得懂、玩得起、買得到的小任務",
+            "lead": "對年輕人來說，永續不能只是一段說明文字。FishFull 把標籤做成可以點、可以拍、可以完成的互動任務：掃描後看魚種狀態、解鎖漁法故事、帶走料理任務，最後回到合作店家完成友善採買。",
+            "badges": [
+                "徽章任務",
+                "拍照分享",
+                "買後回饋"
+            ],
+            "labels": [
+                {
+                    "title": "魚種狀態",
+                    "body": "用紅黃綠燈提示當季與資源狀況，幫助使用者 3 秒內知道今天是否適合購買。"
+                },
+                {
+                    "title": "漁法故事",
+                    "body": "介紹定置網、延繩釣、養殖等方式，讓友善捕撈與一般選擇的差異看得懂。"
+                },
+                {
+                    "title": "產地與料理",
+                    "body": "呈現產地、在地採買與推薦料理，把漁人故事連回真實魚攤與餐桌。"
+                }
+            ],
+            "missions": {
+                "eyebrow": "任務路線",
+                "title": "四步驟小任務：讓標籤有下一步",
+                "body": "每一步都能被使用者理解，也能幫店家知道大家喜歡什麼。",
+                "cards": [
+                    {
+                        "icon": "🔍",
+                        "title": "掃描解鎖",
+                        "body": "掃描 QR Code 後看到今日推薦魚種與紅黃綠燈提示。"
+                    },
+                    {
+                        "icon": "🎖️",
+                        "title": "完成徽章",
+                        "body": "回答漁法或產地小問題，取得「好魚玩家」徽章。"
+                    },
+                    {
+                        "icon": "🍽️",
+                        "title": "帶走食譜",
+                        "body": "選擇清蒸、乾煎、味噌湯等簡單料理任務。"
+                    },
+                    {
+                        "icon": "🧾",
+                        "title": "回饋採購",
+                        "body": "完成購買或料理後留下心得，幫下一位使用者更好選。"
+                    }
+                ]
+            },
+            "arHint": "點選左側三張標籤卡，可切換右側互動物件；開啟 AR 後可用相機畫面拍照，未開啟時也能在網頁內直接玩。"
+        },
+        "en": {
+            "title": "AR Missions",
+            "metaTitle": "FishFull | AR Missions",
+            "description": "AR missions, badges, and photo sharing turn traffic lights, fishing stories, origin, and cooking ideas into interactive experiences that lead to purchases.",
+            "eyebrow": "Learn labels by playing",
+            "headline": "Turn seafood labels into missions people can understand, play, and bring to purchase",
+            "lead": "For younger visitors, sustainability cannot be only a paragraph. FishFull makes labels tappable, photographable, and finishable: scan, read fish status, unlock the fishing story, take a recipe mission, and return to a partner store to buy.",
+            "badges": [
+                "Badge missions",
+                "Photo sharing",
+                "Purchase feedback"
+            ],
+            "labels": [
+                {
+                    "title": "Fish status",
+                    "body": "Traffic-light cues help users know in three seconds whether a species is a good choice today."
+                },
+                {
+                    "title": "Fishing story",
+                    "body": "Set nets, longline fishing, aquaculture, and other methods are explained in plain language."
+                },
+                {
+                    "title": "Origin and cooking",
+                    "body": "Origin, local buying, and cooking ideas connect fisher stories to real stalls and tables."
+                }
+            ],
+            "missions": {
+                "eyebrow": "Mission route",
+                "title": "Four small mission steps: give labels a next action",
+                "body": "Every step is understandable for users and useful for stores that want to learn what people like.",
+                "cards": [
+                    {
+                        "icon": "🔍",
+                        "title": "Scan to unlock",
+                        "body": "See today’s recommended species and traffic-light cue."
+                    },
+                    {
+                        "icon": "🎖️",
+                        "title": "Earn a badge",
+                        "body": "Answer a fishing-method or origin question and earn a Good Seafood Player badge."
+                    },
+                    {
+                        "icon": "🍽️",
+                        "title": "Take a recipe",
+                        "body": "Choose steaming, pan-frying, miso soup, or another simple cooking mission."
+                    },
+                    {
+                        "icon": "🧾",
+                        "title": "Share feedback",
+                        "body": "After buying or cooking, leave feedback to help the next shopper choose better."
+                    }
+                ]
+            },
+            "arHint": "Tap the three label cards to switch the interactive object on the right. Turn on AR to use the camera, or keep it off for an in-page demo."
+        }
     }
-  };
+};
 
   function lang() {
     return window.SCMLanguage ? window.SCMLanguage.current() : (localStorage.getItem('scm-language') === 'en' ? 'en' : 'zh');
@@ -231,8 +609,8 @@
   function nav(currentKey, data) {
     var currentLang = lang();
     var labels = currentLang === 'en'
-      ? { home: 'Home', about: 'Our Philosophy', map: 'Map', sustainability: 'AR Missions', instagram: 'Instagram' }
-      : { home: '首頁', about: '我們的理念', map: '友善海鮮地圖', sustainability: 'AR 永續任務', instagram: 'Instagram' };
+      ? { home: 'Home', about: 'Our Idea', map: 'Seafood Map', sustainability: 'AR Missions', instagram: 'Instagram' }
+      : { home: '首頁', about: '我們的理念', map: '友善海鮮地圖', sustainability: 'AR 永續小任務', instagram: 'Instagram' };
     var links = [
       { key: 'about', label: labels.about, href: '/pages/about.html' },
       { key: 'map', label: labels.map, href: '/pages/map.html' },
@@ -363,9 +741,9 @@
     return [
       '<section class="content-section map-section">',
         '<div class="section-heading">',
-          '<p class="eyebrow">FIELD EVIDENCE</p>',
-          '<h2>' + esc(lang() === 'en' ? 'Pilot locations and implementation evidence' : '示範點位與落地佐證') + '</h2>',
-          '<p>' + esc(lang() === 'en' ? 'Filter pilot locations and see how each point supports purchase conversion and data tracking.' : '篩選示範點位，查看每個地點如何支援採購轉換與行為追蹤。') + '</p>',
+          '<p class="eyebrow">' + esc(lang() === 'en' ? 'Store spots' : '合作點位') + '</p>',
+          '<h2>' + esc(lang() === 'en' ? 'Partner spots and seafood stories' : '合作點位與好魚故事') + '</h2>',
+          '<p>' + esc(lang() === 'en' ? 'Filter partner spots and see what each place recommends, explains, and collects from shoppers.' : '篩選合作點位，查看每個地點推薦什麼魚、怎麼介紹、如何收集買後回饋。') + '</p>',
         '</div>',
         '<div class="filter-row">',
           data.filters.map(function (filter) {
@@ -396,8 +774,8 @@
       '<section class="content-section sustainability-layout">',
         '<div class="sustainability-copy">',
           '<div class="section-heading">',
-            '<p class="eyebrow">LABEL SYSTEM</p>',
-            '<h2>' + esc(lang() === 'en' ? 'Interactive labels for decision, learning, and feedback' : '讓標籤同時負責判斷、學習與回饋') + '</h2>',
+            '<p class="eyebrow">' + esc(lang() === 'en' ? 'Label missions' : '標籤小任務') + '</p>',
+            '<h2>' + esc(lang() === 'en' ? 'Interactive labels that lead to real choices' : '讓標籤帶出真正的選擇') + '</h2>',
             '<p>' + esc(data.arHint) + '</p>',
           '</div>',
           '<div class="label-grid">',
@@ -416,7 +794,7 @@
     return [
       '<footer class="site-footer">',
         '<strong>FishFull 漁有料</strong>',
-        '<span>' + esc(lang() === 'en' ? 'Scan to know. Buy to protect the ocean.' : '一掃即知，讓每一次買魚都成為守護海洋的選擇。') + '</span>',
+        '<span>' + esc(lang() === 'en' ? 'Choose better seafood, one purchase at a time.' : '買對一條魚，也能讓海更有魚。') + '</span>',
       '</footer>'
     ].join('');
   }
