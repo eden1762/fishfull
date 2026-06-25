@@ -19,7 +19,7 @@
                 "href": "/pages/sustainability.html"
             },
             {
-                "label": "現場佐證",
+                "label": "現場紀錄",
                 "href": "/pages/field.html"
             }
         ],
@@ -32,10 +32,10 @@
         "visualTags": [
             "掃碼即用",
             "市場好讀",
-            "買後可量測"
+            "買後可回饋"
         ],
         "actionTitle": "今天先完成哪一步？",
-        "actionHint": "把網站入口收斂成四個真實行動：先懂怎麼選、找到哪裡買、用小任務降低料理與標籤焦慮，最後用現場佐證確認好魚真的被買走。",
+        "actionHint": "四個入口都對準真實行動：先懂怎麼選、找到哪裡買、用小任務降低料理與標籤焦慮，再看現場紀錄了解大家真的怎麼買。",
         "actions": [
             {
                 "tone": "blue",
@@ -53,14 +53,14 @@
                 "title": "去附近買魚",
                 "subtitle": "找魚攤、餐廳與社區合作點，把好魚帶回家",
                 "badge": "直接行動",
-                "description": "把合作魚攤、餐廳、社區與校園標在地圖上，搭配推薦魚種、料理建議與購買回饋，讓好選擇更容易被真的買走。"
+                "description": "把合作魚攤、餐廳、社區與校園標在地圖上，搭配推薦魚種、料理建議與買魚回饋，讓好選擇更容易被真的買走。"
             },
             {
                 "tone": "pink",
                 "href": "/pages/sustainability.html",
                 "number": "03",
                 "title": "玩任務學標籤",
-                "subtitle": "用遊戲感學會看標籤，拍照分享再完成購買回饋",
+                "subtitle": "用遊戲感學會看標籤，拍照分享再完成買魚回饋",
                 "badge": "玩中學",
                 "description": "把紅黃綠燈、產地故事、漁法知識做成徽章任務，讓年輕人願意停下來、懂得選，也願意揪朋友一起完成低碳好魚任務。"
             },
@@ -68,10 +68,10 @@
                 "tone": "blue",
                 "href": "/pages/field.html",
                 "number": "04",
-                "title": "看現場佐證",
-                "subtitle": "用 MOU、訪談、照片與購買回饋證明有行動",
-                "badge": "有證據",
-                "description": "把合作意向、魚販訪談、現場照片、社區校園試用與購買紀錄收在同一頁，讓團隊知道下一輪要補哪個證據，而不是只看瀏覽量。"
+                "title": "看現場紀錄",
+                "subtitle": "看合作店家、魚販故事、活動照片與買魚回饋",
+                "badge": "真實回饋",
+                "description": "把合作店家、魚販與客人故事、社區校園活動、現場照片與買魚紀錄收在同一頁，讓大家看見好魚怎麼被介紹、被料理、被帶回家。"
             }
         ],
         "stats": [
@@ -81,7 +81,7 @@
             },
             {
                 "value": "1條魚",
-                "label": "先跑最小實測"
+                "label": "先主推一條好魚"
             },
             {
                 "value": "10秒",
@@ -106,7 +106,7 @@
                 "href": "/pages/sustainability.html"
             },
             {
-                "label": "Field Proof",
+                "label": "Field Notes",
                 "href": "/pages/field.html"
             }
         ],
@@ -119,10 +119,10 @@
         "visualTags": [
             "Scan to use",
             "Market friendly",
-            "Purchase measurable"
+            "Feedback after buying"
         ],
         "actionTitle": "Which step will you take today?",
-        "actionHint": "The homepage now points to four real actions: understand the choice, find where to buy, use missions to reduce label and cooking anxiety, and check field proof that good fish are actually bought.",
+        "actionHint": "Four entrances point to real actions: understand the choice, find where to buy, use missions to reduce label and cooking anxiety, and read field notes about how people actually buy fish.",
         "actions": [
             {
                 "tone": "blue",
@@ -140,14 +140,14 @@
                 "title": "Buy nearby",
                 "subtitle": "Find stalls, restaurants, and community spots that bring good catches closer",
                 "badge": "Take action",
-                "description": "Partner stalls, restaurants, communities, and campuses are shown on the map with recommended species, cooking ideas, and purchase feedback so good choices are actually bought."
+                "description": "Partner stalls, restaurants, communities, and campuses are shown on the map with recommended species, cooking ideas, and buying feedback so good choices are actually bought."
             },
             {
                 "tone": "pink",
                 "href": "/pages/sustainability.html",
                 "number": "03",
                 "title": "Play label missions",
-                "subtitle": "Learn labels with game-like tasks, photo sharing, and purchase feedback",
+                "subtitle": "Learn labels with game-like tasks, photo sharing, and buying feedback",
                 "badge": "Learn by playing",
                 "description": "Traffic lights, origin stories, and fishing-method knowledge become badge missions that help younger visitors stop, learn, choose, and invite friends into low-carbon seafood action."
             },
@@ -155,10 +155,10 @@
                 "tone": "blue",
                 "href": "/pages/field.html",
                 "number": "04",
-                "title": "Check field proof",
-                "subtitle": "Use MOUs, interviews, photos, and purchase notes to prove action",
-                "badge": "Evidence",
-                "description": "Partner intent, vendor interviews, site photos, community and campus trials, and purchase notes are kept on one page so the team knows what evidence to collect next."
+                "title": "Read field notes",
+                "subtitle": "See partner shops, vendor stories, activity photos, and buying feedback",
+                "badge": "Real feedback",
+                "description": "Partner shops, vendor and shopper stories, community and campus actions, site photos, and buying notes are kept together so everyone can see how good fish are introduced, cooked, and taken home."
             }
         ],
         "stats": [
@@ -168,11 +168,11 @@
             },
             {
                 "value": "1 fish",
-                "label": "Start with the smallest test"
+                "label": "Start with one good catch"
             },
             {
                 "value": "10 sec",
-                "label": "Leave purchase feedback"
+                "label": "Leave buying feedback"
             }
         ]
     }
