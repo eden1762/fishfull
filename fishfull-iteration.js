@@ -174,6 +174,7 @@
       '.fishfull-pulse__question small{display:block;margin-top:6px;color:#765f3d;line-height:1.5}',
       '.fishfull-pulse__button{display:inline-flex;margin-top:16px;padding:11px 16px;border-radius:999px;background:#f29b2e;color:#fff;text-decoration:none;font-weight:900;box-shadow:0 10px 24px rgba(242,155,46,.24);border:0;cursor:pointer}',
       '.fishfull-feedback{margin-top:18px;padding:18px;border-radius:24px;background:#fff;border:1px solid rgba(15,120,152,.16)}',
+      '.fishfull-feedback-panel .fishfull-feedback{margin-top:22px}',
       '.fishfull-feedback h4{margin:0;color:#12354a;font-size:1.1rem}',
       '.fishfull-feedback p{margin:8px 0 0;color:#51656f;line-height:1.6}',
       '.fishfull-feedback__grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}',
@@ -259,10 +260,20 @@
 
   function renderLoop() {
     injectStyle();
-    var root = document.querySelector('.page-home .home-hero') || document.querySelector('.page-shell main') || document.querySelector('main') || document.getElementById('root');
-    if (!root) return;
 
     var text = copy[currentLang()];
+    var feedbackPanel = document.getElementById('fishfull-feedback-panel');
+    if (feedbackPanel) {
+      feedbackPanel.innerHTML = feedbackForm(text);
+      bindFeedback(text);
+      var oldLoop = document.getElementById('fishfull-behavior-loop');
+      if (oldLoop && oldLoop.parentNode !== feedbackPanel) oldLoop.remove();
+      return;
+    }
+
+    var root = document.querySelector('.page-home .home-hero') || document.getElementById('root');
+    if (!root) return;
+
     var existing = document.getElementById('fishfull-behavior-loop');
     var cards = text.loop.map(function (item) {
       return '<article class="fishfull-loop__card"><strong>' + escapeHtml(item[0]) + '</strong><p>' + escapeHtml(item[1]) + '</p></article>';
