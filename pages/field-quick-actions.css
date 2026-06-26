@@ -6,13 +6,24 @@
   display: flex;
   gap: 8px;
   width: min(calc(100% - 28px), 560px);
-  padding: 10px;
+  padding: 26px 10px 10px;
   border: 1px solid rgba(8, 107, 136, .16);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .9);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .92);
   box-shadow: 0 18px 46px rgba(7, 54, 77, .18);
   transform: translateX(-50%);
   backdrop-filter: blur(14px);
+}
+
+.field-quick-actions::before {
+  content: "現場下一步";
+  position: absolute;
+  top: 8px;
+  left: 18px;
+  color: #086b88;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: .08em;
 }
 
 .field-quick-actions a {
@@ -56,7 +67,7 @@
 
 @media (max-width: 640px) {
   body[data-page="field"] {
-    padding-bottom: calc(104px + env(safe-area-inset-bottom));
+    padding-bottom: calc(124px + env(safe-area-inset-bottom));
   }
 
   .field-quick-actions {
@@ -67,6 +78,10 @@
     justify-content: stretch;
     border-radius: 24px;
     transform: none;
+  }
+
+  .field-quick-actions::before {
+    left: 16px;
   }
 
   .field-quick-actions a {
