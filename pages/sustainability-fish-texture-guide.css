@@ -1,0 +1,82 @@
+.ar-texture-guide {
+  position: absolute;
+  left: clamp(14px, 3vw, 24px);
+  top: clamp(82px, 13vw, 118px);
+  z-index: 9;
+  display: grid;
+  gap: 8px;
+  width: min(260px, calc(100% - 28px));
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 18px 46px rgba(7, 39, 61, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #123047;
+}
+
+.ar-texture-guide strong {
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.ar-texture-guide span {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(18, 48, 71, 0.82);
+}
+
+.ar-texture-swatches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.ar-texture-swatch {
+  min-height: 34px;
+  border-radius: 13px;
+  border: 1px solid rgba(18, 48, 71, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
+.ar-texture-swatch.is-red {
+  background:
+    radial-gradient(circle at 28% 34%, rgba(255, 255, 255, 0.72) 0 5px, transparent 6px),
+    linear-gradient(135deg, #ff8890, #d73d4e 58%, #8b2030);
+}
+
+.ar-texture-swatch.is-stripe {
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.74) 0 5px, transparent 6px 13px),
+    linear-gradient(135deg, #2b9ccf, #155f93 60%, #f1f7fb);
+}
+
+.ar-texture-swatch.is-gold {
+  background:
+    radial-gradient(circle at 26% 36%, rgba(255, 255, 255, 0.78) 0 5px, transparent 6px),
+    linear-gradient(135deg, #f6cf4a, #75b870 48%, #1585aa);
+}
+
+@media (max-width: 680px) {
+  .ar-texture-guide {
+    top: auto;
+    bottom: 118px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    padding: 10px 12px;
+  }
+
+  .ar-texture-guide span {
+    font-size: 0.74rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ar-texture-guide {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
