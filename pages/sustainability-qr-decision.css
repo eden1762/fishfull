@@ -102,6 +102,36 @@
   content: ' ✓';
 }
 
+.ar-qr-decision__recipe {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(18, 48, 71, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  color: #123047;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.ar-qr-decision__recipe span {
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: rgba(18, 48, 71, 0.78);
+}
+
+.ar-qr-decision__recipe b {
+  font-size: 0.86rem;
+  font-weight: 950;
+  color: #0d6f92;
+}
+
+.ar-qr-decision__recipe b::after {
+  content: ' →';
+}
+
 .ar-stage[data-fish-tone='mackerel'] .ar-qr-decision {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.91), rgba(222, 244, 255, 0.84));
 }
@@ -127,6 +157,10 @@
   .ar-qr-decision__steps li {
     min-height: 32px;
     font-size: 0.82rem;
+  }
+
+  .ar-qr-decision__recipe {
+    padding: 9px 10px;
   }
 }
 
