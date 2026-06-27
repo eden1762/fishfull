@@ -1,0 +1,145 @@
+.ar-light-check {
+  position: absolute;
+  right: clamp(14px, 3vw, 24px);
+  bottom: clamp(94px, 14vw, 132px);
+  z-index: 10;
+  width: min(308px, calc(100% - 28px));
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 46px rgba(7, 39, 61, 0.16);
+  color: #123047;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.ar-light-check__beam {
+  position: absolute;
+  inset: -18px auto auto -28px;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 226, 142, 0.55), rgba(255, 226, 142, 0.08) 56%, rgba(255, 226, 142, 0));
+  pointer-events: none;
+}
+
+.ar-light-check__beam::after {
+  content: '';
+  position: absolute;
+  left: 52px;
+  top: 52px;
+  width: 104px;
+  height: 2px;
+  transform: rotate(22deg);
+  transform-origin: left center;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(255, 226, 142, 0.9), rgba(255, 226, 142, 0));
+}
+
+.ar-light-check__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ar-light-check strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+}
+
+.ar-light-check__badge {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: rgba(18, 48, 71, 0.08);
+  color: rgba(18, 48, 71, 0.74);
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.ar-light-check p,
+.ar-light-check em {
+  display: block;
+  margin: 7px 0 0;
+  font-size: 0.73rem;
+  line-height: 1.42;
+  color: rgba(18, 48, 71, 0.82);
+}
+
+.ar-light-check em {
+  font-style: normal;
+  color: rgba(18, 48, 71, 0.64);
+}
+
+.ar-light-check__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.ar-light-check__chips span {
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: rgba(18, 48, 71, 0.08);
+  color: rgba(18, 48, 71, 0.78);
+  font-size: 0.68rem;
+  font-weight: 850;
+}
+
+.ar-stage[data-fish-tone='bream'] .ar-light-check__badge,
+.ar-stage[data-fish-tone='bream'] .ar-light-check__chips span {
+  background: rgba(223, 75, 87, 0.16);
+  color: #8f2d38;
+}
+
+.ar-stage[data-fish-tone='mackerel'] .ar-light-check__badge,
+.ar-stage[data-fish-tone='mackerel'] .ar-light-check__chips span {
+  background: rgba(23, 137, 200, 0.16);
+  color: #0f5f86;
+}
+
+.ar-stage[data-fish-tone='mahi'] .ar-light-check__badge,
+.ar-stage[data-fish-tone='mahi'] .ar-light-check__chips span {
+  background: rgba(217, 164, 42, 0.18);
+  color: #88621a;
+}
+
+.ar-stage.is-ar-on .ar-light-check {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 820px) {
+  .ar-light-check {
+    right: 12px;
+    bottom: 86px;
+    width: min(286px, calc(100% - 24px));
+  }
+}
+
+@media (max-width: 680px) {
+  .ar-light-check {
+    left: 12px;
+    right: 12px;
+    bottom: 82px;
+    width: auto;
+    padding: 10px;
+  }
+
+  .ar-light-check p,
+  .ar-light-check em {
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ar-light-check {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
