@@ -20,6 +20,41 @@
     <link rel="stylesheet" href="/pages/ar-qr-stall.css" />
     <link rel="stylesheet" href="/pages/ar-fish-coach.css" />
     <link rel="stylesheet" href="/fishfull-brand.css" />
+    <style>
+      .page-ar-game .ar-coach-picks button,
+      .page-ar-game .ar-coach-mission-steps button,
+      .page-ar-game .ar-coach-copy-ask,
+      .page-ar-game .ar-coach-result > a {
+        box-sizing: border-box;
+        touch-action: manipulation;
+      }
+
+      .page-ar-game .ar-coach-picks button:focus-visible,
+      .page-ar-game .ar-coach-mission-steps button:focus-visible,
+      .page-ar-game .ar-coach-copy-ask:focus-visible,
+      .page-ar-game .ar-coach-result > a:focus-visible {
+        outline: 3px solid rgba(255,159,28,.7);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 560px) {
+        .page-ar-game .ar-fish-coach {
+          padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right)) !important;
+          padding-bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+        }
+
+        .page-ar-game .ar-coach-result > a,
+        .page-ar-game .ar-coach-copy-ask {
+          width: 100%;
+          min-height: 48px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          white-space: normal;
+        }
+      }
+    </style>
   </head>
   <body data-page="ar-game" data-entry="ar-game">
     <div id="root"></div>
