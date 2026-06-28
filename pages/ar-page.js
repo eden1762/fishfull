@@ -32,6 +32,15 @@
         { title: '花腹鯖', body: '藍背銀腹、油脂香，適合鹽烤或乾煎，日常餐桌很可以。' },
         { title: '鬼頭刀', body: '肉厚有存在感，香煎、烤魚、餐盒料理都好搭。' }
       ],
+      loopEyebrow: '遊戲路線',
+      loopTitle: '四步驟玩完一輪，從看魚直接接到購買行動',
+      loopBody: 'AR 不是只看帥圖，而是把「看懂魚、敢開口、知道怎麼煮、願意回饋」串成一條短路線。手機版這一段放在魚模型下方，不會遮住完整魚身。',
+      loopSteps: [
+        { number: '01', title: '選魚', body: '先挑赤鯮、花腹鯖或鬼頭刀，看完整魚身和重點特徵。' },
+        { number: '02', title: '看燈號', body: '用綠、黃、紅判斷今天要安心買、多問一句，還是先換選擇。' },
+        { number: '03', title: '問魚販', body: '直接帶一句好懂問法到魚攤，讓魚販更快介紹來源、大小和料理方式。' },
+        { number: '04', title: '煮完回饋', body: '買回家接零失敗食譜，吃完用十秒回饋幫好通路加分。' }
+      ],
       missionEyebrow: '魚攤 30 秒任務',
       missionTitle: '看完魚身，照著三張任務卡做就不慌',
       missionBody: 'AR 遊戲不是只拿來拍照；它要幫消費者在魚攤前快速看懂、敢問、敢買，也讓魚販更好介紹好魚。',
@@ -81,6 +90,15 @@
         { title: 'Crimson Sea Bream', body: 'Red-toned, delicate, and great steamed or pan-fried. Check origin and catch method first.' },
         { title: 'Pacific Mackerel', body: 'Blue back, silver belly, rich oil, and easy to grill or pan-fry for everyday meals.' },
         { title: 'Mahi-mahi', body: 'Firm, bright, and great for searing, grilling, and seafood bowls.' }
+      ],
+      loopEyebrow: 'Game route',
+      loopTitle: 'Finish one quick round, from viewing the fish to buying with confidence',
+      loopBody: 'AR is not just a cool visual. It turns seeing, asking, cooking, and feedback into one short route. On mobile, this stays below the fish model so the full body remains visible.',
+      loopSteps: [
+        { number: '01', title: 'Pick a fish', body: 'Choose crimson sea bream, Pacific mackerel, or mahi-mahi and view the full body first.' },
+        { number: '02', title: 'Read the light', body: 'Use green, yellow, and red cues to decide whether to buy, ask more, or switch fish.' },
+        { number: '03', title: 'Ask the fishmonger', body: 'Bring one clear question to the stall so origin, size, and cooking style are easier to explain.' },
+        { number: '04', title: 'Cook and feedback', body: 'Open an easy recipe after purchase, then leave quick feedback to support better seafood spots.' }
       ],
       missionEyebrow: '30-second fish-stall mission',
       missionTitle: 'After viewing the fish, follow three cards and buy with less guesswork',
@@ -191,6 +209,29 @@
     ].join('');
   }
 
+  function playLoop(text) {
+    return [
+      '<section class="content-section ar-game-loop">',
+        '<div class="section-heading">',
+          '<p class="eyebrow">' + esc(text.loopEyebrow) + '</p>',
+          '<h2>' + esc(text.loopTitle) + '</h2>',
+          '<p>' + esc(text.loopBody) + '</p>',
+        '</div>',
+        '<div class="ar-loop-track" aria-label="' + esc(lang() === 'en' ? 'AR game route' : 'AR 遊戲路線') + '">',
+          list(text.loopSteps, function (step) {
+            return [
+              '<article class="ar-loop-step">',
+                '<span>' + esc(step.number) + '</span>',
+                '<h3>' + esc(step.title) + '</h3>',
+                '<p>' + esc(step.body) + '</p>',
+              '</article>'
+            ].join('');
+          }),
+        '</div>',
+      '</section>'
+    ].join('');
+  }
+
   function mission(text) {
     return [
       '<section class="content-section ar-market-mission">',
@@ -245,6 +286,7 @@
         '<main>',
           hero(text),
           arSection(text),
+          playLoop(text),
           mission(text),
           guide(text),
         '</main>',
