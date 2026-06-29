@@ -1,0 +1,52 @@
+/* FishFull AR dynamic viewport guard: keep the complete 3D fish visible when mobile browser bars expand or collapse. */
+.page-ar-game .ar-stage {
+  --fishfull-ar-visible-height: 100svh;
+}
+
+@supports (height: 100dvh) {
+  .page-ar-game .ar-stage {
+    --fishfull-ar-visible-height: 100dvh;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-ar-game .model-stage,
+  .page-ar-game .ar-stage {
+    max-block-size: calc(var(--fishfull-ar-visible-height) - 10px) !important;
+  }
+
+  .page-ar-game .ar-stage {
+    min-block-size: min(704px, calc(var(--fishfull-ar-visible-height) - 42px)) !important;
+  }
+
+  .page-ar-game .ar-model,
+  .page-ar-game .ar-stage.is-ar-on .ar-model {
+    max-block-size: calc(var(--fishfull-ar-visible-height) - var(--ar-safe-top) - var(--ar-safe-bottom) - 18px) !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .page-ar-game .ar-stage {
+    min-block-size: min(680px, calc(var(--fishfull-ar-visible-height) - 34px)) !important;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 700px) and (orientation: portrait) {
+  .page-ar-game .ar-stage {
+    min-block-size: min(604px, calc(var(--fishfull-ar-visible-height) - 12px)) !important;
+  }
+
+  .page-ar-game .ar-toolbar {
+    max-block-size: calc(30svh + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (max-width: 820px) and (max-height: 520px) and (orientation: landscape) {
+  .page-ar-game .ar-stage {
+    min-block-size: min(442px, calc(var(--fishfull-ar-visible-height) - 10px)) !important;
+  }
+
+  .page-ar-game .ar-toolbar {
+    max-block-size: calc(28svh + env(safe-area-inset-bottom)) !important;
+  }
+}
