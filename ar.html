@@ -124,6 +124,7 @@
           en: 'FishFull official logo'
         };
         var timer = null;
+        var qrEntryFocused = false;
         var reduceMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
         function currentLang() {
@@ -177,6 +178,17 @@
           window.setTimeout(function () { stage.focus({ preventScroll: true }); }, 300);
         }
 
+        function shouldFocusQrEntry() {
+          var params = new URLSearchParams(window.location.search);
+          return params.get('demo') === 'qr' || window.location.hash === '#fishfull-ar-stage';
+        }
+
+        function focusQrEntryOnce() {
+          if (qrEntryFocused || !shouldFocusQrEntry()) return;
+          qrEntryFocused = true;
+          window.setTimeout(focusFishStage, 520);
+        }
+
         function applyButtonText(button) {
           var text = label();
           if (button.textContent !== text) button.textContent = text;
@@ -186,6 +198,7 @@
         function enhanceCoach() {
           enforceOfficialLogo();
           syncMotionPreference();
+          focusQrEntryOnce();
           Array.prototype.slice.call(document.querySelectorAll('.ar-coach-result')).forEach(function (card) {
             var existing = card.querySelector('.ar-coach-view-return');
             if (existing) {
