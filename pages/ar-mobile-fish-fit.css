@@ -198,47 +198,75 @@
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
+@media (max-width: 820px) and (max-height: 520px) and (orientation: landscape) {
+  .page-ar-game {
+    --fishfull-phone-gutter: max(10px, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+
   .page-ar-game .model-stage {
-    min-block-size: 520px !important;
+    min-block-size: min(460px, calc(100svh - 8px)) !important;
   }
 
   .page-ar-game .ar-stage {
-    --ar-safe-top: 96px;
-    --ar-safe-bottom: 108px;
-    min-block-size: 500px !important;
+    --ar-safe-top: clamp(54px, 15svh, 78px);
+    --ar-safe-bottom: clamp(84px, 22svh, 112px);
+    min-block-size: min(442px, calc(100svh - 10px)) !important;
   }
 
   .page-ar-game .ar-model,
   .page-ar-game .ar-stage.is-ar-on .ar-model {
+    inline-size: min(58vw, 360px) !important;
     block-size: calc(100% - var(--ar-safe-top) - var(--ar-safe-bottom)) !important;
-    min-block-size: 220px !important;
-    inline-size: min(82%, 560px) !important;
+    min-block-size: clamp(146px, 36svh, 218px) !important;
   }
 
   .page-ar-game .ar-fallback-fish {
-    inline-size: min(64%, 360px) !important;
+    inline-size: min(48vw, 300px) !important;
+  }
+
+  .page-ar-game .ar-real-ar-btn,
+  .page-ar-game .ar-hint-pill,
+  .page-ar-game .ar-fresh-strip,
+  .page-ar-game .ar-species-panel {
+    font-size: .78rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .page-ar-game .ar-toolbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: end !important;
+    gap: 8px !important;
+    max-block-size: calc(32svh + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-ar-game .ar-fish-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .page-ar-game .ar-fish-btn,
+  .page-ar-game .ar-toggle-camera {
+    min-block-size: 38px !important;
+    padding-block: 8px !important;
   }
 }
 
-@media (max-width: 700px) and (orientation: landscape) {
-  .page-ar-game .model-stage {
-    min-block-size: 460px !important;
-  }
-
+@media (max-width: 680px) and (max-height: 430px) and (orientation: landscape) {
   .page-ar-game .ar-stage {
-    --ar-safe-top: 86px;
-    --ar-safe-bottom: 96px;
-    min-block-size: 440px !important;
+    --ar-safe-top: clamp(44px, 13svh, 64px);
+    --ar-safe-bottom: clamp(76px, 24svh, 96px);
   }
 
   .page-ar-game .ar-model,
   .page-ar-game .ar-stage.is-ar-on .ar-model {
-    inline-size: min(70%, 430px) !important;
-    min-block-size: 190px !important;
+    inline-size: min(52vw, 288px) !important;
+    min-block-size: clamp(124px, 34svh, 182px) !important;
   }
 
   .page-ar-game .ar-toolbar {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    max-block-size: calc(30svh + env(safe-area-inset-bottom)) !important;
   }
 }
