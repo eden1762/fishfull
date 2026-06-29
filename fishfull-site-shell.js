@@ -3,6 +3,7 @@
 
   var logoSrc = '/fishfull.jpg';
   var copyrightText = 'Copyright © 2026Fishfull漁有料版權所有';
+  var observerTimer = null;
 
   function currentLang() {
     return window.SCMLanguage && window.SCMLanguage.current ? window.SCMLanguage.current() : (localStorage.getItem('scm-language') === 'en' ? 'en' : 'zh');
@@ -27,8 +28,11 @@
         img.decoding = 'async';
         mark.appendChild(img);
       }
-      img.src = logoSrc;
-      img.alt = logoAlt();
+      if (img.getAttribute('src') !== logoSrc) img.src = logoSrc;
+      if (img.getAttribute('alt') !== logoAlt()) img.alt = logoAlt();
+      Array.prototype.slice.call(mark.childNodes).forEach(function (node) {
+        if (node !== img && node.nodeType !== 1) mark.removeChild(node);
+      });
     });
   }
 
@@ -55,7 +59,7 @@
     }
 
     footer.setAttribute('aria-label', currentLang() === 'en' ? 'Copyright' : '版權聲明');
-    footer.textContent = copyrightText;
+    if (footer.textContent !== copyrightText) footer.textContent = copyrightText;
   }
 
   function applyShell() {
@@ -64,11 +68,23 @@
   }
 
   function scheduleApply() {
-    window.setTimeout(applyShell, 0);
+    window.clearTimeout(observerTimer);
+    observerTimer = window.setTimeout(applyShell, 0);
     window.setTimeout(applyShell, 120);
   }
 
-  document.addEventListener('DOMContentLoaded', scheduleApply);
+  function watchPageUpdates() {
+    if (!window.MutationObserver) return;
+    new MutationObserver(scheduleApply).observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    scheduleApply();
+    watchPageUpdates();
+  });
   document.addEventListener('scm-language-change', scheduleApply);
   window.addEventListener('load', scheduleApply);
 })();
