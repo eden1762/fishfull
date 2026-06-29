@@ -37,12 +37,23 @@
   }
 
   function ensureFooter() {
-    var footer = document.querySelector('footer.site-footer');
+    var footers = document.querySelectorAll('footer.site-footer');
+    var footer = footers[0] || null;
+
+    if (footers.length > 1) {
+      Array.prototype.slice.call(footers, 1).forEach(function (extraFooter) {
+        extraFooter.parentNode.removeChild(extraFooter);
+      });
+    }
+
     if (!footer) {
       footer = document.createElement('footer');
       footer.className = 'site-footer';
       footerParent().appendChild(footer);
+    } else if (footer.parentNode !== footerParent() && document.body.getAttribute('data-page') === 'ar-game') {
+      footerParent().appendChild(footer);
     }
+
     footer.setAttribute('aria-label', currentLang() === 'en' ? 'Copyright' : '版權聲明');
     footer.textContent = copyrightText;
   }
