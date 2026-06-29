@@ -1,0 +1,70 @@
+.page-ar-game .ar-coach-ask-card,
+.page-ar-game .ar-coach-stall-line,
+.page-ar-game .ar-coach-qr-line {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-ar-game .ar-coach-ask-card {
+  border: 1px solid rgba(255,159,28,.2);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,247,226,.88)),
+    radial-gradient(circle at 100% 0%, rgba(255,159,28,.18), transparent 38%);
+}
+
+.page-ar-game .ar-coach-ask-card p {
+  color: var(--ink);
+  font-size: clamp(17px, 2.4vw, 22px);
+  font-weight: 900;
+  line-height: 1.55;
+  letter-spacing: -.01em;
+}
+
+.page-ar-game .ar-coach-stall-line p,
+.page-ar-game .ar-coach-qr-line p {
+  color: var(--ink);
+  font-weight: 760;
+}
+
+.page-ar-game .ar-coach-copy-ask {
+  min-width: min(100%, 12rem);
+  box-shadow: 0 12px 24px rgba(255,159,28,.22);
+}
+
+.page-ar-game .ar-coach-result[data-tone="red"] .ar-coach-ask-card {
+  border-color: rgba(214,73,51,.24);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,238,235,.88)),
+    radial-gradient(circle at 100% 0%, rgba(214,73,51,.16), transparent 38%);
+}
+
+@media (max-width: 560px) {
+  .page-ar-game .ar-coach-ask-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .page-ar-game .ar-coach-ask-card > strong {
+    width: 100%;
+    height: auto;
+    min-height: 38px;
+    border-radius: 16px;
+  }
+
+  .page-ar-game .ar-coach-ask-card p {
+    font-size: 18px;
+  }
+
+  .page-ar-game .ar-coach-copy-ask {
+    width: 100%;
+    min-height: 52px;
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-ar-game .ar-coach-ask-card p {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+}
