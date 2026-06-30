@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/pages/ar-buy-light-cues.css" />
     <link rel="stylesheet" href="/pages/ar-market-handoff.css" />
     <link rel="stylesheet" href="/pages/ar-market-thumb-flow.css" />
+    <link rel="stylesheet" href="/pages/ar-one-thumb-stall.css" />
     <link rel="stylesheet" href="/fishfull-brand.css" />
     <style>
       .page-ar-game .brand-symbol {
@@ -178,66 +179,54 @@
         function focusFishStage() {
           var stage = document.getElementById('fishfull-ar-stage');
           if (!stage) return;
-          var nav = document.querySelector('.page-ar-game .page-nav, .page-ar-game .site-nav, .page-ar-game .brand');
-          var navHeight = nav ? nav.getBoundingClientRect().height : 0;
-          var safeTop = Math.max(12, navHeight + 10);
-          var targetY = window.scrollY + stage.getBoundingClientRect().top - safeTop;
-          window.scrollTo({ top: Math.max(0, targetY), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-          stage.setAttribute('tabindex', '-1');
-          window.setTimeout(function () { stage.focus({ preventScroll: true }); }, prefersReducedMotion() ? 40 : 300);
-        }
-
-        function shouldFocusQrEntry() {
-          var params = new URLSearchParams(window.location.search);
-          return params.get('demo') === 'qr' || window.location.hash === '#fishfull-ar-stage';
-        }
-
-        function focusQrEntryOnce() {
-          if (qrEntryFocused || !shouldFocusQrEntry()) return;
+          if (qrEntryFocused) return;
           qrEntryFocused = true;
-          window.setTimeout(focusFishStage, 520);
+          document.body.classList.add('ar-fish-first-entry');
+          stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+          window.setTimeout(function () {
+            var model = stage.querySelector('model-viewer.ar-model');
+            if (model && model.focus) model.focus({ preventScroll: true });
+          }, 550);
         }
 
-        function applyButtonText(button) {
-          var text = label();
-          if (button.textContent !== text) button.textContent = text;
-          if (button.getAttribute('aria-label') !== text) button.setAttribute('aria-label', text);
+        function ensureReturnButton() {
+          var coach = document.querySelector('.page-ar-game .ar-fish-coach');
+          if (!coach || coach.querySelector('[data-ar-view-return]')) return;
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'ar-coach-view-return';
+          button.setAttribute('data-ar-view-return', '');
+          button.textContent = label();
+          button.addEventListener('click', function () {
+            var stage = document.getElementById('fishfull-ar-stage');
+            if (stage) stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+          });
+          coach.insertBefore(button, coach.firstChild);
         }
 
-        function enhanceCoach() {
-          enforceOfficialLogo();
-          syncMotionPreference();
-          focusQrEntryOnce();
-          Array.prototype.slice.call(document.querySelectorAll('.ar-coach-result')).forEach(function (card) {
-            var existing = card.querySelector('.ar-coach-view-return');
-            if (existing) {
-              applyButtonText(existing);
-              return;
-            }
-            var button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'ar-coach-view-return';
-            applyButtonText(button);
-            button.addEventListener('click', focusFishStage);
-            var mainAction = card.querySelector('a[href]');
-            if (mainAction) card.insertBefore(button, mainAction);
-            else card.appendChild(button);
+        function syncReturnButtonLabel() {
+          Array.prototype.slice.call(document.querySelectorAll('[data-ar-view-return]')).forEach(function (button) {
+            button.textContent = label();
           });
         }
 
-        function scheduleEnhance() {
+        function enhance() {
           window.clearTimeout(timer);
-          timer = window.setTimeout(enhanceCoach, 80);
+          timer = window.setTimeout(function () {
+            enforceOfficialLogo();
+            syncMotionPreference();
+            ensureReturnButton();
+            syncReturnButtonLabel();
+            if (window.location.hash === '#fishfull-ar-stage') focusFishStage();
+          }, 120);
         }
 
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleEnhance);
-        else scheduleEnhance();
-        document.addEventListener('scm-language-change', scheduleEnhance);
-        if (reduceMotionQuery) {
-          if (reduceMotionQuery.addEventListener) reduceMotionQuery.addEventListener('change', scheduleEnhance);
-          else if (reduceMotionQuery.addListener) reduceMotionQuery.addListener(scheduleEnhance);
-        }
-        new MutationObserver(scheduleEnhance).observe(document.documentElement, { childList: true, subtree: true });
+        document.addEventListener('DOMContentLoaded', enhance);
+        document.addEventListener('scm-language-change', enhance);
+        window.addEventListener('load', enhance);
+        window.addEventListener('hashchange', enhance);
+        if (reduceMotionQuery && reduceMotionQuery.addEventListener) reduceMotionQuery.addEventListener('change', enhance);
+        else if (reduceMotionQuery && reduceMotionQuery.addListener) reduceMotionQuery.addListener(enhance);
       })();
     </script>
   </body>
