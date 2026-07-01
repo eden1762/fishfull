@@ -84,6 +84,7 @@ def assert_ar_entry_is_primary() -> None:
     assert_contains("ar.html", "/pages/ar-safe-view.css", "AR safe-view frame")
     assert_contains("ar.html", "/pages/ar-official-model-only.css", "AR official 3D model only styles")
     assert_contains("ar.html", "/pages/ar-official-model-only.js", "AR official 3D model only behavior")
+    assert_contains("ar.html", "/pages/ar-no-generated-fish-visuals.css", "AR generated fish visual guard")
     assert_contains("ar.html", "Back to the full 3D fish", "English full-fish return action")
 
     phone_guard = read("pages/ar-ultra-small-phone.css")
@@ -98,6 +99,10 @@ def assert_ar_entry_is_primary() -> None:
         raise AssertionError("pages/ar-official-model-only.css must hide substitute fish art")
     if "removeFallbackFish" not in model_only_js or "modelReady" not in model_only_js:
         raise AssertionError("pages/ar-official-model-only.js must remove substitute fish art and hold photos until the full 3D model is ready")
+
+    generated_fish_guard = read("pages/ar-no-generated-fish-visuals.css")
+    if ".phone-fish" not in generated_fish_guard or "display: none !important" not in generated_fish_guard:
+        raise AssertionError("pages/ar-no-generated-fish-visuals.css must hide generated hero fish drawings")
 
     home = read("home.js")
     if "ar.html" not in home:
@@ -116,6 +121,7 @@ def main() -> int:
         "pages/ar-safe-view.css",
         "pages/ar-official-model-only.css",
         "pages/ar-official-model-only.js",
+        "pages/ar-no-generated-fish-visuals.css",
     ]
     for path in required_files:
         read(path)
@@ -124,7 +130,7 @@ def main() -> int:
     assert_ar_entry_is_primary()
     assert_no_public_phrase("Elon Musk")
     assert_no_public_phrase("first principles")
-    print("FishFull static checks passed: official logo, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, mobile fish-fit guard, landscape phone guard, and official 3D model-only AR guard are present.")
+    print("FishFull static checks passed: official logo, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, mobile fish-fit guard, landscape phone guard, official 3D model-only AR guard, and no generated hero fish visuals are present.")
     return 0
 
 
