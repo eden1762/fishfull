@@ -17,6 +17,8 @@ PUBLIC_TEXT_EXTENSIONS = {".html", ".js", ".css"}
 GENERATED_LOGO_GUARD_TERMS = [
     "generatedTrademarkSelector",
     "removeGeneratedTrademarkVisuals",
+    "removeBannedBrandLogoSvg",
+    "blockedBrandLogoSvgSelector",
     "round-fish-logo",
     "ai-generated-logo",
     "legacy-fishfull-mark",
@@ -46,6 +48,21 @@ def assert_no_public_phrase(phrase: str) -> None:
         raise AssertionError(f"Public copy contains banned phrase {phrase!r}: {', '.join(offenders)}")
 
 
+def assert_logo_footer_cleanup() -> None:
+    shell = read("fishfull-site-shell.js")
+    brand_css = read("fishfull-brand.css")
+    if 'svg[class="brand-logo-img"]' not in shell or "svg.brand-logo-img" not in shell:
+        raise AssertionError("fishfull-site-shell.js must remove blocked brand-logo SVG elements")
+    if "removeBannedBrandLogoSvg" not in shell:
+        raise AssertionError("fishfull-site-shell.js must keep blocked brand-logo SVG cleanup active")
+    if "fishfull-global-footer" not in shell:
+        raise AssertionError("fishfull-site-shell.js must manage the global footer from one shared source")
+    if 'svg[class="brand-logo-img"]' not in brand_css or "svg.brand-logo-img" not in brand_css:
+        raise AssertionError("fishfull-brand.css must hide blocked brand-logo SVG elements before script cleanup")
+    if "footer.site-footer.fishfull-global-footer::before" not in brand_css:
+        raise AssertionError("fishfull-brand.css must disable the global footer before pseudo element")
+
+
 def assert_official_logo_guard() -> None:
     shell = read("fishfull-site-shell.js")
     if f"var logoSrc = '{OFFICIAL_LOGO}'" not in shell:
@@ -61,6 +78,7 @@ def assert_official_logo_guard() -> None:
     for term in GENERATED_LOGO_GUARD_TERMS:
         if term not in shell:
             raise AssertionError(f"fishfull-site-shell.js must guard against generated logo assets: {term}")
+    assert_logo_footer_cleanup()
 
     html_paths = sorted(ROOT.glob("*.html")) + sorted((ROOT / "pages").glob("*.html"))
     for path in html_paths:
@@ -122,6 +140,7 @@ def main() -> int:
         "ar.html",
         "home.js",
         "fishfull.jpg",
+        "fishfull-brand.css",
         "fishfull-site-shell.js",
         "pages/ar-mobile-fish-fit.css",
         "pages/ar-ultra-small-phone.css",
@@ -138,7 +157,9 @@ def main() -> int:
     assert_ar_entry_is_primary()
     assert_no_public_phrase("Elon Musk")
     assert_no_public_phrase("first principles")
-    print("FishFull static checks passed: official logo, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, mobile fish-fit guard, landscape phone guard, fish-stall tap-safe controls, official 3D model-only AR guard, and no generated hero fish visuals are present.")
+    assert_no_public_phrase("馬斯克")
+    assert_no_public_phrase("第一性原則")
+    print("FishFull static checks passed: official logo, blocked brand-logo SVG cleanup, footer before cleanup, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, mobile fish-fit guard, landscape phone guard, fish-stall tap-safe controls, official 3D model-only AR guard, and no generated hero fish visuals are present.")
     return 0
 
 
