@@ -71,3 +71,31 @@
     padding: 18px;
   }
 }
+
+/* When QR/home links jump straight to the AR stage, show the full fish before explanatory cards on phones. */
+@media (max-width: 640px) {
+  .page-ar-game #fishfull-ar-stage:target,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    scroll-margin-top: calc(12px + env(safe-area-inset-top)) !important;
+  }
+
+  .page-ar-game #fishfull-ar-stage:target .model-stage,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .model-stage {
+    order: 1;
+    min-block-size: min(72svh, 640px) !important;
+    margin-block-start: 0 !important;
+  }
+
+  .page-ar-game #fishfull-ar-stage:target .ar-side-copy,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .ar-side-copy {
+    order: 2;
+  }
+
+  .page-ar-game #fishfull-ar-stage:target .ar-side-copy .section-heading,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .ar-side-copy .section-heading {
+    margin-block-start: 0;
+  }
+}
