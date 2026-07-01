@@ -4,8 +4,8 @@
   "version": "4.1.0",
   "type": "module",
   "scripts": {
-    "start": "python3 -m http.server 4173",
-    "preview": "python3 -m http.server 4173",
-    "build": "python3 ./scripts/verify-static-site.py"
+    "start": "node ./scripts/static-server.js 4173",
+    "preview": "node ./scripts/static-server.js 4173",
+    "build": "node ./scripts/verify-static-site.js"
   }
 }
