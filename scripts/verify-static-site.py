@@ -25,10 +25,15 @@ GENERATED_LOGO_GUARD_TERMS = [
 ]
 
 
-def read(path: str) -> str:
+def assert_exists(path: str) -> None:
     target = ROOT / path
     if not target.exists():
         raise AssertionError(f"Missing required file: {path}")
+
+
+def read(path: str) -> str:
+    assert_exists(path)
+    target = ROOT / path
     return target.read_text(encoding="utf-8")
 
 
@@ -151,7 +156,7 @@ def main() -> int:
         "pages/ar-no-generated-fish-visuals.css",
     ]
     for path in required_files:
-        read(path)
+        assert_exists(path)
 
     assert_official_logo_guard()
     assert_ar_entry_is_primary()
