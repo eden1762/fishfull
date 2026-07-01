@@ -80,8 +80,15 @@ def assert_official_logo_guard() -> None:
 def assert_ar_entry_is_primary() -> None:
     assert_contains("ar.html", 'data-page="ar-game"', "root-level AR game page marker")
     assert_contains("ar.html", "/pages/ar-mobile-fish-fit.css", "mobile AR full-fish fit guard")
+    assert_contains("ar.html", "/pages/ar-ultra-small-phone.css", "ultra-small phone and landscape AR guard")
     assert_contains("ar.html", "/pages/ar-safe-view.css", "AR safe-view frame")
     assert_contains("ar.html", "Back to the full 3D fish", "English full-fish return action")
+
+    phone_guard = read("pages/ar-ultra-small-phone.css")
+    if "orientation: landscape" not in phone_guard or "FishFull AR landscape guard" not in phone_guard:
+        raise AssertionError("pages/ar-ultra-small-phone.css must protect the full 3D fish in mobile landscape view")
+    if "overflow-x: clip" not in phone_guard or "max-block-size" not in phone_guard:
+        raise AssertionError("pages/ar-ultra-small-phone.css must prevent landscape AR control overflow")
 
     home = read("home.js")
     if "ar.html" not in home:
@@ -96,6 +103,7 @@ def main() -> int:
         "fishfull.jpg",
         "fishfull-site-shell.js",
         "pages/ar-mobile-fish-fit.css",
+        "pages/ar-ultra-small-phone.css",
         "pages/ar-safe-view.css",
     ]
     for path in required_files:
@@ -105,7 +113,7 @@ def main() -> int:
     assert_ar_entry_is_primary()
     assert_no_public_phrase("Elon Musk")
     assert_no_public_phrase("first principles")
-    print("FishFull static checks passed: official logo, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, and mobile fish-fit guard are present.")
+    print("FishFull static checks passed: official logo, no duplicate footer guard, generated-logo cleanup, alternate trademark cleanup, AR entry, mobile fish-fit guard, and landscape phone guard are present.")
     return 0
 
 
