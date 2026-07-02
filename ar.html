@@ -144,6 +144,7 @@
         };
         var timer = null;
         var qrEntryFocused = false;
+        var logoObserver = null;
         var reduceMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
         function currentLang() {
@@ -169,6 +170,16 @@
             }
             if (img && img.getAttribute('alt') !== text) img.setAttribute('alt', text);
           });
+        }
+
+        function watchOfficialLogo() {
+          if (!window.MutationObserver || logoObserver) return;
+          var root = document.getElementById('root');
+          if (!root) return;
+          logoObserver = new MutationObserver(function () {
+            enforceOfficialLogo();
+          });
+          logoObserver.observe(root, { childList: true, subtree: true });
         }
 
         function syncMotionPreference() {
@@ -224,6 +235,8 @@
         }
 
         function enhance() {
+          watchOfficialLogo();
+          enforceOfficialLogo();
           window.clearTimeout(timer);
           timer = window.setTimeout(function () {
             enforceOfficialLogo();
@@ -231,7 +244,7 @@
             ensureReturnButton();
             syncReturnButtonLabel();
             if (window.location.hash === '#fishfull-ar-stage') focusFishStage();
-          }, 120);
+          }, 60);
         }
 
         document.addEventListener('DOMContentLoaded', enhance);
