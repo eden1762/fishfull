@@ -200,6 +200,16 @@
           return !!(reduceMotionQuery && reduceMotionQuery.matches);
         }
 
+        function focusModelInStage(stage, delay) {
+          if (!stage) return;
+          window.setTimeout(function () {
+            var model = stage.querySelector('model-viewer.ar-model');
+            if (!model || !model.focus) return;
+            model.setAttribute('tabindex', '0');
+            model.focus({ preventScroll: true });
+          }, typeof delay === 'number' ? delay : 550);
+        }
+
         function focusFishStage() {
           var stage = document.getElementById('fishfull-ar-stage');
           if (!stage) return;
@@ -207,10 +217,7 @@
           qrEntryFocused = true;
           document.body.classList.add('ar-fish-first-entry');
           stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-          window.setTimeout(function () {
-            var model = stage.querySelector('model-viewer.ar-model');
-            if (model && model.focus) model.focus({ preventScroll: true });
-          }, 550);
+          focusModelInStage(stage, 550);
         }
 
         function ensureReturnButton() {
@@ -225,7 +232,10 @@
           button.addEventListener('click', function () {
             var stage = document.getElementById('fishfull-ar-stage');
             document.body.classList.add('ar-fish-first-entry');
-            if (stage) stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+            if (stage) {
+              stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+              focusModelInStage(stage, prefersReducedMotion() ? 80 : 550);
+            }
           });
           coach.insertBefore(button, coach.firstChild);
         }
