@@ -221,8 +221,10 @@
           button.className = 'ar-coach-view-return';
           button.setAttribute('data-ar-view-return', '');
           button.textContent = label();
+          button.setAttribute('aria-label', label());
           button.addEventListener('click', function () {
             var stage = document.getElementById('fishfull-ar-stage');
+            document.body.classList.add('ar-fish-first-entry');
             if (stage) stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
           });
           coach.insertBefore(button, coach.firstChild);
@@ -230,7 +232,9 @@
 
         function syncReturnButtonLabel() {
           Array.prototype.slice.call(document.querySelectorAll('[data-ar-view-return]')).forEach(function (button) {
-            button.textContent = label();
+            var text = label();
+            button.textContent = text;
+            button.setAttribute('aria-label', text);
           });
         }
 
