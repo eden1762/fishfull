@@ -1,0 +1,86 @@
+:root {
+  --fishfull-blue: #086f9f;
+  --fishfull-blue-deep: #064d74;
+  --fishfull-blue-soft: #e8f8ff;
+  --fishfull-green: #1f9d72;
+  --fishfull-green-deep: #08724f;
+  --fishfull-green-soft: #e9fff5;
+  --fishfull-white: #ffffff;
+}
+
+body {
+  background: var(--fishfull-blue-soft);
+}
+
+.page-home {
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255,255,255,.82) 0 7%, rgba(255,255,255,0) 18%),
+    radial-gradient(ellipse at 18% 78%, rgba(31,157,114,.18) 0 18%, rgba(31,157,114,0) 42%),
+    linear-gradient(180deg, #ffffff 0%, #e8f8ff 32%, #7ed7ef 52%, #0b83b6 76%, #08724f 100%);
+}
+
+.page-home::before {
+  background:
+    radial-gradient(ellipse at 16% 82%, rgba(255,255,255,.62) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 52% 52%, rgba(255,255,255,.52) 0 8%, transparent 9%),
+    linear-gradient(110deg, rgba(255,255,255,.46), transparent 34% 64%, rgba(233,255,245,.46));
+}
+
+.page-home::after {
+  background:
+    radial-gradient(ellipse at 15% 100%, rgba(255,255,255,.88) 0 19%, transparent 20%),
+    radial-gradient(ellipse at 45% 100%, rgba(255,255,255,.78) 0 17%, transparent 18%),
+    radial-gradient(ellipse at 78% 100%, rgba(233,255,245,.72) 0 20%, transparent 21%);
+}
+
+.site-nav,
+.hero-copy,
+.coast-panel,
+.route-panel,
+.mobile-social-dock,
+.desktop-social-dock {
+  background: rgba(255,255,255,.76);
+  border-color: rgba(255,255,255,.78);
+}
+
+.coast-sky {
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(232,248,255,.72));
+}
+
+.static-sun {
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255,255,255,.95) 0 16%, rgba(255,255,255,0) 17%),
+    linear-gradient(135deg, #e8f8ff, #ffffff 48%, #dff7ed);
+  box-shadow: 0 20px 70px rgba(8,111,159,.18);
+}
+
+.coast-water {
+  background:
+    radial-gradient(ellipse at 20% 100%, rgba(255,255,255,.78) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 62% 100%, rgba(255,255,255,.7) 0 18%, transparent 19%),
+    linear-gradient(180deg, var(--fishfull-blue), var(--fishfull-blue-deep));
+}
+
+.coast-sand {
+  background:
+    radial-gradient(ellipse at 20% 0, rgba(255,255,255,.84) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 70% 0, rgba(255,255,255,.72) 0 13%, transparent 14%),
+    linear-gradient(180deg, var(--fishfull-green-soft), var(--fishfull-white));
+}
+
+.route-orange,
+.route-pink {
+  background: linear-gradient(180deg, var(--fishfull-green-soft), var(--fishfull-white) 58%, var(--fishfull-blue-soft));
+}
+
+.route-orange .route-button,
+.route-pink .route-button {
+  background: linear-gradient(135deg, var(--fishfull-green-soft), var(--fishfull-white));
+}
+
+.coast-tags span,
+.no-spin-note {
+  color: var(--fishfull-green-deep);
+  background: var(--fishfull-green-soft);
+  border-color: rgba(31,157,114,.18);
+}
