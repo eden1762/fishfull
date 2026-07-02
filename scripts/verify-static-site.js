@@ -89,6 +89,10 @@ function assertRequiredFiles() {
   }
 }
 
+function hasRewrite(rewrites, source, destination) {
+  return rewrites.some((rewrite) => rewrite.source === source && rewrite.destination === destination);
+}
+
 function assertValidVercelConfig() {
   const config = JSON.parse(readText('vercel.json'));
   const rewrites = Array.isArray(config.rewrites) ? config.rewrites : [];
@@ -96,6 +100,12 @@ function assertValidVercelConfig() {
     if (!rewrites.some((rewrite) => rewrite.destination === destination)) {
       throw new Error(`vercel.json: missing rewrite destination ${destination}`);
     }
+  }
+  if (!hasRewrite(rewrites, '/ar', '/ar.html')) {
+    throw new Error('vercel.json: missing root AR game rewrite /ar -> /ar.html');
+  }
+  if (!hasRewrite(rewrites, '/pages/ar', '/ar.html')) {
+    throw new Error('vercel.json: missing legacy AR game rewrite /pages/ar -> /ar.html');
   }
 }
 
