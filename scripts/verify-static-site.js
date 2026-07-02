@@ -160,6 +160,20 @@ function assertOfficialLogoGuard() {
   }
 }
 
+function assertCopyrightFooterSource() {
+  const shell = readText('fishfull-site-shell.js');
+  for (const term of [
+    'function ensureCopyrightFooter',
+    'data-fishfull-copyright',
+    'footer.textContent = copyrightText',
+    'ensureCopyrightFooter();'
+  ]) {
+    if (!shell.includes(term)) {
+      throw new Error(`fishfull-site-shell.js missing copyright footer source term: ${term}`);
+    }
+  }
+}
+
 function assertArEntryIsPrimary() {
   assertContains('ar.html', 'data-page="ar-game"', 'root-level AR game page marker');
   assertContains('ar.html', '/pages/ar-mobile-fish-fit.css', 'mobile AR full-fish fit guard');
@@ -197,6 +211,7 @@ function main() {
   assertValidVercelConfig();
   assertNoLegacyGeneratedMarkup();
   assertOfficialLogoGuard();
+  assertCopyrightFooterSource();
   assertArEntryIsPrimary();
   assertJavaScriptSyntax();
   console.log('FishFull static check passed.');
