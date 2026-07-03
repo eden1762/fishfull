@@ -85,6 +85,21 @@
   }
 }
 
+@media (max-width: 820px) and (orientation: landscape) {
+  .page-ar-game #fishfull-ar-stage:target .model-stage,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .model-stage,
+  body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage .model-stage {
+    min-block-size: calc(var(--fishfull-ar-focus-height) - 4px) !important;
+    padding-block: max(4px, env(safe-area-inset-top)) calc(10px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .page-ar-game #fishfull-ar-stage:target .ar-toolbar,
+  .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .ar-toolbar,
+  body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage .ar-toolbar {
+    max-block-size: calc(22svh + env(safe-area-inset-bottom)) !important;
+  }
+}
+
 @supports not (overflow: clip) {
   @media (max-width: 640px) {
     .page-ar-game #fishfull-ar-stage:target,
