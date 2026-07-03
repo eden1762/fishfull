@@ -271,9 +271,22 @@
   .ar-stage {
     overscroll-behavior: contain;
     touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .ar-model {
     touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .ar-action-btn,
+  .ar-fish-btn,
+  .ar-photo-btn,
+  .ar-toggle-btn,
+  .ar-real-ar-btn {
+    -webkit-tap-highlight-color: transparent;
   }
 }
