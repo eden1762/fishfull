@@ -95,6 +95,18 @@
         background: rgba(255,255,255,.94);
       }
 
+      .page-ar-game .ar-stage-live-hint {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
       @media (max-width: 560px) {
         .page-ar-game .ar-fish-coach {
           padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right)) !important;
@@ -146,6 +158,10 @@
           zh: '完整 3D 魚模型，可拖曳旋轉查看魚身',
           en: 'Full 3D fish model. Drag to rotate and inspect the fish.'
         };
+        var modelHints = {
+          zh: '先確認完整魚身，再往下看新鮮度、問法、料理與回饋。',
+          en: 'Check the whole fish first, then move down for freshness, buying questions, recipes, and feedback.'
+        };
         var cleanHandoffRoutes = {
           'map.html': '/map',
           'recipes.html': '/recipes',
@@ -172,6 +188,10 @@
           return modelLabels[currentLang()] || modelLabels.zh;
         }
 
+        function modelHint() {
+          return modelHints[currentLang()] || modelHints.zh;
+        }
+
         function enforceOfficialLogo() {
           Array.prototype.slice.call(document.querySelectorAll('.page-ar-game .brand .brand-symbol')).forEach(function (symbol) {
             var text = logoLabel();
@@ -195,12 +215,27 @@
           logoObserver.observe(root, { childList: true, subtree: true });
         }
 
+        function ensureModelHint(stage) {
+          if (!stage) return null;
+          var hint = stage.querySelector('#fishfull-ar-model-hint');
+          if (!hint) {
+            hint = document.createElement('p');
+            hint.id = 'fishfull-ar-model-hint';
+            hint.className = 'ar-stage-live-hint';
+            stage.insertBefore(hint, stage.firstChild);
+          }
+          hint.textContent = modelHint();
+          return hint;
+        }
+
         function syncMotionPreference() {
           var shouldReduce = !!(reduceMotionQuery && reduceMotionQuery.matches);
           var text = modelLabel();
           Array.prototype.slice.call(document.querySelectorAll('.page-ar-game model-viewer.ar-model')).forEach(function (model) {
+            var hint = ensureModelHint(model.closest('#fishfull-ar-stage'));
             model.setAttribute('aria-label', text);
             model.setAttribute('title', text);
+            if (hint) model.setAttribute('aria-describedby', hint.id);
             if (shouldReduce) {
               if (!model.dataset.originalRotation) model.dataset.originalRotation = model.getAttribute('rotation-per-second') || '16deg';
               model.removeAttribute('auto-rotate');
