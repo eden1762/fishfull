@@ -266,3 +266,14 @@
     max-height: 54px !important;
   }
 }
+
+@media (max-width: 768px) and (pointer: coarse) {
+  .ar-stage {
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
+
+  .ar-model {
+    touch-action: none;
+  }
+}
