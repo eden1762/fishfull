@@ -67,6 +67,17 @@
   }
 }
 
+@media (max-width: 380px) and (max-height: 700px) and (orientation: portrait) {
+  .page-ar-game .ar-hint-pill,
+  .page-ar-game .ar-fresh-strip,
+  .page-ar-game .ar-species-panel {
+    max-block-size: 4.6em !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @media (max-width: 340px) and (max-height: 620px) and (orientation: portrait) {
   .page-ar-game .ar-stage {
     --ar-safe-top: clamp(76px, 16vh, 96px);
