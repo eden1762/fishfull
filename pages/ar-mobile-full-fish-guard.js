@@ -55,6 +55,10 @@
     return !!(coarsePointer || viewportWidth() < 700 || viewportHeight() < 680);
   }
 
+  function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
   function fishDistance(model) {
     var height = viewportHeight();
     var ratio = stageRatio(model);
@@ -89,7 +93,7 @@
 
   function syncDirectArEntry() {
     Array.prototype.slice.call(document.querySelectorAll('.page-ar-game a[href="/ar.html"]')).forEach(function (link) {
-      link.setAttribute('href', '/ar.html#fishfull-ar-stage');
+      link.setAttribute('href', '/ar#fishfull-ar-stage');
       link.setAttribute('data-ar-full-fish-entry', 'true');
     });
   }
@@ -120,7 +124,7 @@
       var stage = document.getElementById('fishfull-ar-stage');
       if (!stage || stageMostlyVisible(stage)) return;
       document.body.classList.add('ar-fish-first-entry');
-      stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       focusStageModel(stage);
     }, 80);
   }
