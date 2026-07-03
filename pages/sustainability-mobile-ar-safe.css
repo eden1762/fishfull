@@ -8,6 +8,7 @@
   .sustainability-layout .model-stage {
     padding: 8px !important;
     overflow: visible !important;
+    scroll-margin-top: 84px;
   }
 
   .ar-stage {
@@ -17,6 +18,7 @@
     margin-bottom: 304px !important;
     overflow: hidden !important;
     contain: layout paint;
+    scroll-margin-top: 84px;
   }
 
   .ar-camera,
@@ -135,6 +137,16 @@
     overflow: auto;
   }
 
+  .ar-toast {
+    left: max(12px, env(safe-area-inset-left)) !important;
+    right: max(12px, env(safe-area-inset-right)) !important;
+    bottom: calc(var(--ar-safe-bottom) + 8px) !important;
+    width: auto !important;
+    max-width: calc(100% - 24px) !important;
+    max-height: 72px !important;
+    overflow: auto !important;
+  }
+
   .ar-model-fallback {
     top: calc(var(--ar-safe-top) + 46%) !important;
     max-width: calc(100% - 38px) !important;
@@ -216,6 +228,10 @@
   .ar-hint-pill {
     max-height: 64px !important;
   }
+
+  .ar-toast {
+    max-height: 58px !important;
+  }
 }
 
 @media (max-width: 920px) and (orientation: landscape) {
@@ -264,6 +280,10 @@
 
   .ar-hint-pill {
     max-height: 54px !important;
+  }
+
+  .ar-toast {
+    max-height: 48px !important;
   }
 }
 
