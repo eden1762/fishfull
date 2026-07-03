@@ -303,3 +303,25 @@
     max-block-size: calc(100% - var(--ar-safe-top) - var(--ar-safe-bottom) - env(safe-area-inset-bottom)) !important;
   }
 }
+
+@media (max-width: 480px) {
+  .page-ar-game .ar-fresh-strip,
+  .page-ar-game .ar-species-panel,
+  .page-ar-game .ar-hint-pill {
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-ar-game .ar-fresh-strip {
+    max-block-size: min(17svh, 96px) !important;
+  }
+
+  .page-ar-game .ar-species-panel {
+    max-block-size: min(22svh, 132px) !important;
+  }
+
+  .page-ar-game .ar-hint-pill {
+    max-block-size: min(16svh, 88px) !important;
+  }
+}
