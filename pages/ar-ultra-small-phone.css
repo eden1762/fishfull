@@ -160,6 +160,11 @@
   .page-ar-game .ar-fresh-strip,
   .page-ar-game .ar-species-panel {
     max-inline-size: calc(100% - (var(--fishfull-landscape-gutter) * 2)) !important;
+    max-block-size: min(5.2em, 24vh) !important;
+    max-block-size: min(5.2em, 24svh) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     font-size: .72rem !important;
     line-height: 1.22 !important;
   }
