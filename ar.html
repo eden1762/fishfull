@@ -146,6 +146,11 @@
           zh: '完整 3D 魚模型，可拖曳旋轉查看魚身',
           en: 'Full 3D fish model. Drag to rotate and inspect the fish.'
         };
+        var cleanHandoffRoutes = {
+          'map.html': '/map',
+          'recipes.html': '/recipes',
+          'feedback.html': '/feedback'
+        };
         var timer = null;
         var qrEntryFocused = false;
         var logoObserver = null;
@@ -259,6 +264,13 @@
           });
         }
 
+        function syncCleanHandoffRoutes() {
+          Array.prototype.slice.call(document.querySelectorAll('.page-ar-game .ar-next-links a[href]')).forEach(function (link) {
+            var href = link.getAttribute('href');
+            if (cleanHandoffRoutes[href]) link.setAttribute('href', cleanHandoffRoutes[href]);
+          });
+        }
+
         function enhance() {
           watchOfficialLogo();
           enforceOfficialLogo();
@@ -268,6 +280,7 @@
             syncMotionPreference();
             ensureReturnButton();
             syncReturnButtonLabel();
+            syncCleanHandoffRoutes();
             if (window.location.hash === '#fishfull-ar-stage') focusFishStage();
           }, 60);
         }
