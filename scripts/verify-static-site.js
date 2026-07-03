@@ -207,7 +207,7 @@ function assertArEntryIsPrimary() {
   assertContains('ar.html', '/pages/ar-official-model-only.js', 'AR official 3D model only behavior');
   assertContains('ar.html', '/pages/ar-no-generated-fish-visuals.css', 'AR generated fish visual guard');
   assertContains('ar.html', 'Back to the full 3D fish', 'English full-fish return action');
-  assertContains('home.js', 'ar.html', 'root-level AR game entry');
+  assertContains('home.js', '/ar#fishfull-ar-stage', 'clean root-level AR game entry');
 
   if (!readText('pages/ar-ultra-small-phone.css').includes('orientation: landscape')) {
     throw new Error('pages/ar-ultra-small-phone.css must protect mobile landscape AR view');
