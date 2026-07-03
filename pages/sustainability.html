@@ -23,6 +23,37 @@
     <link rel="stylesheet" href="sustainability-mobile-ar-safe.css" />
     <link rel="stylesheet" href="sustainability-ar-tap-targets.css" />
     <link rel="stylesheet" href="../fishfull-brand.css" />
+    <style>
+      @media (max-width: 340px) and (pointer: coarse) {
+        .ar-stage {
+          --ar-safe-top: 188px;
+          --ar-safe-bottom: 120px;
+          margin-bottom: 368px !important;
+        }
+
+        .ar-toolbar {
+          grid-template-columns: minmax(0, 1fr) 40px !important;
+          gap: 5px !important;
+        }
+
+        .ar-fish-options {
+          grid-template-columns: 1fr !important;
+          gap: 5px !important;
+        }
+
+        .ar-fish-btn,
+        .ar-toggle-btn {
+          min-height: 36px !important;
+          padding-top: 7px !important;
+          padding-bottom: 7px !important;
+        }
+
+        .ar-photo-btn {
+          width: 40px !important;
+          min-height: 40px !important;
+        }
+      }
+    </style>
   </head>
   <body data-page="sustainability">
     <div id="root"></div>
