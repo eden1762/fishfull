@@ -15,12 +15,17 @@
   body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage {
     scroll-margin-top: calc(76px + env(safe-area-inset-top));
     scroll-margin-bottom: calc(132px + env(safe-area-inset-bottom));
+    max-inline-size: 100vw;
+    overflow-x: clip;
+    contain: layout paint;
   }
 
   .page-ar-game #fishfull-ar-stage:target .model-stage,
   .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .model-stage,
   body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage .model-stage {
     order: -1;
+    inline-size: 100%;
+    max-inline-size: 100%;
     min-block-size: min(720px, calc(var(--fishfull-ar-focus-height) - 10px)) !important;
     padding-block: max(8px, env(safe-area-inset-top)) calc(22px + env(safe-area-inset-bottom)) !important;
   }
@@ -28,7 +33,10 @@
   .page-ar-game #fishfull-ar-stage:target .ar-stage,
   .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .ar-stage,
   body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage .ar-stage {
+    inline-size: 100%;
+    max-inline-size: 100%;
     min-block-size: min(690px, calc(var(--fishfull-ar-focus-height) - 18px)) !important;
+    overflow-x: clip;
   }
 
   .page-ar-game #fishfull-ar-stage:target .ar-side-copy,
@@ -55,9 +63,24 @@
     right: max(12px, env(safe-area-inset-right)) !important;
     bottom: max(12px, env(safe-area-inset-bottom)) !important;
     max-block-size: calc(30svh + env(safe-area-inset-bottom)) !important;
+    max-inline-size: calc(100vw - max(24px, env(safe-area-inset-left)) - max(24px, env(safe-area-inset-right))) !important;
+    overflow-x: hidden !important;
     overflow-y: auto !important;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+@supports not (overflow: clip) {
+  @media (max-width: 640px) {
+    .page-ar-game #fishfull-ar-stage:target,
+    .page-ar-game #fishfull-ar-stage:target .ar-stage,
+    .page-ar-game.ar-fish-first-entry #fishfull-ar-stage,
+    .page-ar-game.ar-fish-first-entry #fishfull-ar-stage .ar-stage,
+    body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage,
+    body.ar-fish-first-entry .page-ar-game #fishfull-ar-stage .ar-stage {
+      overflow-x: hidden;
+    }
   }
 }
 
