@@ -103,6 +103,16 @@
     return visibleHeight >= Math.min(rect.height * 0.62, viewportHeight() * 0.58);
   }
 
+  function focusStageModel(stage) {
+    if (!stage) return;
+    window.setTimeout(function () {
+      var model = stage.querySelector && stage.querySelector('model-viewer.ar-model');
+      if (!model || !model.focus) return;
+      model.setAttribute('tabindex', '0');
+      model.focus({ preventScroll: true });
+    }, 180);
+  }
+
   function returnToFullFishAfterChoice(event) {
     var trigger = event.target && event.target.closest ? event.target.closest('.page-ar-game .sustainability-copy .label-card[data-ar-option]') : null;
     if (!trigger || !isMobileViewport()) return;
@@ -111,6 +121,7 @@
       if (!stage || stageMostlyVisible(stage)) return;
       document.body.classList.add('ar-fish-first-entry');
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      focusStageModel(stage);
     }, 80);
   }
 
