@@ -1,4 +1,10 @@
 /* FishFull AR ultra-small phone guard: keep the full 3D fish readable on very narrow phones. */
+@media (max-width: 700px), (max-height: 680px) {
+  .page-ar-game #fishfull-ar-stage {
+    scroll-margin-block-start: max(10px, env(safe-area-inset-top));
+  }
+}
+
 @media (max-width: 340px) and (orientation: portrait) {
   .page-ar-game {
     --fishfull-phone-gutter: max(10px, env(safe-area-inset-left), env(safe-area-inset-right));
