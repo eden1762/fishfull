@@ -1,0 +1,30 @@
+/* AR 手機觸控保護：按鈕保留足夠點按面積，不擠壓完整 3D 魚舞台。 */
+@media (max-width: 768px) and (pointer: coarse) {
+  .ar-toolbar .ar-action-btn,
+  .ar-fish-options .ar-fish-btn,
+  .ar-real-ar-btn {
+    min-height: 44px !important;
+  }
+
+  .ar-fish-options .ar-fish-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .ar-toolbar .ar-action-btn:focus-visible,
+  .ar-fish-options .ar-fish-btn:focus-visible,
+  .ar-real-ar-btn:focus-visible {
+    outline: 3px solid rgba(0, 161, 128, 0.72) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+@media (max-width: 380px) and (pointer: coarse) {
+  .ar-toolbar .ar-action-btn,
+  .ar-fish-options .ar-fish-btn,
+  .ar-real-ar-btn {
+    min-height: 40px !important;
+  }
+}
