@@ -2,6 +2,7 @@
   'use strict';
 
   var timer = 0;
+  var settleTimer = 0;
   var lastViewportKey = '';
 
   function viewportHeight() {
@@ -53,6 +54,10 @@
   function isMobileViewport() {
     var coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     return !!(coarsePointer || viewportWidth() < 700 || viewportHeight() < 680);
+  }
+
+  function isDirectStageEntry() {
+    return window.location.hash === '#fishfull-ar-stage' && isMobileViewport();
   }
 
   function fishDistance(model) {
@@ -113,6 +118,18 @@
     }, 180);
   }
 
+  function settleDirectStageEntry() {
+    if (!isDirectStageEntry()) return;
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(function () {
+      var stage = document.getElementById('fishfull-ar-stage');
+      if (!stage) return;
+      document.body.classList.add('ar-fish-first-entry');
+      if (!stageMostlyVisible(stage)) stage.scrollIntoView({ behavior: 'auto', block: 'start' });
+      focusStageModel(stage);
+    }, 220);
+  }
+
   function returnToFullFishAfterChoice(event) {
     var trigger = event.target && event.target.closest ? event.target.closest('.page-ar-game .sustainability-copy .label-card[data-ar-option]') : null;
     if (!trigger || !isMobileViewport()) return;
@@ -151,10 +168,14 @@
 
       if (!model.dataset.fishfullGuardLoadBound) {
         model.dataset.fishfullGuardLoadBound = 'true';
-        model.addEventListener('load', scheduleGuard, { passive: true });
+        model.addEventListener('load', function () {
+          scheduleGuard();
+          settleDirectStageEntry();
+        }, { passive: true });
       }
     });
     lastViewportKey = currentKey;
+    settleDirectStageEntry();
   }
 
   function scheduleGuard() {
@@ -178,6 +199,7 @@
   window.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
   window.addEventListener('orientationchange', scheduleGuard, { passive: true });
   window.addEventListener('pageshow', scheduleGuard, { passive: true });
+  window.addEventListener('hashchange', scheduleGuard, { passive: true });
   document.addEventListener('scm-language-change', scheduleGuard);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
