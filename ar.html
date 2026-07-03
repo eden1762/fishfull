@@ -142,6 +142,10 @@
           zh: 'FishFull 漁有料官方商標',
           en: 'FishFull official logo'
         };
+        var modelLabels = {
+          zh: '完整 3D 魚模型，可拖曳旋轉查看魚身',
+          en: 'Full 3D fish model. Drag to rotate and inspect the fish.'
+        };
         var timer = null;
         var qrEntryFocused = false;
         var logoObserver = null;
@@ -157,6 +161,10 @@
 
         function logoLabel() {
           return logoLabels[currentLang()] || logoLabels.zh;
+        }
+
+        function modelLabel() {
+          return modelLabels[currentLang()] || modelLabels.zh;
         }
 
         function enforceOfficialLogo() {
@@ -184,7 +192,10 @@
 
         function syncMotionPreference() {
           var shouldReduce = !!(reduceMotionQuery && reduceMotionQuery.matches);
+          var text = modelLabel();
           Array.prototype.slice.call(document.querySelectorAll('.page-ar-game model-viewer.ar-model')).forEach(function (model) {
+            model.setAttribute('aria-label', text);
+            model.setAttribute('title', text);
             if (shouldReduce) {
               if (!model.dataset.originalRotation) model.dataset.originalRotation = model.getAttribute('rotation-per-second') || '16deg';
               model.removeAttribute('auto-rotate');
