@@ -195,6 +195,7 @@
   window.addEventListener('orientationchange', scheduleSettledGuard, { passive: true });
   window.addEventListener('pageshow', scheduleSettledGuard, { passive: true });
   window.addEventListener('focus', scheduleSettledGuard, { passive: true });
+  window.addEventListener('hashchange', scheduleSettledGuard, { passive: true });
   document.addEventListener('visibilitychange', scheduleGuardWhenPageReturns);
   document.addEventListener('scm-language-change', scheduleGuard);
   if (window.visualViewport) {
