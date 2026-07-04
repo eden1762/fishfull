@@ -234,6 +234,24 @@
   }
 }
 
+@media (max-width: 768px) and (max-height: 700px) and (pointer: coarse) {
+  .ar-fresh-strip {
+    align-items: center !important;
+    min-height: 0 !important;
+    max-height: 38px !important;
+    padding: 4px 6px !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+  }
+
+  .ar-fresh-strip strong,
+  .ar-fresh-strip span {
+    flex: 0 0 auto !important;
+    font-size: 10.5px !important;
+    line-height: 1.1 !important;
+  }
+}
+
 @media (max-width: 920px) and (orientation: landscape) {
   .sustainability-layout .model-stage {
     padding: 6px !important;
