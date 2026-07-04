@@ -2,6 +2,7 @@
   'use strict';
 
   var timer = 0;
+  var settleTimer = 0;
   var lastViewportKey = '';
 
   function viewportHeight() {
@@ -166,10 +167,16 @@
     timer = window.setTimeout(applyFullFishGuard, 90);
   }
 
+  function scheduleSettledGuard() {
+    scheduleGuard();
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(scheduleGuard, 420);
+  }
+
   function scheduleGuardWhenViewportChanges() {
     var currentKey = viewportKey();
     if (currentKey === lastViewportKey) return;
-    scheduleGuard();
+    scheduleSettledGuard();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleGuard);
@@ -180,8 +187,8 @@
     if (event.key === 'Enter' || event.key === ' ') returnToFullFishAfterChoice(event);
   });
   window.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
-  window.addEventListener('orientationchange', scheduleGuard, { passive: true });
-  window.addEventListener('pageshow', scheduleGuard, { passive: true });
+  window.addEventListener('orientationchange', scheduleSettledGuard, { passive: true });
+  window.addEventListener('pageshow', scheduleSettledGuard, { passive: true });
   document.addEventListener('scm-language-change', scheduleGuard);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
