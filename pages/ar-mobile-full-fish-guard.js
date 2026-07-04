@@ -127,6 +127,7 @@
       document.body.classList.add('ar-fish-first-entry');
       stage.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
       focusStageModel(stage);
+      window.setTimeout(scheduleSettledGuard, prefersReducedMotion() ? 160 : 720);
     }, 80);
   }
 
