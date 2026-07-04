@@ -31,9 +31,27 @@
   z-index: 1;
 }
 
+/* AR coach badges should read as compact text labels, not decorative emoji graphics. */
+.page-ar-game .ar-fish-coach .ar-coach-detail > strong {
+  min-width: 2.25rem;
+  padding-inline: .35rem;
+  font-size: .78rem;
+  line-height: 1.15;
+  letter-spacing: .02em;
+  text-align: center;
+  font-family: inherit;
+  font-variant-emoji: text;
+  background: rgba(255,255,255,.82);
+}
+
 @media (max-width: 560px) {
   .page-ar-game .ar-phone-card {
     min-height: auto;
     padding-block: 24px;
+  }
+
+  .page-ar-game .ar-fish-coach .ar-coach-detail > strong {
+    min-width: 2rem;
+    font-size: .72rem;
   }
 }
