@@ -10,7 +10,7 @@
       body: '先掃 QR、看 AR 魚身、挑一條主推魚、找合作點、接一份零失敗食譜。FishFull 把這些步驟做成可點入口，讓消費者站在魚攤前不用猜，魚販也更好介紹。',
       cards: [
         ['掃碼開場', '魚攤、餐桌或社群貼文一掃就能進入，先看燈號、來源與料理方向。', '/pages/qr.html'],
-        ['AR 選魚小教練', '手機先看完整 3D 魚身，再用綠／黃／紅燈號判斷，現場比較敢問也比較敢買。', arRoute],
+        ['AR 遊戲選魚小教練', '手機先看完整 3D 魚身，再用綠／黃／紅燈號判斷，現場比較敢問也比較敢買。', arRoute],
         ['主推魚', '先看今天推薦哪一條，包含口感、份量、問法與料理搭配。', '/pages/fish.html'],
         ['去附近買魚', '找市場、魚市、餐廳與漁港合作點，把知道變成真的去買。', '/pages/map.html'],
         ['零失敗食譜', '清蒸、乾煎、煮湯都拆成簡單步驟，第一次煮魚也不容易翻車。', '/pages/recipes.html']
@@ -23,7 +23,7 @@
       body: 'Scan a QR, view the AR fish, pick one featured catch, find a partner spot, and cook with an easy recipe. FishFull turns seafood shopping into a clear route for shoppers and vendors.',
       cards: [
         ['Scan to Start', 'Open the guide from a stall, table, or social post and see color guidance, source notes, and cooking direction.', '/pages/qr.html'],
-        ['AR Fish Coach', 'View the full 3D fish on your phone, then use green/yellow/red guidance to ask better and buy smarter.', arRoute],
+        ['AR Game Fish Coach', 'View the full 3D fish on your phone, then use green/yellow/red guidance to ask better and buy smarter.', arRoute],
         ['Featured Fish', 'See one recommended fish with taste, portion, buying questions, and recipe pairing.', '/pages/fish.html'],
         ['Buy Nearby', 'Find partner markets, restaurants, fish markets, and ports.', '/pages/map.html'],
         ['Easy Recipes', 'Steam, pan-fry, or make soup with low-fail steps.', '/pages/recipes.html']
