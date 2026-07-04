@@ -179,6 +179,11 @@
     scheduleSettledGuard();
   }
 
+  function scheduleGuardWhenPageReturns() {
+    if (document.hidden) return;
+    scheduleSettledGuard();
+  }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleGuard);
   else scheduleGuard();
 
@@ -189,6 +194,8 @@
   window.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
   window.addEventListener('orientationchange', scheduleSettledGuard, { passive: true });
   window.addEventListener('pageshow', scheduleSettledGuard, { passive: true });
+  window.addEventListener('focus', scheduleSettledGuard, { passive: true });
+  document.addEventListener('visibilitychange', scheduleGuardWhenPageReturns);
   document.addEventListener('scm-language-change', scheduleGuard);
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', scheduleGuardWhenViewportChanges, { passive: true });
