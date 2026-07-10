@@ -21,7 +21,8 @@
     '.round-fish-logo',
     '.legacy-fishfull-mark'
   ].join(', ');
-  var observerTimer = null;
+  var observerTimer = 0;
+  var applying = false;
 
   function currentLang() {
     return window.SCMLanguage && window.SCMLanguage.current ? window.SCMLanguage.current() : (localStorage.getItem('scm-language') === 'en' ? 'en' : 'zh');
@@ -47,11 +48,12 @@
   }
 
   function isLogoImage(img) {
-    if (!img) return false;
+    if (!img || !img.matches || !img.matches('img')) return false;
     var src = img.getAttribute('src') || '';
     var alt = img.getAttribute('alt') || '';
     var className = img.className || '';
-    return src.indexOf('fishfull') !== -1 || /logo|brand|商標/i.test(alt + ' ' + className) || isBrandContainer(img);
+    if (src === logoSrc) return true;
+    return /logo|brand|商標/i.test(alt + ' ' + className) || isBrandContainer(img);
   }
 
   function hasOfficialLogo(node) {
@@ -60,11 +62,25 @@
     return !!(node.querySelector && node.querySelector('img[src="' + logoSrc + '"]'));
   }
 
+  function removeNode(node) {
+    if (node && node.parentNode) node.parentNode.removeChild(node);
+  }
+
   function setOfficialLogo(holder) {
     if (!holder) return null;
     holder.classList.add('fishfull-logo-mark');
     holder.setAttribute('aria-hidden', 'false');
-    var img = holder.querySelector('img');
+    var img = holder.matches && holder.matches('img') ? holder : holder.querySelector('img');
+
+    if (holder.matches && holder.matches('img')) {
+      var wrap = document.createElement('span');
+      wrap.className = 'fishfull-logo-mark';
+      holder.parentNode.insertBefore(wrap, holder);
+      wrap.appendChild(holder);
+      holder = wrap;
+      img = holder.querySelector('img');
+    }
+
     if (!img) {
       holder.textContent = '';
       img = document.createElement('img');
@@ -74,19 +90,14 @@
       img.decoding = 'async';
       holder.appendChild(img);
     }
-    if (img.getAttribute('src') !== logoSrc) img.src = logoSrc;
-    if (img.getAttribute('alt') !== logoAlt()) img.alt = logoAlt();
-    Array.prototype.slice.call(holder.childNodes).forEach(function (node) {
-      if (node !== img && node.nodeType !== 1) holder.removeChild(node);
-    });
+
+    if (img.getAttribute('src') !== logoSrc) img.setAttribute('src', logoSrc);
+    if (img.getAttribute('alt') !== logoAlt()) img.setAttribute('alt', logoAlt());
+
     Array.prototype.slice.call(holder.children).forEach(function (child) {
-      if (child !== img) holder.removeChild(child);
+      if (child !== img) removeNode(child);
     });
     return holder;
-  }
-
-  function removeNode(node) {
-    if (node && node.parentNode) node.parentNode.removeChild(node);
   }
 
   function removeGeneratedTrademarkVisuals() {
@@ -99,27 +110,16 @@
 
   function removeAlternateTrademarkVisuals() {
     if (!document.querySelectorAll) return;
-    Array.prototype.slice.call(document.querySelectorAll('img, svg')).forEach(function (node) {
-      if (!node || hasOfficialLogo(node)) return;
-      if (node.matches && node.matches('svg.' + legacyBrandClass)) {
-        removeNode(node);
-        return;
-      }
-      if (!node.matches || !node.matches('img')) return;
-      if (!isLogoImage(node)) return;
-      if (node.getAttribute('src') === logoSrc) return;
-      var removable = node.closest && node.closest('.home-brand-logo, .brand-symbol, .brand-sun, .generated-logo, .generated-mark, .ai-logo, .ai-generated-logo, .' + legacyBrandClass + ', .fish-logo, .fish-icon, .fish-badge, .round-fish-logo, .legacy-fishfull-mark');
-      removeNode(removable || node);
+    Array.prototype.slice.call(document.querySelectorAll('img')).forEach(function (img) {
+      if (!isLogoImage(img) || img.getAttribute('src') === logoSrc) return;
+      var removable = img.closest('.home-brand-logo, .brand-symbol, .brand-sun, .generated-logo, .generated-mark, .ai-logo, .ai-generated-logo, .' + legacyBrandClass + ', .fish-logo, .fish-icon, .fish-badge, .round-fish-logo, .legacy-fishfull-mark');
+      removeNode(removable || img);
     });
   }
 
   function dedupeBrandLogos() {
-    var containers = document.querySelectorAll('.brand-mark, .brand');
-    Array.prototype.forEach.call(containers, function (container) {
-      var holders = [];
-      Array.prototype.slice.call(container.querySelectorAll('.fishfull-logo-mark, .home-brand-logo, .brand-symbol, .brand-sun')).forEach(function (holder) {
-        if (holders.indexOf(holder) === -1) holders.push(holder);
-      });
+    Array.prototype.slice.call(document.querySelectorAll('.brand-mark, .brand')).forEach(function (container) {
+      var holders = Array.prototype.slice.call(container.querySelectorAll('.fishfull-logo-mark, .home-brand-logo, .brand-symbol, .brand-sun'));
       Array.prototype.slice.call(container.querySelectorAll('img')).forEach(function (img) {
         if (!isLogoImage(img)) return;
         var holder = img.closest('.fishfull-logo-mark, .home-brand-logo, .brand-symbol, .brand-sun') || img;
@@ -127,56 +127,22 @@
       });
       if (!holders.length) return;
 
-      var keeper = holders.filter(function (holder) {
-        var img = holder.matches && holder.matches('img') ? holder : holder.querySelector && holder.querySelector('img');
-        return img && img.getAttribute('src') === logoSrc;
-      })[0] || holders[0];
-      if (keeper.matches && keeper.matches('img')) {
-        var wrap = document.createElement('span');
-        wrap.className = 'fishfull-logo-mark';
-        keeper.parentNode.insertBefore(wrap, keeper);
-        wrap.appendChild(keeper);
-        keeper = wrap;
-      }
-      setOfficialLogo(keeper);
-
+      var keeper = holders.filter(hasOfficialLogo)[0] || holders[0];
+      keeper = setOfficialLogo(keeper);
       holders.forEach(function (holder) {
-        if (holder !== keeper && !keeper.contains(holder)) removeNode(holder);
+        if (holder !== keeper && holder.parentNode && !keeper.contains(holder)) removeNode(holder);
       });
     });
   }
 
   function applyLogo() {
-    var marks = document.querySelectorAll('.brand-sun, .brand-symbol, .brand-mark .fishfull-logo-mark, .brand .fishfull-logo-mark');
-    Array.prototype.forEach.call(marks, setOfficialLogo);
+    Array.prototype.slice.call(document.querySelectorAll('.brand-sun, .brand-symbol, .brand-mark .fishfull-logo-mark, .brand .fishfull-logo-mark')).forEach(setOfficialLogo);
     dedupeBrandLogos();
     removeAlternateTrademarkVisuals();
     removeGeneratedTrademarkVisuals();
   }
 
-  function isGeneratedTrademarkVisual(node) {
-    if (!node || !node.matches) return false;
-    if (hasOfficialLogo(node)) return false;
-    if (node.matches(generatedTrademarkSelector)) return true;
-    var label = [
-      node.getAttribute('class') || '',
-      node.getAttribute('id') || '',
-      node.getAttribute('aria-label') || '',
-      node.getAttribute('alt') || '',
-      node.getAttribute('src') || ''
-    ].join(' ');
-    return /(generated|ai[-_ ]?logo|round[-_ ]?fish|fish[-_ ]?(logo|icon|badge)|legacy[-_ ]?fishfull|brand[-_ ]?logo[-_ ]?img|brand[-_ ]?(fish|badge|icon))/i.test(label);
-  }
-
-  function removeGeneratedTrademarkContainers() {
-    if (!document.querySelectorAll) return;
-    Array.prototype.slice.call(document.querySelectorAll('[class], [id], [aria-label], img, svg')).forEach(function (node) {
-      if (isGeneratedTrademarkVisual(node)) removeNode(node);
-    });
-  }
-
   function removeLegacyGlobalFooter() {
-    if (!document.querySelectorAll) return;
     Array.prototype.slice.call(document.querySelectorAll('footer.fishfull-global-footer')).forEach(removeNode);
   }
 
@@ -199,58 +165,52 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (node) {
       node.nodeValue = node.nodeValue.split(copyrightText).join('').replace(/\s+/g, ' ').trim();
-      var parent = node.parentElement;
-      while (parent && parent !== document.body && parent !== footer && parent.textContent.trim() === '') {
-        var next = parent.parentElement;
-        removeNode(parent);
-        parent = next;
-      }
     });
   }
 
   function ensureCopyrightFooter() {
-    if (!document.body || !document.createElement) return;
+    if (!document.body) return;
     var parent = footerParent();
     var footer = document.querySelector('footer.site-footer[data-fishfull-copyright="true"]');
     if (!footer) {
       footer = document.createElement('footer');
       footer.className = 'site-footer';
       footer.setAttribute('data-fishfull-copyright', 'true');
-      footer.setAttribute('aria-label', currentLang() === 'en' ? 'Copyright' : '版權資訊');
     }
-    footer.textContent = copyrightText;
+    footer.setAttribute('aria-label', currentLang() === 'en' ? 'Copyright' : '版權資訊');
+    if (footer.textContent !== copyrightText) footer.textContent = copyrightText;
     removeDuplicateCopyrightText(footer);
     Array.prototype.slice.call(document.querySelectorAll('footer.site-footer')).forEach(function (node) {
       if (node !== footer && node.textContent && node.textContent.indexOf(copyrightText) !== -1) removeNode(node);
     });
     if (footer.parentNode !== parent) parent.appendChild(footer);
-    if (!footer.parentNode) parent.appendChild(footer);
   }
 
   function applyShell() {
-    installCleanupStyle();
-    removeLegacyGlobalFooter();
-    removeGeneratedTrademarkContainers();
-    applyLogo();
-    ensureCopyrightFooter();
+    if (applying) return;
+    applying = true;
+    try {
+      installCleanupStyle();
+      removeLegacyGlobalFooter();
+      applyLogo();
+      ensureCopyrightFooter();
+    } finally {
+      applying = false;
+    }
   }
 
   function scheduleApply() {
     window.clearTimeout(observerTimer);
-    observerTimer = window.setTimeout(applyShell, 0);
-    window.setTimeout(applyShell, 120);
+    observerTimer = window.setTimeout(applyShell, 20);
   }
 
   function watchPageUpdates() {
     if (!window.MutationObserver || !document.body) return;
-    new MutationObserver(scheduleApply).observe(document.body, {
-      childList: true,
-      subtree: true
-    });
+    new MutationObserver(scheduleApply).observe(document.body, { childList: true, subtree: true });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    scheduleApply();
+    applyShell();
     watchPageUpdates();
   });
   document.addEventListener('scm-language-change', scheduleApply);
