@@ -40,6 +40,12 @@ function assertContains(relativePath, needle, reason) {
   }
 }
 
+function assertNotContains(relativePath, needle, reason) {
+  if (readText(relativePath).includes(needle)) {
+    throw new Error(`${relativePath}: contains ${reason}: ${needle}`);
+  }
+}
+
 function walkFiles(dir = ROOT, results = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const target = path.join(dir, entry.name);
@@ -69,21 +75,23 @@ function assertRequiredFiles() {
     'index.html',
     'ar.html',
     'home.js',
+    'home-ocean-theme.css',
     'fishfull.jpg',
     'fishfull-brand.css',
     'fishfull-site-shell.js',
+    'fishfull-iteration.js',
     'site-i18n.js',
     'vercel.json',
+    'assets/fishfull-demo-qr.svg',
+    'assets/models/crimson-sea-bream.gltf',
+    'assets/models/pacific-mackerel.gltf',
+    'assets/models/mahi-mahi.gltf',
     'pages/about.html',
+    'pages/catch.html',
     'pages/map.html',
-    'pages/sustainability.html',
-    'pages/ar-mobile-fish-fit.css',
-    'pages/ar-ultra-small-phone.css',
-    'pages/ar-safe-view.css',
-    'pages/ar-stall-tap-safe.css',
-    'pages/ar-official-model-only.css',
-    'pages/ar-official-model-only.js',
-    'pages/ar-no-generated-fish-visuals.css'
+    'pages/map-vr-demo.css',
+    'pages/map-vr-demo.js',
+    'pages/sustainability.html'
   ]) {
     assertExists(requiredPath);
   }
@@ -96,16 +104,16 @@ function hasRewrite(rewrites, source, destination) {
 function assertValidVercelConfig() {
   const config = JSON.parse(readText('vercel.json'));
   const rewrites = Array.isArray(config.rewrites) ? config.rewrites : [];
-  for (const destination of ['/pages/about.html', '/pages/map.html', '/pages/sustainability.html']) {
-    if (!rewrites.some((rewrite) => rewrite.destination === destination)) {
-      throw new Error(`vercel.json: missing rewrite destination ${destination}`);
+  for (const [source, destination] of [
+    ['/ar', '/ar.html'],
+    ['/catch', '/pages/catch.html'],
+    ['/map', '/pages/map.html'],
+    ['/pages/ar', '/ar.html'],
+    ['/pages/catch', '/pages/catch.html']
+  ]) {
+    if (!hasRewrite(rewrites, source, destination)) {
+      throw new Error(`vercel.json: missing rewrite ${source} -> ${destination}`);
     }
-  }
-  if (!hasRewrite(rewrites, '/ar', '/ar.html')) {
-    throw new Error('vercel.json: missing root AR game rewrite /ar -> /ar.html');
-  }
-  if (!hasRewrite(rewrites, '/pages/ar', '/ar.html')) {
-    throw new Error('vercel.json: missing legacy AR game rewrite /pages/ar -> /ar.html');
   }
 }
 
@@ -144,6 +152,10 @@ function assertOfficialLogoGuard() {
     }
   }
 
+  if (shell.includes("src.indexOf('fishfull') !== -1")) {
+    throw new Error('fishfull-site-shell.js must not mistake the catch QR asset for a brand logo');
+  }
+
   for (const filePath of htmlFiles()) {
     const content = fs.readFileSync(filePath, 'utf8');
     const rel = normalizeRelative(filePath);
@@ -165,7 +177,7 @@ function assertCopyrightFooterSource() {
   for (const term of [
     'function ensureCopyrightFooter',
     'data-fishfull-copyright',
-    'footer.textContent = copyrightText',
+    'footer.textContent',
     'ensureCopyrightFooter();'
   ]) {
     if (!shell.includes(term)) {
@@ -197,30 +209,36 @@ function assertLocalPageAssetsExist() {
   }
 }
 
-function assertArEntryIsPrimary() {
-  assertContains('ar.html', 'data-page="ar-game"', 'root-level AR game page marker');
-  assertContains('ar.html', '/pages/ar-mobile-fish-fit.css', 'mobile AR full-fish fit guard');
-  assertContains('ar.html', '/pages/ar-ultra-small-phone.css', 'ultra-small phone and landscape AR guard');
-  assertContains('ar.html', '/pages/ar-safe-view.css', 'AR safe-view frame');
-  assertContains('ar.html', '/pages/ar-stall-tap-safe.css', 'fish-stall tap-safe mobile controls');
-  assertContains('ar.html', '/pages/ar-official-model-only.css', 'AR official 3D model only styles');
-  assertContains('ar.html', '/pages/ar-official-model-only.js', 'AR official 3D model only behavior');
-  assertContains('ar.html', '/pages/ar-no-generated-fish-visuals.css', 'AR generated fish visual guard');
-  assertContains('ar.html', 'Back to the full 3D fish', 'English full-fish return action');
-  assertContains('home.js', '/ar#fishfull-ar-stage', 'clean root-level AR game entry');
+function assertCatchQrFlow() {
+  assertContains('home.js', 'src="/assets/fishfull-demo-qr.svg?v=20260710"', 'visible catch QR asset');
+  assertContains('home.js', "qrHref: '/catch'", 'catch profile QR destination');
+  assertContains('home.js', 'oceanSceneTemplate', 'clear ocean scene source');
+  assertContains('home.js', 'sea-plants', 'seaweed illustration');
+  assertContains('home.js', 'scene-creature', 'fish illustration');
+  assertContains('pages/catch.html', 'TRACEABILITY', 'catch traceability section');
+  assertContains('pages/catch.html', '/ar?fish=bream#fishfull-ar-stage', 'catch-to-AR route');
+  assertContains('assets/fishfull-demo-qr.svg', 'viewBox="0 0 37 37"', 'stable QR viewBox');
+}
 
-  if (!readText('pages/ar-ultra-small-phone.css').includes('orientation: landscape')) {
-    throw new Error('pages/ar-ultra-small-phone.css must protect mobile landscape AR view');
-  }
-  if (!readText('pages/ar-stall-tap-safe.css').includes('touch-action: manipulation')) {
-    throw new Error('pages/ar-stall-tap-safe.css must keep mobile controls tappable');
-  }
-  if (!readText('pages/ar-official-model-only.js').includes('removeFallbackFish')) {
-    throw new Error('pages/ar-official-model-only.js must remove substitute fish art');
-  }
-  if (!readText('pages/ar-no-generated-fish-visuals.css').includes('.phone-fish')) {
-    throw new Error('pages/ar-no-generated-fish-visuals.css must guard generated hero fish visuals');
-  }
+function assertArEntryIsPrimary() {
+  assertContains('ar.html', 'data-page="ar-game"', 'root-level AR page marker');
+  assertContains('ar.html', 'id="fishfull-ar-stage"', 'AR stage');
+  assertContains('ar.html', 'id="camera"', 'camera AR view');
+  assertContains('ar.html', '/assets/models/crimson-sea-bream.gltf', 'crimson sea bream model');
+  assertContains('ar.html', '/assets/models/pacific-mackerel.gltf', 'Pacific mackerel model');
+  assertContains('ar.html', '/assets/models/mahi-mahi.gltf', 'mahi-mahi model');
+  assertContains('ar.html', 'No info cards blocking the view', 'clean English AR message');
+  assertContains('home.js', '/ar#fishfull-ar-stage', 'clean root-level AR entry');
+  assertNotContains('ar.html', 'ar-species-panel', 'legacy AR information panel');
+  assertNotContains('ar.html', 'ar-fish-coach', 'legacy AR coach cards');
+}
+
+function assertMapVrDemo() {
+  assertContains('pages/map.html', 'map-vr-demo.css', 'VR demo styles');
+  assertContains('pages/map.html', 'map-vr-demo.js', 'VR demo behavior');
+  assertContains('pages/map-vr-demo.js', '360° STORE WALK-THROUGH DEMO', 'VR demo scene');
+  assertContains('pages/map-vr-demo.js', 'location-card', 'VR button injection for every location card');
+  assertContains('pages/map-vr-demo.css', 'touch-action: pan-y', 'mobile drag behavior');
 }
 
 function assertJavaScriptSyntax() {
@@ -236,7 +254,9 @@ function main() {
   assertOfficialLogoGuard();
   assertCopyrightFooterSource();
   assertLocalPageAssetsExist();
+  assertCatchQrFlow();
   assertArEntryIsPrimary();
+  assertMapVrDemo();
   assertJavaScriptSyntax();
   console.log('FishFull static check passed.');
 }
