@@ -74,6 +74,8 @@ function assertRequiredFiles() {
   for (const requiredPath of [
     'index.html',
     'ar.html',
+    'catch.html',
+    'map.html',
     'home.js',
     'home-ocean-theme.css',
     'fishfull.jpg',
@@ -106,13 +108,16 @@ function assertValidVercelConfig() {
   const rewrites = Array.isArray(config.rewrites) ? config.rewrites : [];
   for (const [source, destination] of [
     ['/ar', '/ar.html'],
-    ['/catch', '/pages/catch.html'],
-    ['/map', '/pages/map.html'],
-    ['/pages/ar', '/ar.html'],
-    ['/pages/catch', '/pages/catch.html']
+    ['/pages/ar', '/ar.html']
   ]) {
     if (!hasRewrite(rewrites, source, destination)) {
       throw new Error(`vercel.json: missing rewrite ${source} -> ${destination}`);
+    }
+  }
+
+  for (const source of ['/catch', '/map']) {
+    if (rewrites.some((rewrite) => rewrite.source === source)) {
+      throw new Error(`vercel.json: ${source} must be served by its root HTML single source, not rewritten`);
     }
   }
 }
@@ -209,14 +214,21 @@ function assertLocalPageAssetsExist() {
   }
 }
 
+function assertSingleSourceRoutes() {
+  assertContains('pages/catch.html', "window.location.replace('/catch'", 'legacy catch redirect');
+  assertContains('pages/map.html', "window.location.replace('/map'", 'legacy map redirect');
+  assertNotContains('pages/catch.html', 'TRACEABILITY', 'duplicate catch page implementation');
+  assertNotContains('pages/map.html', 'pages.js', 'duplicate map page implementation');
+}
+
 function assertCatchQrFlow() {
   assertContains('home.js', 'src="/assets/fishfull-demo-qr.svg?v=20260710"', 'visible catch QR asset');
   assertContains('home.js', "qrHref: '/catch'", 'catch profile QR destination');
   assertContains('home.js', 'oceanSceneTemplate', 'clear ocean scene source');
   assertContains('home.js', 'sea-plants', 'seaweed illustration');
   assertContains('home.js', 'scene-creature', 'fish illustration');
-  assertContains('pages/catch.html', 'TRACEABILITY', 'catch traceability section');
-  assertContains('pages/catch.html', '/ar?fish=bream#fishfull-ar-stage', 'catch-to-AR route');
+  assertContains('catch.html', 'TRACEABILITY', 'catch traceability section');
+  assertContains('catch.html', '/ar?fish=bream#fishfull-ar-stage', 'catch-to-AR route');
   assertContains('assets/fishfull-demo-qr.svg', 'viewBox="0 0 37 37"', 'stable QR viewBox');
 }
 
@@ -234,8 +246,8 @@ function assertArEntryIsPrimary() {
 }
 
 function assertMapVrDemo() {
-  assertContains('pages/map.html', 'map-vr-demo.css', 'VR demo styles');
-  assertContains('pages/map.html', 'map-vr-demo.js', 'VR demo behavior');
+  assertContains('map.html', '/pages/map-vr-demo.css', 'VR demo styles');
+  assertContains('map.html', '/pages/map-vr-demo.js', 'VR demo behavior');
   assertContains('pages/map-vr-demo.js', '360° STORE WALK-THROUGH DEMO', 'VR demo scene');
   assertContains('pages/map-vr-demo.js', 'location-card', 'VR button injection for every location card');
   assertContains('pages/map-vr-demo.css', 'touch-action: pan-y', 'mobile drag behavior');
@@ -254,6 +266,7 @@ function main() {
   assertOfficialLogoGuard();
   assertCopyrightFooterSource();
   assertLocalPageAssetsExist();
+  assertSingleSourceRoutes();
   assertCatchQrFlow();
   assertArEntryIsPrimary();
   assertMapVrDemo();
