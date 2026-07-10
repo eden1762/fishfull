@@ -14,9 +14,9 @@ body {
 
 .page-home {
   background:
-    radial-gradient(circle at 78% 12%, rgba(255,255,255,.82) 0 7%, rgba(255,255,255,0) 18%),
-    radial-gradient(ellipse at 18% 78%, rgba(31,157,114,.18) 0 18%, rgba(31,157,114,0) 42%),
-    linear-gradient(180deg, #ffffff 0%, #e8f8ff 32%, #7ed7ef 52%, #0b83b6 76%, #08724f 100%);
+    radial-gradient(circle at 80% 8%, rgba(255,255,255,.86) 0 6%, rgba(255,255,255,0) 17%),
+    radial-gradient(ellipse at 18% 88%, rgba(31,157,114,.18) 0 17%, rgba(31,157,114,0) 44%),
+    linear-gradient(180deg, #f9ffff 0%, #e5f8fb 34%, #83d8df 58%, #0b83a2 82%, #08724f 100%);
 }
 
 .page-home::before {
@@ -35,137 +35,87 @@ body {
 
 .site-nav,
 .hero-copy,
-.coast-panel,
 .route-panel,
 .mobile-social-dock,
 .desktop-social-dock {
-  background: rgba(255,255,255,.76);
-  border-color: rgba(255,255,255,.78);
+  background: rgba(255,255,255,.79);
+  border-color: rgba(255,255,255,.82);
 }
 
 .coast-panel {
-  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(232,248,255,.86));
+  isolation: isolate;
+  min-height: 620px;
+  background: #087d91;
+  border-color: rgba(255,255,255,.84);
 }
 
-.coast-sky {
-  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(232,248,255,.72));
-}
-
-/* Screenshot fix: replace the old mint ball and cloud decorations with cute ocean-only ornaments. */
-.static-sun,
-.cloud {
-  display: none !important;
-}
-
-.coast-sky::before,
-.coast-sky::after,
-.coast-water::before,
-.coast-water::after,
-.coast-sand::before,
-.coast-sand::after {
-  content: "";
+.ocean-scene {
   position: absolute;
-  pointer-events: none;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.coast-sky::before {
-  left: 8%;
-  right: 8%;
-  bottom: -10px;
-  height: 58px;
-  border-radius: 999px;
-  background:
-    radial-gradient(ellipse at 10% 70%, rgba(8,111,159,.18) 0 18%, transparent 19%),
-    radial-gradient(ellipse at 30% 70%, rgba(255,255,255,.9) 0 19%, transparent 20%),
-    radial-gradient(ellipse at 50% 70%, rgba(8,111,159,.16) 0 18%, transparent 19%),
-    radial-gradient(ellipse at 70% 70%, rgba(255,255,255,.86) 0 19%, transparent 20%),
-    radial-gradient(ellipse at 90% 70%, rgba(31,157,114,.14) 0 18%, transparent 19%);
-  opacity: .95;
+.ocean-scene .wave-lines {
+  filter: drop-shadow(0 9px 12px rgba(7,70,94,.12));
 }
 
-.coast-sky::after {
-  top: 50px;
-  right: 16%;
-  width: 86px;
-  height: 42px;
-  border-radius: 58% 46% 46% 58%;
-  background:
-    radial-gradient(circle at 24% 40%, rgba(255,255,255,.96) 0 8%, transparent 9%),
-    linear-gradient(135deg, rgba(31,157,114,.9), rgba(8,111,159,.88));
-  box-shadow:
-    -16px 18px 0 -12px rgba(8,111,159,.34),
-    24px 3px 0 -13px rgba(31,157,114,.76);
-  transform: rotate(-7deg);
-  opacity: .9;
+.ocean-scene .scene-creature {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 16px 18px rgba(6,64,79,.22));
 }
 
-.coast-water {
-  background:
-    radial-gradient(ellipse at 20% 100%, rgba(255,255,255,.78) 0 18%, transparent 19%),
-    radial-gradient(ellipse at 62% 100%, rgba(255,255,255,.7) 0 18%, transparent 19%),
-    linear-gradient(180deg, var(--fishfull-blue), var(--fishfull-blue-deep));
+.ocean-scene .creature-one {
+  animation: fishFloat 5.8s ease-in-out infinite;
 }
 
-.coast-water::before {
-  left: -8%;
-  right: -8%;
-  top: -28px;
-  height: 72px;
-  background:
-    radial-gradient(ellipse at 9% 68%, rgba(255,255,255,.92) 0 15%, transparent 16%),
-    radial-gradient(ellipse at 28% 64%, rgba(255,255,255,.82) 0 15%, transparent 16%),
-    radial-gradient(ellipse at 48% 68%, rgba(255,255,255,.9) 0 15%, transparent 16%),
-    radial-gradient(ellipse at 68% 64%, rgba(255,255,255,.82) 0 15%, transparent 16%),
-    radial-gradient(ellipse at 88% 68%, rgba(255,255,255,.9) 0 15%, transparent 16%);
-  opacity: .86;
+.ocean-scene .creature-two {
+  animation: fishFloat 6.8s ease-in-out -1.4s infinite;
 }
 
-.coast-water::after {
-  left: 12%;
-  bottom: 18px;
-  width: 58px;
-  height: 30px;
-  border-radius: 55% 45% 45% 55%;
-  background:
-    radial-gradient(circle at 26% 40%, rgba(255,255,255,.94) 0 7%, transparent 8%),
-    linear-gradient(135deg, rgba(255,255,255,.82), rgba(31,157,114,.72) 48%, rgba(8,111,159,.75));
-  box-shadow: 18px 2px 0 -11px rgba(31,157,114,.64);
-  transform: rotate(5deg);
-  opacity: .88;
+.ocean-scene .creature-three {
+  animation: fishFloat 5.2s ease-in-out -2.1s infinite;
 }
 
-.coast-sand {
-  background:
-    radial-gradient(ellipse at 20% 0, rgba(255,255,255,.84) 0 16%, transparent 17%),
-    radial-gradient(ellipse at 70% 0, rgba(255,255,255,.72) 0 13%, transparent 14%),
-    linear-gradient(180deg, var(--fishfull-green-soft), var(--fishfull-white));
+.ocean-scene .sea-plants {
+  filter: drop-shadow(0 10px 12px rgba(3,65,63,.16));
 }
 
-.coast-sand::before,
-.coast-sand::after {
-  bottom: 12px;
-  width: 12px;
-  height: 88px;
-  border-radius: 999px 999px 14px 14px;
-  background: linear-gradient(180deg, rgba(31,157,114,.18), rgba(31,157,114,.72));
-  transform-origin: bottom center;
-  opacity: .9;
+.coast-card {
+  z-index: 2;
+  width: calc(100% - 48px);
+  margin: 24px;
+  padding: clamp(20px, 3vw, 30px);
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(4,63,79,.88), rgba(5,104,104,.78));
+  border: 1px solid rgba(255,255,255,.42);
+  box-shadow: 0 22px 56px rgba(3,47,62,.30);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-.coast-sand::before {
-  left: 7%;
-  box-shadow:
-    18px 12px 0 -3px rgba(8,114,79,.58),
-    38px -2px 0 -2px rgba(31,157,114,.52);
-  transform: rotate(-9deg);
+.coast-card h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0,38,54,.24);
 }
 
-.coast-sand::after {
-  right: 9%;
-  box-shadow:
-    -18px 9px 0 -3px rgba(8,114,79,.54),
-    -38px -5px 0 -2px rgba(31,157,114,.5);
-  transform: rotate(8deg);
+.coast-card p {
+  color: rgba(255,255,255,.9);
+}
+
+.coast-tags span {
+  color: #063f4e;
+  background: rgba(255,255,255,.9);
+  border-color: rgba(255,255,255,.72);
+}
+
+.no-spin-note {
+  color: var(--fishfull-green-deep);
+  background: var(--fishfull-green-soft);
+  border-color: rgba(31,157,114,.18);
 }
 
 .route-orange,
@@ -178,36 +128,56 @@ body {
   background: linear-gradient(135deg, var(--fishfull-green-soft), var(--fishfull-white));
 }
 
-.coast-tags span,
-.no-spin-note {
-  color: var(--fishfull-green-deep);
-  background: var(--fishfull-green-soft);
-  border-color: rgba(31,157,114,.18);
+@keyframes fishFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ocean-scene .scene-creature {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .coast-panel {
+    min-height: 520px;
+  }
 }
 
 @media (max-width: 720px) {
-  .coast-sky::before {
-    left: 5%;
-    right: 5%;
-    height: 50px;
+  .coast-panel {
+    min-height: 460px;
+    border-radius: 28px;
   }
 
-  .coast-sky::after {
-    top: 46px;
-    right: 10%;
-    width: 72px;
-    height: 36px;
+  .coast-card {
+    width: calc(100% - 28px);
+    margin: 14px;
+    border-radius: 22px;
   }
 
-  .coast-water::after {
-    left: 10%;
-    bottom: 12px;
-    width: 50px;
-    height: 26px;
+  .ocean-scene {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 430px) {
+  .coast-panel {
+    min-height: 430px;
   }
 
-  .coast-sand::before,
-  .coast-sand::after {
-    height: 70px;
+  .coast-card p {
+    font-size: 14px;
+    line-height: 1.62;
+  }
+
+  .coast-tags {
+    gap: 6px;
+  }
+
+  .coast-tags span {
+    padding: 7px 9px;
+    font-size: 11px;
   }
 }
