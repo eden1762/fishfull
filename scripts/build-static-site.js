@@ -11,6 +11,7 @@ const PUBLIC_DIR = path.join(ROOT, 'public');
 const BRAND_EN = 'FISHFULL Green Seafood';
 const BRAND_ZH = '漁有料';
 const BRAND_SHELL = '/fishfull-site-shell.js';
+const COMPANY_NAV = '/fishfull-company-nav.js';
 
 const SKIP_DIRS = new Set(['.git', '.vercel', 'node_modules', 'public', 'scripts', 'api']);
 const STATIC_EXTENSIONS = new Set([
@@ -72,6 +73,11 @@ function normalizeTitle(rawTitle) {
   return `${BRAND_EN}｜${BRAND_ZH}${suffix ? `｜${suffix}` : ''}`;
 }
 
+function injectSharedScript(content, src) {
+  if (content.includes(src)) return content;
+  return content.replace(/<\/body>/i, `<script src="${src}" defer></script>\n</body>`);
+}
+
 function normalizeBuiltHtml(dir = PUBLIC_DIR) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const target = path.join(dir, entry.name);
@@ -87,9 +93,8 @@ function normalizeBuiltHtml(dir = PUBLIC_DIR) {
       .replace(/SUSTAINABLE CATCH MAP/gi, BRAND_EN)
       .replace(/<title>([\s\S]*?)<\/title>/i, (_match, title) => `<title>${normalizeTitle(title)}</title>`);
 
-    if (!content.includes('fishfull-site-shell.js')) {
-      content = content.replace(/<\/body>/i, `<script src="${BRAND_SHELL}" defer></script>\n</body>`);
-    }
+    content = injectSharedScript(content, BRAND_SHELL);
+    content = injectSharedScript(content, COMPANY_NAV);
     fs.writeFileSync(target, content, 'utf8');
   }
 }
