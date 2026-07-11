@@ -4,17 +4,20 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/sustainability", "destination": "/ar", "permanent": false },
+    { "source": "/pages/sustainability", "destination": "/ar", "permanent": false },
+    { "source": "/pages/sustainability.html", "destination": "/ar", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/ar", "destination": "/ar.html" },
     { "source": "/about", "destination": "/pages/about.html" },
     { "source": "/recipes", "destination": "/pages/recipes.html" },
     { "source": "/feedback", "destination": "/pages/feedback.html" },
-    { "source": "/sustainability", "destination": "/pages/sustainability.html" },
     { "source": "/pages/ar", "destination": "/ar.html" },
     { "source": "/pages/about", "destination": "/pages/about.html" },
     { "source": "/pages/recipes", "destination": "/pages/recipes.html" },
-    { "source": "/pages/feedback", "destination": "/pages/feedback.html" },
-    { "source": "/pages/sustainability", "destination": "/pages/sustainability.html" }
+    { "source": "/pages/feedback", "destination": "/pages/feedback.html" }
   ]
 }
