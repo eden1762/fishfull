@@ -14,10 +14,8 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/ar", "destination": "/ar.html" },
-    { "source": "/recipes", "destination": "/pages/recipes.html" },
-    { "source": "/feedback", "destination": "/pages/feedback.html" },
-    { "source": "/pages/ar", "destination": "/ar.html" },
-    { "source": "/pages/recipes", "destination": "/pages/recipes.html" },
-    { "source": "/pages/feedback", "destination": "/pages/feedback.html" }
+    { "source": "/recipes", "destination": "/pages/recipes" },
+    { "source": "/feedback", "destination": "/pages/feedback" },
+    { "source": "/pages/ar", "destination": "/ar.html" }
   ]
 }
