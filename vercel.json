@@ -10,11 +10,11 @@
     { "source": "/about", "destination": "/pages/about.html" },
     { "source": "/recipes", "destination": "/pages/recipes.html" },
     { "source": "/feedback", "destination": "/pages/feedback.html" },
-    { "source": "/sustainability", "destination": "/pages/sustainability.html" },
+    { "source": "/sustainability", "destination": "/ar.html" },
     { "source": "/pages/ar", "destination": "/ar.html" },
     { "source": "/pages/about", "destination": "/pages/about.html" },
     { "source": "/pages/recipes", "destination": "/pages/recipes.html" },
     { "source": "/pages/feedback", "destination": "/pages/feedback.html" },
-    { "source": "/pages/sustainability", "destination": "/pages/sustainability.html" }
+    { "source": "/pages/sustainability", "destination": "/ar.html" }
   ]
 }
