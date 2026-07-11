@@ -2,6 +2,8 @@
   'use strict';
 
   var logoSrc = '/fishfull.jpg';
+  var brandEnglish = 'FISHFULL Green Seafood';
+  var brandChinese = '漁有料';
   var copyrightText = 'Copyright © 2026Fishfull漁有料版權所有';
   var cleanupStyleId = 'fishfull-shell-cleanup-style';
   var legacyBrandClass = ['brand', 'logo', 'img'].join('-');
@@ -29,7 +31,7 @@
   }
 
   function logoAlt() {
-    return currentLang() === 'en' ? 'FishFull official logo' : 'FishFull 漁有料官方商標';
+    return currentLang() === 'en' ? 'FISHFULL Green Seafood logo, 漁有料' : 'FISHFULL Green Seafood 漁有料商標';
   }
 
   function installCleanupStyle() {
@@ -38,13 +40,20 @@
     style.id = cleanupStyleId;
     style.textContent = [
       'footer.site-footer.fishfull-global-footer::before{content:none!important;display:none!important;background:none!important;background-image:none!important;border:0!important;box-shadow:none!important;}',
-      'svg.' + legacyBrandClass + ',.' + legacyBrandClass + '[data-generated-logo],.generated-logo,.generated-mark,.ai-logo,.ai-generated-logo,.round-fish-logo,.legacy-fishfull-mark{display:none!important;}'
+      'svg.' + legacyBrandClass + ',.' + legacyBrandClass + '[data-generated-logo],.generated-logo,.generated-mark,.ai-logo,.ai-generated-logo,.round-fish-logo,.legacy-fishfull-mark{display:none!important;}',
+      '.fishfull-brand-lockup{display:flex!important;align-items:center!important;gap:10px!important;min-width:0!important;text-decoration:none!important;color:inherit!important}',
+      '.fishfull-brand-lockup .fishfull-logo-mark{display:grid!important;place-items:center!important;flex:0 0 auto!important;width:46px!important;height:46px!important;overflow:hidden!important;border-radius:50%!important;background:#fff!important}',
+      '.fishfull-brand-lockup .fishfull-logo-mark img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}',
+      '.fishfull-brand-copy{display:grid!important;gap:2px!important;min-width:0!important;line-height:1!important}',
+      '.fishfull-brand-copy strong{font-size:clamp(14px,2.4vw,22px)!important;font-weight:1000!important;letter-spacing:.01em!important;white-space:nowrap!important}',
+      '.fishfull-brand-copy b{font-size:clamp(12px,2vw,18px)!important;color:#087d72!important;letter-spacing:.08em!important;white-space:nowrap!important}',
+      '@media(max-width:520px){.fishfull-brand-lockup .fishfull-logo-mark{width:40px!important;height:40px!important}.fishfull-brand-copy strong{font-size:13px!important}.fishfull-brand-copy b{font-size:12px!important}}'
     ].join('\n');
     document.head.appendChild(style);
   }
 
   function isBrandContainer(node) {
-    return !!(node && node.closest && node.closest('.brand-mark, .brand, .site-nav, .page-nav'));
+    return !!(node && node.closest && node.closest('.brand-mark, a.brand, .site-nav, .page-nav, .topbar, .top'));
   }
 
   function isLogoImage(img) {
@@ -118,7 +127,7 @@
   }
 
   function dedupeBrandLogos() {
-    Array.prototype.slice.call(document.querySelectorAll('.brand-mark, .brand')).forEach(function (container) {
+    Array.prototype.slice.call(document.querySelectorAll('.brand-mark, a.brand')).forEach(function (container) {
       var holders = Array.prototype.slice.call(container.querySelectorAll('.fishfull-logo-mark, .home-brand-logo, .brand-symbol, .brand-sun'));
       Array.prototype.slice.call(container.querySelectorAll('img')).forEach(function (img) {
         if (!isLogoImage(img)) return;
@@ -126,7 +135,6 @@
         if (holders.indexOf(holder) === -1) holders.push(holder);
       });
       if (!holders.length) return;
-
       var keeper = holders.filter(hasOfficialLogo)[0] || holders[0];
       keeper = setOfficialLogo(keeper);
       holders.forEach(function (holder) {
@@ -135,11 +143,59 @@
     });
   }
 
+  function brandMarkup() {
+    return '<span class="fishfull-logo-mark"><img src="' + logoSrc + '" width="46" height="46" loading="eager" decoding="async" alt="' + logoAlt() + '"></span><span class="fishfull-brand-copy"><strong>' + brandEnglish + '</strong><b>' + brandChinese + '</b></span>';
+  }
+
+  function ensureCompleteBrand() {
+    Array.prototype.slice.call(document.querySelectorAll('.brand-mark, a.brand')).forEach(function (container) {
+      if (!container.closest('header, .site-nav, .page-nav, .topbar, .top')) return;
+      container.classList.add('fishfull-brand-lockup');
+      container.setAttribute('aria-label', brandEnglish + ' ' + brandChinese);
+      if (!container.querySelector('img[src="' + logoSrc + '"]') || container.textContent.indexOf(brandEnglish) === -1 || container.textContent.indexOf(brandChinese) === -1) {
+        container.innerHTML = brandMarkup();
+      }
+    });
+  }
+
   function applyLogo() {
     Array.prototype.slice.call(document.querySelectorAll('.brand-sun, .brand-symbol, .brand-mark .fishfull-logo-mark, .brand .fishfull-logo-mark')).forEach(setOfficialLogo);
     dedupeBrandLogos();
     removeAlternateTrademarkVisuals();
     removeGeneratedTrademarkVisuals();
+    ensureCompleteBrand();
+  }
+
+  function removeLegacyLabelPageLinks() {
+    Array.prototype.slice.call(document.querySelectorAll('a')).forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      var text = (link.textContent || '').replace(/\s+/g, ' ').trim();
+      if (/\/sustainability(?:\.html)?(?:[?#]|$)/i.test(href) || text === '玩標籤' || text === 'Label Missions') removeNode(link);
+    });
+  }
+
+  function replaceForbiddenVisibleText() {
+    if (!document.body || !window.TreeWalker) return;
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        var parent = node.parentElement;
+        if (!node.nodeValue || !parent || (parent.closest && parent.closest('script, style, template'))) return NodeFilter.FILTER_REJECT;
+        return /FISHFULL MAP|SUSTAINABLE CATCH MAP/i.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      node.nodeValue = node.nodeValue.replace(/FISHFULL MAP/gi, brandEnglish).replace(/SUSTAINABLE CATCH MAP/gi, brandEnglish);
+    });
+  }
+
+  function updateDocumentTitle() {
+    var current = document.title || '';
+    var suffix = current.split(/[｜|]/).filter(function (part) {
+      return part && !/fishfull|漁有料|sustainable catch map/i.test(part);
+    }).join('｜').trim();
+    document.title = brandEnglish + '｜' + brandChinese + (suffix ? '｜' + suffix : '');
   }
 
   function removeLegacyGlobalFooter() {
@@ -147,7 +203,7 @@
   }
 
   function footerParent() {
-    return document.querySelector('.page-shell') || document.querySelector('.page-home') || document.getElementById('root') || document.body;
+    return document.querySelector('.page-shell') || document.querySelector('.page-home') || document.getElementById('root') || document.querySelector('.page') || document.body;
   }
 
   function removeDuplicateCopyrightText(footer) {
@@ -193,6 +249,9 @@
       installCleanupStyle();
       removeLegacyGlobalFooter();
       applyLogo();
+      removeLegacyLabelPageLinks();
+      replaceForbiddenVisibleText();
+      updateDocumentTitle();
       ensureCopyrightFooter();
     } finally {
       applying = false;
@@ -206,7 +265,7 @@
 
   function watchPageUpdates() {
     if (!window.MutationObserver || !document.body) return;
-    new MutationObserver(scheduleApply).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(scheduleApply).observe(document.body, { childList: true, subtree: true, characterData: true });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
