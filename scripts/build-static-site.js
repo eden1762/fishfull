@@ -8,6 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC_DIR = path.join(ROOT, 'public');
+const BRAND_EN = 'FISHFULL Green Seafood';
+const BRAND_ZH = '漁有料';
 
 const SKIP_DIRS = new Set(['.git', '.vercel', 'node_modules', 'public', 'scripts', 'api']);
 const STATIC_EXTENSIONS = new Set([
@@ -60,11 +62,39 @@ function copyTree(dir = ROOT) {
   }
 }
 
+function normalizeTitle(rawTitle) {
+  const suffix = rawTitle
+    .split(/[｜|]/)
+    .map((part) => part.trim())
+    .filter((part) => part && !/fishfull|漁有料|sustainable catch map/i.test(part))
+    .join('｜');
+  return `${BRAND_EN}｜${BRAND_ZH}${suffix ? `｜${suffix}` : ''}`;
+}
+
+function normalizeBuiltHtml(dir = PUBLIC_DIR) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const target = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      normalizeBuiltHtml(target);
+      continue;
+    }
+    if (!entry.isFile() || path.extname(entry.name).toLowerCase() !== '.html') continue;
+
+    let content = fs.readFileSync(target, 'utf8');
+    content = content
+      .replace(/FishFull Map/gi, BRAND_EN)
+      .replace(/SUSTAINABLE CATCH MAP/gi, BRAND_EN)
+      .replace(/<title>([\s\S]*?)<\/title>/i, (_match, title) => `<title>${normalizeTitle(title)}</title>`);
+    fs.writeFileSync(target, content, 'utf8');
+  }
+}
+
 function main() {
   execFileSync(process.execPath, [path.join(__dirname, 'verify-static-site.js')], { stdio: 'inherit' });
   fs.rmSync(PUBLIC_DIR, { recursive: true, force: true });
   fs.mkdirSync(PUBLIC_DIR, { recursive: true });
   copyTree();
+  normalizeBuiltHtml();
   fs.writeFileSync(path.join(PUBLIC_DIR, '.vercel-output-ready'), 'FishFull static output generated.\n', 'utf8');
   console.log('FishFull public output generated.');
 }
