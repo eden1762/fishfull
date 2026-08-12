@@ -3,7 +3,8 @@
 
   var applying = false;
   var timer = 0;
-  var navVersion = '20260812-idea-spirit-v1';
+  var navVersion = '20260812-idea-spirit-v2';
+  var styleId = 'fishfull-shared-nav-style';
 
   var items = {
     zh: [
@@ -59,12 +60,28 @@
     }).join('');
   }
 
+  function installNavStyle() {
+    if (!document.head || document.getElementById(styleId)) return;
+    var style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = [
+      '@media(max-width:1100px){',
+      '.fishfull-nav-host{flex-wrap:wrap!important}',
+      '.fishfull-nav-host [data-fishfull-nav-signature]{display:flex!important;order:50!important;flex:1 0 100%!important;width:100%!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;flex-wrap:nowrap!important;justify-content:flex-start!important;gap:6px!important;padding:6px 0 2px!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}',
+      '.fishfull-nav-host [data-fishfull-nav-signature]::-webkit-scrollbar{display:none}',
+      '.fishfull-nav-host [data-fishfull-nav-signature] a{display:inline-flex!important;align-items:center!important;min-height:40px!important;flex:0 0 auto!important;white-space:nowrap!important}',
+      '}'
+    ].join('');
+    document.head.appendChild(style);
+  }
+
   function updateNav(nav) {
     var lang = language();
     var signature = navVersion + '|' + lang + '|' + currentKey();
-    var nextMarkup = markup(lang);
-    if (nav.getAttribute('data-fishfull-nav-signature') !== signature || nav.innerHTML !== nextMarkup) {
-      nav.innerHTML = nextMarkup;
+    var host = nav.closest && nav.closest('header');
+    if (host) host.classList.add('fishfull-nav-host');
+    if (nav.getAttribute('data-fishfull-nav-signature') !== signature) {
+      nav.innerHTML = markup(lang);
       nav.setAttribute('data-fishfull-nav-signature', signature);
       nav.setAttribute('aria-label', lang === 'en' ? 'Main navigation' : '主選單');
     }
@@ -74,6 +91,7 @@
     if (applying || !document.body) return;
     applying = true;
     try {
+      installNavStyle();
       var navs = document.querySelectorAll([
         'header.site-nav .nav-links',
         'header.topbar .topnav',
