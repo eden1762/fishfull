@@ -5,11 +5,14 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/about", "destination": "/idea", "permanent": true },
+    { "source": "/pages/about", "destination": "/idea", "permanent": true },
+    { "source": "/pages/about.html", "destination": "/idea", "permanent": true },
+    { "source": "/pages/idea", "destination": "/idea", "permanent": true },
+    { "source": "/pages/idea.html", "destination": "/idea", "permanent": true },
     { "source": "/sustainability", "destination": "/ar", "permanent": false },
     { "source": "/pages/sustainability", "destination": "/ar", "permanent": false },
-    { "source": "/pages/sustainability.html", "destination": "/ar", "permanent": false },
-    { "source": "/pages/about", "destination": "/about", "permanent": true },
-    { "source": "/pages/idea", "destination": "/idea", "permanent": true }
+    { "source": "/pages/sustainability.html", "destination": "/ar", "permanent": false }
   ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },

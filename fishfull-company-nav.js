@@ -3,6 +3,28 @@
 
   var applying = false;
   var timer = 0;
+  var navVersion = '20260812-idea-spirit-v1';
+
+  var items = {
+    zh: [
+      ['qr', '掃漁貨QR', '/#qr-demo'],
+      ['ar', 'AR看真魚', '/ar#fishfull-ar-stage'],
+      ['fish', '主推魚', '/pages/fish.html'],
+      ['map', '去附近買魚', '/pages/map.html'],
+      ['recipes', '零失敗食譜', '/pages/recipes.html'],
+      ['feedback', '十秒回饋', '/pages/feedback.html'],
+      ['spirit', '理念與精神', '/idea']
+    ],
+    en: [
+      ['qr', 'Scan Catch QR', '/#qr-demo'],
+      ['ar', 'View Fish in AR', '/ar#fishfull-ar-stage'],
+      ['fish', 'Featured Fish', '/pages/fish.html'],
+      ['map', 'Buy Nearby', '/pages/map.html'],
+      ['recipes', 'Easy Recipes', '/pages/recipes.html'],
+      ['feedback', 'Quick Feedback', '/pages/feedback.html'],
+      ['spirit', 'Idea & Spirit', '/idea']
+    ]
+  };
 
   function language() {
     if (window.SCMLanguage && typeof window.SCMLanguage.current === 'function') {
@@ -11,101 +33,55 @@
     return localStorage.getItem('scm-language') === 'en' ? 'en' : 'zh';
   }
 
-  function labels() {
-    return language() === 'en'
-      ? { idea: 'Our Idea', about: 'About Us' }
-      : { idea: '我們的理念', about: '關於我們' };
-  }
-
-  function normalizedPath(link) {
-    try {
-      return new URL(link.getAttribute('href') || '', window.location.origin).pathname.replace(/\/$/, '') || '/';
-    } catch (_error) {
-      return link.getAttribute('href') || '';
-    }
-  }
-
-  function isIdeaText(text) {
-    return text === '我們的理念' || text === 'Our Idea';
-  }
-
-  function isAboutText(text) {
-    return text === '關於我們' || text === 'About Us';
-  }
-
-  function createLink(text, href) {
-    var link = document.createElement('a');
-    link.textContent = text;
-    link.setAttribute('href', href);
-    link.setAttribute('data-fishfull-company-link', href.slice(1));
-    return link;
-  }
-
-  function setCurrent(link, href) {
+  function currentKey() {
     var path = window.location.pathname.replace(/\/$/, '') || '/';
-    var matches = href === '/idea'
-      ? (path === '/idea' || path === '/pages/idea' || path === '/pages/idea.html')
-      : (path === '/about' || path === '/pages/about' || path === '/pages/about.html');
+    if (path === '/' && window.location.hash === '#qr-demo') return 'qr';
+    if (path === '/ar' || path === '/ar.html' || path === '/pages/ar') return 'ar';
+    if (/^\/pages\/fish(?:\.html)?$/.test(path)) return 'fish';
+    if (path === '/map' || /^\/pages\/map(?:\.html)?$/.test(path)) return 'map';
+    if (path === '/recipes' || /^\/pages\/recipes(?:\.html)?$/.test(path)) return 'recipes';
+    if (path === '/feedback' || /^\/pages\/feedback(?:\.html)?$/.test(path)) return 'feedback';
+    if (path === '/idea' || path === '/about' || /^\/pages\/(?:idea|about)(?:\.html)?$/.test(path)) return 'spirit';
+    return '';
+  }
 
-    if (matches) link.setAttribute('aria-current', 'page');
-    else if (link.getAttribute('aria-current') === 'page') link.removeAttribute('aria-current');
+  function esc(value) {
+    return String(value).replace(/[&<>"']/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+    });
+  }
+
+  function markup(lang) {
+    var active = currentKey();
+    return items[lang].map(function (item) {
+      var current = item[0] === active ? ' aria-current="page"' : '';
+      return '<a href="' + esc(item[2]) + '" data-fishfull-nav-key="' + item[0] + '"' + current + '>' + esc(item[1]) + '</a>';
+    }).join('');
   }
 
   function updateNav(nav) {
-    var text = labels();
-    var links = Array.prototype.slice.call(nav.querySelectorAll(':scope > a'));
-    if (!links.length) links = Array.prototype.slice.call(nav.querySelectorAll('a'));
-
-    var ideaLink = null;
-    var aboutLink = null;
-
-    links.forEach(function (link) {
-      var label = (link.textContent || '').replace(/\s+/g, ' ').trim();
-      var path = normalizedPath(link);
-
-      if (isIdeaText(label)) {
-        ideaLink = ideaLink || link;
-      } else if (isAboutText(label)) {
-        aboutLink = aboutLink || link;
-      } else if (path === '/idea' || path === '/pages/idea' || path === '/pages/idea.html') {
-        ideaLink = ideaLink || link;
-      } else if (path === '/about' || path === '/pages/about' || path === '/pages/about.html') {
-        aboutLink = aboutLink || link;
-      }
-    });
-
-    if (!ideaLink) {
-      ideaLink = createLink(text.idea, '/idea');
-      nav.appendChild(ideaLink);
+    var lang = language();
+    var signature = navVersion + '|' + lang + '|' + currentKey();
+    var nextMarkup = markup(lang);
+    if (nav.getAttribute('data-fishfull-nav-signature') !== signature || nav.innerHTML !== nextMarkup) {
+      nav.innerHTML = nextMarkup;
+      nav.setAttribute('data-fishfull-nav-signature', signature);
+      nav.setAttribute('aria-label', lang === 'en' ? 'Main navigation' : '主選單');
     }
-
-    ideaLink.textContent = text.idea;
-    ideaLink.setAttribute('href', '/idea');
-    ideaLink.setAttribute('data-fishfull-company-link', 'idea');
-
-    if (!aboutLink || aboutLink === ideaLink) {
-      aboutLink = createLink(text.about, '/about');
-      if (ideaLink.nextSibling) nav.insertBefore(aboutLink, ideaLink.nextSibling);
-      else nav.appendChild(aboutLink);
-    }
-
-    aboutLink.textContent = text.about;
-    aboutLink.setAttribute('href', '/about');
-    aboutLink.setAttribute('data-fishfull-company-link', 'about');
-
-    if (ideaLink.nextElementSibling !== aboutLink) {
-      nav.insertBefore(aboutLink, ideaLink.nextElementSibling);
-    }
-
-    setCurrent(ideaLink, '/idea');
-    setCurrent(aboutLink, '/about');
   }
 
   function apply() {
     if (applying || !document.body) return;
     applying = true;
     try {
-      var navs = document.querySelectorAll('header nav, .site-nav .nav-links, .page-nav .nav-links, .topbar .nav, .top .links');
+      var navs = document.querySelectorAll([
+        'header.site-nav .nav-links',
+        'header.topbar .topnav',
+        'header.topbar .nav',
+        'header.idea-nav nav',
+        '.page-nav .nav-links',
+        '.top .links'
+      ].join(', '));
       Array.prototype.forEach.call(navs, updateNav);
     } finally {
       applying = false;
@@ -120,10 +96,12 @@
   document.addEventListener('DOMContentLoaded', function () {
     apply();
     if (window.MutationObserver && document.body) {
-      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
     }
   });
 
   document.addEventListener('scm-language-change', schedule);
+  window.addEventListener('hashchange', schedule);
+  window.addEventListener('popstate', schedule);
   window.addEventListener('load', schedule);
 })();
