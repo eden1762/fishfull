@@ -1,1 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <url>
+    <loc>https://fishfull.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/ar</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/pages/fish.html</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/pages/map.html</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/pages/recipes.html</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/pages/feedback.html</loc>
+  </url>
+
+  <url>
+    <loc>https://fishfull.vercel.app/idea</loc>
+  </url>
+
+</urlset>
