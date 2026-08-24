@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fishfull.vercel.app/sitemap.xml
