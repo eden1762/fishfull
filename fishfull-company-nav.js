@@ -3,7 +3,7 @@
 
   var applying = false;
   var timer = 0;
-  var navVersion = '20260830-shared-header-v2';
+  var navVersion = '20260830-shared-header-v3';
   var styleId = 'fishfull-shared-nav-style';
   var instagramUrl = 'https://www.instagram.com/fishfull_2025/';
 
@@ -37,6 +37,11 @@
     } catch (error) {
       return 'zh';
     }
+  }
+
+  function isHomepage() {
+    var path = window.location.pathname.replace(/\/$/, '') || '/';
+    return path === '/';
   }
 
   function currentKey() {
@@ -113,7 +118,7 @@
       header.classList.add('fishfull-nav-host', 'fishfull-shared-header');
       nav.classList.add('topnav');
       var embeddedLang = nav.querySelector('#lang, #lang-toggle, .language-toggle');
-      if (embeddedLang) actionContainer(header).appendChild(embeddedLang);
+      if (embeddedLang && !isHomepage()) actionContainer(header).appendChild(embeddedLang);
     }
     if (nav.getAttribute('data-fishfull-nav-signature') !== signature) {
       nav.innerHTML = markup(lang);
@@ -147,6 +152,13 @@
 
   function normalizeActions(header) {
     if (!header) return;
+
+    if (isHomepage()) {
+      var homepageActions = header.querySelector('.nav-actions, .actions, .top-actions');
+      if (homepageActions) homepageActions.remove();
+      return;
+    }
+
     var actions = actionContainer(header);
 
     Array.prototype.forEach.call(actions.querySelectorAll('a'), function (link) {
