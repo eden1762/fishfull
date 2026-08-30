@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://fishfull.vercel.app/</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
+  <url>
+    <loc>https://fishfull.vercel.app/catch</loc>
+    <lastmod>2026-08-30</lastmod>
+  </url>
   <url>
     <loc>https://fishfull.vercel.app/ar</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
   <url>
-    <loc>https://fishfull.vercel.app/pages/fish.html</loc>
+    <loc>https://fishfull.vercel.app/pages/fish</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
   <url>
-    <loc>https://fishfull.vercel.app/pages/map.html</loc>
+    <loc>https://fishfull.vercel.app/map</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
   <url>
-    <loc>https://fishfull.vercel.app/pages/recipes.html</loc>
+    <loc>https://fishfull.vercel.app/recipes</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
   <url>
-    <loc>https://fishfull.vercel.app/pages/feedback.html</loc>
+    <loc>https://fishfull.vercel.app/feedback</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
   <url>
     <loc>https://fishfull.vercel.app/idea</loc>
+    <lastmod>2026-08-30</lastmod>
   </url>
-
 </urlset>
