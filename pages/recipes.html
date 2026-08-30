@@ -27,11 +27,84 @@
     <link rel="stylesheet" href="/pages/site-pages.css" />
     <link rel="stylesheet" href="/pages/action-pages.css" />
     <link rel="stylesheet" href="/fishfull-brand.css" />
+    <style>
+      .recipe-card__media {
+        margin: 0 0 16px;
+        overflow: hidden;
+        border-radius: 18px;
+        background: #eef8f6;
+      }
+
+      .recipe-card__image {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body data-page="recipes">
     <div id="root"></div>
     <script src="/site-i18n.js" defer></script>
     <script src="/pages/pages.js" defer></script>
     <script src="/fishfull-site-shell.js" defer></script>
+    <script>
+      (function () {
+        'use strict';
+
+        var recipeImages = [
+          {
+            src: '/assets/cuisine/蔥薑清蒸午仔魚.png',
+            alt: '蔥薑清蒸午仔魚料理成品'
+          },
+          {
+            src: '/assets/cuisine/鹽香乾煎午仔魚.png',
+            alt: '鹽香乾煎午仔魚料理成品'
+          },
+          {
+            src: '/assets/cuisine/味噌魚湯.png',
+            alt: '味噌魚湯料理成品'
+          }
+        ];
+        var timer = 0;
+
+        function attachRecipeImages() {
+          var cards = document.querySelectorAll('.recipe-card');
+          Array.prototype.forEach.call(cards, function (card, index) {
+            var imageData = recipeImages[index];
+            if (!imageData || card.querySelector('.recipe-card__media')) return;
+
+            var figure = document.createElement('figure');
+            figure.className = 'recipe-card__media';
+
+            var image = document.createElement('img');
+            image.className = 'recipe-card__image';
+            image.src = imageData.src;
+            image.alt = imageData.alt;
+            image.decoding = 'async';
+            image.loading = index === 0 ? 'eager' : 'lazy';
+
+            figure.appendChild(image);
+            card.insertBefore(figure, card.firstChild);
+          });
+        }
+
+        function scheduleAttach() {
+          window.clearTimeout(timer);
+          timer = window.setTimeout(attachRecipeImages, 16);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          attachRecipeImages();
+          var root = document.getElementById('root');
+          if (root && window.MutationObserver) {
+            new MutationObserver(scheduleAttach).observe(root, {
+              childList: true,
+              subtree: true
+            });
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
