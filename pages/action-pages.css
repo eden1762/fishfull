@@ -68,6 +68,10 @@
   align-items: stretch;
   background: linear-gradient(135deg, rgba(255,255,255,.86), rgba(232,248,243,.9));
 }
+.spotlight-main,
+.spotlight-facts {
+  min-width: 0;
+}
 .spotlight-main {
   padding: clamp(4px, 1vw, 12px);
 }
@@ -93,6 +97,37 @@
   font-weight: 650;
 }
 
+.spotlight-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: stretch;
+}
+.spotlight-facts article {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255,255,255,.76);
+}
+.spotlight-facts span,
+.spotlight-facts strong {
+  display: block;
+}
+.spotlight-facts span {
+  margin-bottom: 8px;
+  color: var(--fish-sea);
+  font-size: 13px;
+  font-weight: 950;
+}
+.spotlight-facts strong {
+  color: var(--fish-blue);
+  font-size: 18px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 .brand-symbol {
   overflow: hidden;
   font-size: 0;
@@ -101,6 +136,14 @@
 }
 
 @media (max-width: 1020px) {
+  .fish-spotlight {
+    grid-template-columns: 1fr;
+  }
+
+  .spotlight-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .recipe-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -108,8 +151,41 @@
 
 @media (max-width: 720px) {
   .link-grid,
-  .recipe-grid {
+  .recipe-grid,
+  .spotlight-facts {
     grid-template-columns: 1fr;
+  }
+
+  .fish-spotlight {
+    display: block;
+  }
+
+  .spotlight-main {
+    width: 100%;
+    padding: 0;
+  }
+
+  .spotlight-main h2 {
+    white-space: nowrap;
+    font-size: clamp(42px, 14vw, 58px);
+    line-height: 1;
+    letter-spacing: -.05em;
+  }
+
+  .spotlight-main p,
+  .spotlight-main li,
+  .spotlight-facts strong {
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .spotlight-facts {
+    margin-top: 20px;
+  }
+
+  .spotlight-facts article {
+    width: 100%;
+    padding: 16px;
   }
 
   .action-card {
