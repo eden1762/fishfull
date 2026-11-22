@@ -373,12 +373,13 @@
   function nav(currentKey) {
     var currentLang = lang();
     var labels = currentLang === 'en'
-      ? { home: 'Home', about: 'Idea', fish: 'Featured Fish', map: 'Buy Nearby', recipes: 'Easy Recipes', feedback: '10-sec Feedback', field: 'Field Notes', sustainability: 'Label Missions' }
-      : { home: '首頁', about: '我們的理念', fish: '主推魚', map: '去附近買魚', recipes: '零失敗食譜', feedback: '十秒回饋', field: '看現場紀錄', sustainability: '玩標籤' };
+      ? { home: 'Home', about: 'Idea', fish: 'Featured Fish', map: 'Buy Nearby', fishing: 'Go Fishing Together', recipes: 'Easy Recipes', feedback: '10-sec Feedback', field: 'Field Notes', sustainability: 'Label Missions' }
+      : { home: '首頁', about: '我們的理念', fish: '主推魚', map: '去附近買魚', fishing: '一起去釣魚', recipes: '零失敗食譜', feedback: '十秒回饋', field: '看現場紀錄', sustainability: '玩標籤' };
     var links = [
       { key: 'about', label: labels.about, href: '/pages/about.html' },
       { key: 'fish', label: labels.fish, href: '/pages/fish.html' },
       { key: 'map', label: labels.map, href: '/pages/map.html' },
+      { key: 'fishing', label: labels.fishing, href: '/fishing' },
       { key: 'recipes', label: labels.recipes, href: '/pages/recipes.html' },
       { key: 'feedback', label: labels.feedback, href: '/pages/feedback.html' },
       { key: 'field', label: labels.field, href: '/pages/field.html' },

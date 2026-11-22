@@ -11,6 +11,7 @@
         { label: '我們的理念', href: '/pages/about.html' },
         { label: '主推魚', href: '/pages/fish.html' },
         { label: '去附近買魚', href: '/pages/map.html' },
+        { label: '一起去釣魚', href: '/fishing' },
         { label: '零失敗食譜', href: '/pages/recipes.html' },
         { label: '十秒回饋', href: '/pages/feedback.html' }
       ],
@@ -53,6 +54,7 @@
         { label: 'Our Idea', href: '/pages/about.html' },
         { label: 'Featured Fish', href: '/pages/fish.html' },
         { label: 'Buy Nearby', href: '/pages/map.html' },
+        { label: 'Go Fishing Together', href: '/fishing' },
         { label: 'Easy Recipes', href: '/pages/recipes.html' },
         { label: 'Quick Feedback', href: '/pages/feedback.html' }
       ],

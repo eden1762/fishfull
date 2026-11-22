@@ -76,6 +76,9 @@ function assertRequiredFiles() {
     'ar.html',
     'catch.html',
     'map.html',
+    'fishing.html',
+    'fishing.css',
+    'fishing.js',
     'home.js',
     'home-ocean-theme.css',
     'fishfull.jpg',
@@ -253,6 +256,16 @@ function assertMapVrDemo() {
   assertContains('pages/map-vr-demo.css', 'touch-action: pan-y', 'mobile drag behavior');
 }
 
+function assertFishingGuide() {
+  assertContains('fishfull-company-nav.js', "['fishing', '一起去釣魚', '/fishing']", 'shared fishing navigation');
+  assertContains('fishing.html', 'id="fishing-map"', 'map container');
+  assertContains('fishing.js', "tile.openstreetmap.org", 'OpenStreetMap tiles');
+  assertContains('fishing.html', 'fishery.ntpc.gov.tw', 'official fishing regulations');
+  assertContains('fishing.html', 'ocean.cwa.gov.tw', 'official marine conditions');
+  assertContains('fishing.html', 'www.cwa.gov.tw/V8/C/M/tide.html', 'official tides');
+  assertContains('fishing.html', 'data-fishing-check=', 'trip checklist');
+}
+
 function assertJavaScriptSyntax() {
   for (const filePath of textFiles().filter((target) => target.endsWith('.js'))) {
     execFileSync(process.execPath, ['--check', filePath], { stdio: 'pipe' });
@@ -270,6 +283,7 @@ function main() {
   assertCatchQrFlow();
   assertArEntryIsPrimary();
   assertMapVrDemo();
+  assertFishingGuide();
   assertJavaScriptSyntax();
   console.log('FishFull static check passed.');
 }

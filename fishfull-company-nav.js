@@ -3,7 +3,7 @@
 
   var applying = false;
   var timer = 0;
-  var navVersion = '20260830-shared-header-v3';
+  var navVersion = '20261122-shared-header-v4';
   var styleId = 'fishfull-shared-nav-style';
   var instagramUrl = 'https://www.instagram.com/fishfull_2025/';
 
@@ -13,6 +13,7 @@
       ['ar', 'AR看真魚', '/ar#fishfull-ar-stage'],
       ['fish', '主推魚', '/pages/fish'],
       ['map', '去附近買魚', '/map'],
+      ['fishing', '一起去釣魚', '/fishing'],
       ['recipes', '零失敗食譜', '/recipes'],
       ['feedback', '十秒回饋', '/feedback'],
       ['spirit', '理念與精神', '/idea']
@@ -22,6 +23,7 @@
       ['ar', 'See Fish in AR', '/ar#fishfull-ar-stage'],
       ['fish', 'Featured Fish', '/pages/fish'],
       ['map', 'Buy Seafood Nearby', '/map'],
+      ['fishing', 'Go Fishing Together', '/fishing'],
       ['recipes', 'Easy Fish Recipes', '/recipes'],
       ['feedback', 'Quick Feedback', '/feedback'],
       ['spirit', 'Our Idea', '/idea']
@@ -50,6 +52,7 @@
     if (path === '/ar' || path === '/ar.html' || path === '/pages/ar') return 'ar';
     if (/^\/pages\/fish(?:\.html)?$/.test(path)) return 'fish';
     if (path === '/map' || /^\/pages\/map(?:\.html)?$/.test(path)) return 'map';
+    if (path === '/fishing' || path === '/fishing.html' || /^\/pages\/fishing(?:\.html)?$/.test(path)) return 'fishing';
     if (path === '/recipes' || /^\/pages\/recipes(?:\.html)?$/.test(path)) return 'recipes';
     if (path === '/feedback' || /^\/pages\/feedback(?:\.html)?$/.test(path)) return 'feedback';
     if (path === '/idea' || path === '/about' || /^\/pages\/(?:idea|about)(?:\.html)?$/.test(path)) return 'spirit';

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07566b" />
+  <title>FishFull 漁有料｜一起去釣魚｜龜吼漁港釣客地圖</title>
+  <meta name="description" content="FishFull 一起去釣魚：以 OpenStreetMap 瀏覽新北萬里龜吼漁港，出發前查閱官方風浪、潮汐、漁港垂釣規定、救援電話與釣魚裝備清單。" />
+  <link rel="canonical" href="https://fishfull.vercel.app/fishing" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FishFull 漁有料" />
+  <meta property="og:title" content="一起去釣魚｜龜吼漁港釣客地圖" />
+  <meta property="og:description" content="港口地圖、風浪潮汐、合法釣區查詢、安全裝備，一頁準備好出發。" />
+  <meta property="og:url" content="https://fishfull.vercel.app/fishing" />
+  <meta property="og:image" content="https://fishfull.vercel.app/fishfull.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/pages/site-pages.css" />
+  <link rel="stylesheet" href="/fishfull-brand.css" />
+  <link rel="stylesheet" href="/fishing.css" />
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","name":"FishFull 一起去釣魚｜龜吼漁港釣客地圖","url":"https://fishfull.vercel.app/fishing","description":"龜吼漁港 OpenStreetMap 港區位置、官方海象潮汐與垂釣規定資訊。","inLanguage":["zh-Hant","en"],"about":{"@type":"Place","name":"龜吼漁港","geo":{"@type":"GeoCoordinates","latitude":25.19649,"longitude":121.68895}}}
+  </script>
+</head>
+<body data-page="fishing">
+<div class="page-shell fishing-shell">
+  <header class="topbar" aria-label="FishFull 網站導覽">
+    <a class="brand" href="/" aria-label="FishFull 漁有料首頁">
+      <span class="fishfull-logo-mark"><img src="/fishfull.jpg" width="46" height="46" alt="FishFull 漁有料官方商標" /></span>
+      <span class="fishing-brand-copy"><strong>FISHFULL Green Seafood</strong><small>漁有料</small></span>
+    </a>
+    <nav class="topnav" aria-label="主選單">
+      <a href="/#qr-demo">掃漁貨QR</a><a href="/ar#fishfull-ar-stage">AR看真魚</a>
+      <a href="/pages/fish">主推魚</a><a href="/map">去附近買魚</a>
+      <a href="/fishing" aria-current="page">一起去釣魚</a><a href="/recipes">零失敗食譜</a>
+      <a href="/feedback">十秒回饋</a><a href="/idea">理念與精神</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="circle-link" href="https://www.instagram.com/fishfull_2025/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+      <button class="circle-link language-toggle" type="button" aria-label="Switch to English"><span data-lang-icon>EN</span></button>
+    </div>
+  </header>
+  <main class="fishing-main" id="main-content">
+    <section class="fishing-hero" aria-labelledby="fishing-heading">
+      <div class="fishing-hero-copy">
+        <p class="fishing-eyebrow" data-fishing-i18n="eyebrow">FISHFULL · 北海岸釣行指南</p>
+        <h1 id="fishing-heading" data-fishing-i18n="heading">一起去釣魚<span class="heading-dot">.</span></h1>
+        <p class="fishing-lead" data-fishing-i18n="lead">看懂海況、查清釣區，再帶上釣竿出發。從龜吼漁港認識北海岸，享受更安全、更友善的釣魚旅程。</p>
+        <div class="fishing-hero-actions">
+          <a class="fishing-btn fishing-btn-primary" href="#fishing-map-section" data-fishing-i18n="seeMap">探索港口地圖 ↗</a>
+          <a class="fishing-btn fishing-btn-ghost" href="#fishing-checklist" data-fishing-i18n="prepare">檢查出發裝備</a>
+        </div>
+        <div class="fishing-hero-chips">
+          <span data-fishing-i18n="place">📍 新北市萬里區 · 龜吼漁港</span>
+          <span data-fishing-i18n="base">🗺 OpenStreetMap 開放地圖</span>
+        </div>
+      </div>
+      <div class="fishing-hero-art" aria-hidden="true">
+        <div class="hero-glow"></div><div class="hero-sun"></div><div class="hero-horizon"></div>
+        <div class="hero-water water-one"></div><div class="hero-water water-two"></div>
+        <div class="fishing-rod"></div><div class="fishing-line"></div><div class="fishing-float"></div>
+        <div class="hero-art-caption"><span>GUIHOU HARBOR</span><strong>25.19649° N<br>121.68895° E</strong></div>
+      </div>
+    </section>
+
+    <section class="fishing-alert" role="note" aria-labelledby="fishing-alert-title">
+      <span class="fishing-alert-symbol" aria-hidden="true">!</span>
+      <div>
+        <h2 id="fishing-alert-title" data-fishing-i18n="alertHeading">先查釣區是否合法，再決定下竿地點</h2>
+        <p data-fishing-i18n="alertBody">新北市公開的 12 處漁港開放垂釣區名單未列出「龜吼漁港」。此頁只標示港口位置，絕不代表港內碼頭、防波堤或周邊海岸可以垂釣。請依最新主管機關公告、保育區範圍及現場告示判斷；若無法確認，請不要下竿。</p>
+        <a href="https://fishery.ntpc.gov.tw/cht/index.php?code=list&amp;ids=159" target="_blank" rel="noopener noreferrer" data-fishing-i18n="noticeLink">查閱新北市漁港垂釣區官方公告 ↗</a>
+      </div>
+    </section>
+
+    <section class="fishing-workspace" id="fishing-map-section" aria-labelledby="map-heading">
+      <div class="fishing-map-panel">
+        <div class="fishing-section-top"><div><p class="fishing-overline" data-fishing-i18n="mapEyebrow">LOCATION EXPLORER</p><h2 id="map-heading" data-fishing-i18n="mapTitle">龜吼漁港地圖</h2><p data-fishing-i18n="mapHelp">縮放、拖曳地圖探索周邊道路與海岸；地圖標記僅供定位。</p></div><span class="fishing-map-bubble" data-fishing-i18n="pinType">📍 港區位置</span></div>
+        <div class="fishing-map-wrap">
+          <div id="fishing-map" class="fishing-map" role="region" aria-label="龜吼漁港 OpenStreetMap 地圖"></div>
+          <div id="fishing-map-fallback" class="fishing-map-fallback" hidden>
+            <strong data-fishing-i18n="mapUnavailable">互動地圖目前無法載入</strong>
+            <a href="https://www.openstreetmap.org/?mlat=25.19649&amp;mlon=121.68895#map=16/25.19649/121.68895" target="_blank" rel="noopener noreferrer" data-fishing-i18n="openOSM">前往 OpenStreetMap 檢視位置 ↗</a>
+          </div>
+          <div class="fishing-map-key" data-fishing-i18n="pinWarning">● 港口中心點，非核准垂釣點</div>
+        </div>
+        <div class="fishing-map-tools">
+          <button type="button" id="fishing-reset-map" class="fishing-control" data-fishing-i18n="recenter">◎ 置中龜吼漁港</button>
+          <a class="fishing-control" href="https://www.google.com/maps/dir/?api=1&amp;destination=25.19649%2C121.68895" target="_blank" rel="noopener noreferrer" data-fishing-i18n="navigate">↗ 開啟導航</a>
+          <button type="button" id="fishing-copy-coordinates" class="fishing-control" data-fishing-i18n="copy">⧉ 複製座標</button>
+        </div>
+        <p class="fishing-map-footnote" data-fishing-i18n="mapFootnote">地圖來源：© OpenStreetMap 貢獻者。請勿將一般道路、消波塊或保育區誤認為可垂釣區域。</p>
+      </div>
+      <aside class="fishing-side-panel" aria-labelledby="before-you-go">
+        <p class="fishing-overline" data-fishing-i18n="planEyebrow">BEFORE YOU CAST</p>
+        <h2 id="before-you-go" data-fishing-i18n="planTitle">釣客出發前的 3 件事</h2>
+        <div class="fishing-plan-step"><span class="step-count">01</span><div><strong data-fishing-i18n="step1Title">確認合法釣區</strong><p data-fishing-i18n="step1Body">先看開放區域、釣向與保育限制；龜吼港區不可直接視為釣場。</p></div></div>
+        <div class="fishing-plan-step"><span class="step-count">02</span><div><strong data-fishing-i18n="step2Title">比對風浪與潮汐</strong><p data-fishing-i18n="step2Body">注意長浪、陣風、潮位與天氣警特報；海況不佳就取消。</p></div></div>
+        <div class="fishing-plan-step"><span class="step-count">03</span><div><strong data-fishing-i18n="step3Title">裝備與同行安排</strong><p data-fishing-i18n="step3Body">穿救生衣、防滑鞋，帶照明、手機及飲水，告知親友回程時間。</p></div></div>
+        <a class="fishing-side-link" href="https://fishery.ntpc.gov.tw/cht/index.php?code=list&amp;ids=159" target="_blank" rel="noopener noreferrer" data-fishing-i18n="legalFirst">先看官方開放釣區 →</a>
+      </aside>
+    </section>
+
+    <section class="fishing-resource-section" aria-labelledby="resource-heading">
+      <div class="fishing-section-top"><div><p class="fishing-overline" data-fishing-i18n="resourcesEyebrow">REAL-WORLD CONDITIONS</p><h2 id="resource-heading" data-fishing-i18n="resourcesTitle">出海邊前，這些資訊一定要看</h2><p data-fishing-i18n="resourcesNote">以下連到官方網站查閱最新資料；本頁不顯示未經驗證的即時風速、浪高或潮汐數字。</p></div></div>
+      <div class="fishing-resource-grid">
+        <article class="fishing-resource-card"><span class="resource-emoji" aria-hidden="true">🌊</span><p class="resource-tag" data-fishing-i18n="windTag">海象與警戒</p><h3 data-fishing-i18n="windTitle">風力 · 浪高 · 長浪</h3><p data-fishing-i18n="windBody">查看海象預報、風浪與警戒資訊。遇颱風、長浪或海況不穩，請勿冒險。</p><a href="https://ocean.cwa.gov.tw/V2/" target="_blank" rel="noopener noreferrer" data-fishing-i18n="seaLink">中央氣象署海象平台 ↗</a></article>
+        <article class="fishing-resource-card"><span class="resource-emoji" aria-hidden="true">🌙</span><p class="resource-tag" data-fishing-i18n="tideTag">潮汐規劃</p><h3 data-fishing-i18n="tideTitle">滿潮 · 乾潮 · 潮高</h3><p data-fishing-i18n="tideBody">查詢鄰近預報地點的潮汐時間與潮高；注意實際海況可能不同。</p><a href="https://www.cwa.gov.tw/V8/C/M/tide.html" target="_blank" rel="noopener noreferrer" data-fishing-i18n="tideLink">中央氣象署潮汐預報 ↗</a></article>
+        <article class="fishing-resource-card"><span class="resource-emoji" aria-hidden="true">⚖️</span><p class="resource-tag" data-fishing-i18n="lawTag">規定與保育</p><h3 data-fishing-i18n="lawTitle">開放釣區 · 釣向 · 禁釣</h3><p data-fishing-i18n="lawBody">以公告和現場牌示為準，避開保育區，勿影響船舶航行與漁民作業。</p><a href="https://fishery.ntpc.gov.tw/cht/index.php?code=list&amp;ids=159" target="_blank" rel="noopener noreferrer" data-fishing-i18n="lawLink">新北漁港垂釣公告 ↗</a></article>
+        <article class="fishing-resource-card"><span class="resource-emoji" aria-hidden="true">🛟</span><p class="resource-tag" data-fishing-i18n="emergencyTag">緊急應變</p><h3 data-fishing-i18n="emergencyTitle">海巡 118 · 救護 119</h3><p data-fishing-i18n="emergencyBody">遇到海上落水、意外或危急情況，立即求援並提供明確定位，不要貿然入水。</p><a href="https://www.cga.gov.tw/" target="_blank" rel="noopener noreferrer" data-fishing-i18n="emergencyLink">海洋委員會海巡署 ↗</a></article>
+      </div>
+    </section>
+
+    <section class="fishing-checklist" id="fishing-checklist" aria-labelledby="checklist-heading">
+      <div class="checklist-intro"><p class="fishing-overline" data-fishing-i18n="checklistEyebrow">YOUR TRIP CHECKLIST</p><h2 id="checklist-heading" data-fishing-i18n="checklistTitle">出發前裝備檢查</h2><p data-fishing-i18n="checklistNote">勾選準備完成的事項，這台裝置會記住你的選擇。</p><div class="checklist-progress" aria-live="polite"><strong id="checklist-count">0 / 5</strong><span data-fishing-i18n="complete">項已準備</span></div><div class="checklist-progressbar"><span id="checklist-bar"></span></div><button class="checklist-reset" type="button" id="fishing-reset-checklist" data-fishing-i18n="resetList">重新檢查 ↻</button></div>
+      <div class="checklist-items">
+        <label><input type="checkbox" data-fishing-check="law" /><span data-fishing-i18n="check1">已確認合法開放釣區與保育限制</span></label>
+        <label><input type="checkbox" data-fishing-check="weather" /><span data-fishing-i18n="check2">已查風浪、潮汐、警特報與退場路線</span></label>
+        <label><input type="checkbox" data-fishing-check="safe" /><span data-fishing-i18n="check3">救生衣（建議 100N 以上）、防滑鞋和照明</span></label>
+        <label><input type="checkbox" data-fishing-check="gear" /><span data-fishing-i18n="check4">釣竿、捲線器、線組、魚鉤、鉗子與飲水</span></label>
+        <label><input type="checkbox" data-fishing-check="contact" /><span data-fishing-i18n="check5">手機已充電、告知親友行程，備好垃圾袋</span></label>
+      </div>
+    </section>
+    <section class="fishing-ethics" aria-labelledby="ethics-heading"><div><p class="fishing-overline" data-fishing-i18n="ethicsEyebrow">FISH RESPONSIBLY</p><h2 id="ethics-heading" data-fishing-i18n="ethicsTitle">讓海更有魚，也讓每次出發更安心</h2><p data-fishing-i18n="ethicsBody">使用無倒鉤或適當鉤具減少傷害，遇到保育類或禁捕物種依規定處理；帶走魚線、魚鉤與垃圾，不佔用漁民工作區。切勿踏上消波塊或跨越封閉護欄。</p></div><a class="fishing-btn fishing-btn-outline" href="/map" data-fishing-i18n="buyFish">去附近買魚 ↗</a></section>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="/site-i18n.js" defer></script>
+<script src="/fishing.js" defer></script>
+<script src="/fishfull-site-shell.js" defer></script>
+<script src="/fishfull-company-nav.js" defer></script>
+</body>
+</html>
